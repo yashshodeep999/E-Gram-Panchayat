@@ -77,21 +77,22 @@ const { buildSiteIndex } = require("./chatbot/siteIndex");
 const { answerFromIndex, detectLang } = require("./chatbot/engineSmart");
 
 let SITE = { chunks: [], kb: {} };
+let isIndexed = false; // ✅ control flag
 
 function rebuildIndex() {
   try {
-    SITE = buildSiteIndex(publicPath);
+    // 🔥 LIMIT FOLDER (important)
+    const smallPath = path.join(__dirname, "..", "Public", "nimgoan");
+
+    SITE = buildSiteIndex(smallPath);
     console.log("✅ Chatbot index built:", SITE.chunks.length);
   } catch (e) {
     console.log("❌ Chatbot index error:", e.message);
   }
 }
-rebuildIndex();
 
-app.get("/api/rebuild-index", (req, res) => {
-  rebuildIndex();
-  res.json({ ok: true, chunks: SITE.chunks.length });
-});
+// ❌ REMOVE THIS (IMPORTANT)
+// rebuildIndex();
 
 /* =========================
    CHATBOT ROUTE
@@ -99,10 +100,19 @@ app.get("/api/rebuild-index", (req, res) => {
 app.post("/api/chat", (req, res) => {
   try {
     const { message, lang } = req.body || {};
-    if (!message) return res.status(400).json({ success: false, reply: "Message required" });
+    if (!message) {
+      return res.status(400).json({ success: false, reply: "Message required" });
+    }
+
+    // ✅ Lazy loading (build only once)
+    if (!isIndexed) {
+      rebuildIndex();
+      isIndexed = true;
+    }
 
     const finalLang = lang || detectLang(message);
     const ans = answerFromIndex(SITE, message, finalLang);
+
     res.json(ans);
   } catch (e) {
     res.status(500).json({ success: false, reply: "Chatbot error" });
