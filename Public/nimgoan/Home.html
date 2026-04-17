@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIMGOAN KETKI GRAM PANCHAYAT</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFFFF0; 
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333333; 
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #8ce953,#DAA520, #3E7C17); 
+            padding: 30px;
+            border-bottom: 2px solid #B87333; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-direction: row;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .header h1 {
+            margin: 0;
+            color: white;
+            flex: 1;
+            text-align: center;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+        
+        .header .right-logo {
+            position: absolute;
+            left: 20px;
+            top: 1px;
+            width: 150px;
+            height: auto;
+        }
+        
+        .header .language-select {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            z-index: 102;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #333333; 
+        }
+        
+        nav ul li {
+            margin-right: 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 16px;
+            display: block;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: #DAA520; 
+        }
+        
+        .images {
+            display: flex;
+            justify-content: center;
+            margin: 45px;
+        }
+        
+        .images img {
+            width: 350px;
+            height: 250px;
+            margin: 0 10px;
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+        
+        .title {
+            font-size: 40px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #3E7C17; 
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid #B87333; 
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .buttons button {
+            background-color: #3E7C17; 
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); 
+        }
+        
+        .buttons button:hover {
+            background-color: #DAA520; 
+        }
+        
+        .section {
+            display: none;
+            background-color: #FFF5E1; 
+            padding: 20px;
+            margin: 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #c55b14; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+        
+        .footer {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17); 
+            padding: 30px;
+            border-top: 2px solid #DAA520; 
+            font-size: 14px;
+            color: white;
+        }
+        
+        .footer .person {
+            text-align: center;
+            display: inline-block;
+            margin: 20px;
+        }
+        
+        .footer img {
+            width: 300px;
+            height: 250px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
+        }
+        
+        .footer .name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: white;
+        }
+        
+        .welcome-message {
+            background-color: #FFFFF0; 
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #8B4513; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        }
+
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox img {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 id="pageTitle">Nimgoan Ketki Gram Panchayat</h1>
+        <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo">
+        <div class="language-select">
+            <select id="languageSelector" onchange="toggleLanguage()">
+                <option value="en">English</option>
+                <option value="mr">Marathi</option>
+            </select>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="Home.html" id="homeNav">Home</a></li>
+            <li><a href="about.html" id="aboutNav">About Us</a></li>
+            <li><a href="Executive Board.html" id="ExecutiveBoardNav">Executive Board</a></li>
+            <li><a href="services.html" id="servicesNav">Services</a></li>
+            <li><a href="schemes.html" id="schemesNav">Schemes</a></li>
+            <li><a href="news.html" id="newsNav">News</a></li>
+            <li><a href="NimgoanKetki.html" id="AboutNimgoanKetkiNav"> About Nimgoan Ketki</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html" id="contactNav">Contact Us</a></li>
+        </ul>
+    </nav>
+
+
+<script src="chatbot-config.js"></script>
+<script src="chatbot-loader.js"></script>
+
+
+    <div class="images">
+        <img alt="Gram Panchayat" src="image1.jpg" onclick="openLightbox(this.src)" />
+        <img alt="Temple" src="image2.jpg" onclick="openLightbox(this.src)" />
+        <img alt="Nimgoan ketki" src="image1.2.jpg" onclick="openLightbox(this.src)" />
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" alt="">
+        </div>
+    </div>
+
+
+    <div class="welcome-message" id="welcomeMessage">
+        <h1>Welcome Message</h1>
+        <p>Dear villagers,</p>
+        <p>We warmly welcome you to the official website of your Gram Panchayat!</p>
+        <p>We are proud to present this website to provide you with easy access to the services, schemes, and latest updates provided by our Panchayat. Through this platform, you can learn about the various initiatives being undertaken in the development of your village, as well as easily submit your complaints, suggestions, and feedback.</p>
+        <p>Our goal is to create an ideal Panchayat that promotes transparency, accountability, and development. This will not be possible without your cooperation and participation.</p>
+        <p>We believe that this website will be useful for the overall development of your village.</p>
+        <div class="signature" id="sarpanchName">Mr. Pravin Dashrath Dongre<br>Sarpanch, Nimgaon Ketki Gram Panchayat.</div>
+    </div>
+
+    <div class="footer">
+        <div class="person">
+            <img src="Gram Sevak1.jpg" alt="Gram Sevak"onclick="openLightbox(this.src)" />
+            <div class="name" id="gramSevakName">Gram Sevak<br>Mr. L.K. Jagtap</div>
+            
+        </div>
+        <div class="person">
+            <img src="Sarpanch.jpg" alt="Sarpanch"onclick="openLightbox(this.src)" />
+            <div class="name" id="sarpanchFooterName">Sarpanch<br>Mr. Pravin Dashrath Dongre</div>
+        </div>
+        <div class="person">
+            <img src="Police Patil.jpg" alt="Police Patil"onclick="openLightbox(this.src)" />
+            <div class="name" id="policePatilName">Police Patil<br>Mr. Atul Dongre
+            </div>
+        </div>
+    </div>
+
+     <div class="footer">
+        &copy; 2025 Nimgoan Ketki Gram Panchayat. All rights reserved.
+        <p>Created by Yashodeep</p>
+    </div>
+
+    <script>
+        
+        
+            
+            function openLightbox(src) {
+                document.getElementById("lightboxImage").src = src;
+                document.getElementById("lightbox").style.display = "block";
+            }
+    
+            function closeLightbox() {
+                document.getElementById("lightbox").style.display = "none";
+            }
+    
+
+        function toggleLanguage() {
+            var lang = document.getElementById('languageSelector').value;
+
+            if (lang === "en") {
+                document.documentElement.lang = "en";
+                document.getElementById("pageTitle").textContent = "Nimgoan Ketki Gram Panchayat";
+                document.getElementById("welcomeMessage").innerHTML = `
+                    <h1>Welcome Message</h1>
+                    <p>Dear villagers,</p>
+                    <p>We warmly welcome you to the official website of your Gram Panchayat!</p>
+                    <p>We are proud to present this website to provide you with easy access to the services, schemes, and latest updates provided by our Panchayat. Through this platform, you can learn about the various initiatives being undertaken in the development of your village, as well as easily submit your complaints, suggestions, and feedback.</p>
+                    <p>Our goal is to create an ideal Panchayat that promotes transparency, accountability, and development. This will not be possible without your cooperation and participation.</p>
+                    <p>We believe that this website will be useful for the overall development of your village.</p>
+                    <div class="signature" id="sarpanchName">Mr. Pravin Dashrath Dongre<br>Sarpanch, Nimgaon Ketki Gram Panchayat.</div>
+                `;
+                document.getElementById("nextButton").textContent = "Next";
+                document.getElementById("homeNav").textContent = "Home";
+                document.getElementById("aboutNav").textContent = "About Us";
+                document.getElementById("ExecutiveBoardNav").textContent = "Executive Board";
+                document.getElementById("servicesNav").textContent = "Services";
+                document.getElementById("schemesNav").textContent = "Schemes";
+                document.getElementById("newsNav").textContent = "News";
+                document.getElementById("galleryNav").textContent = "Gallery";
+                document.getElementById("AboutNimgoanKetkiNav").textContent = "About Nimgoan";
+                document.getElementById("contactNav").textContent = "Contact Us";
+                document.getElementById("gramSevakName").textContent = "Gram Sevak";
+                document.getElementById("sarpanchFooterName").textContent = "Sarpanch";
+                document.getElementById("policePatilName").textContent = "Police Patil";
+
+            } else if (lang === "mr") {
+                document.documentElement.lang = "mr";
+                document.getElementById("pageTitle").textContent = "निमगाव केतकी ग्रामपंचायत";
+                document.getElementById("welcomeMessage").innerHTML = `
+                    <h1>स्वागत संदेश</h1>
+                    <p>प्रिय ग्रामस्थांनो,</p>
+                    <p>आपल्या ग्राम पंचायतच्या अधिकृत वेबसाइटवर आपले मन:पूर्वक स्वागत आहे!</p>
+                    <p>आम्हाला अभिमान आहे की, आपणास आमच्या पंचायतद्वारे पुरवल्या जाणाऱ्या सेवा, योजनांची माहिती आणि ताज्या अपडेट्स सहज उपलब्ध करून देण्यासाठी आम्ही ही वेबसाइट सादर करत आहोत. या व्यासपीठाद्वारे आपण आपल्या गावाच्या विकासातील विविध उपक्रमांची माहिती घेऊ शकता, तसेच आपल्या तक्रारी, सूचना आणि अभिप्राय सहज सादर करू शकता.</p>
+                    <p>आमचे ध्येय आहे की, पारदर्शकता, उत्तरदायित्व आणि विकासाला प्रोत्साहन देणारी एक आदर्श पंचायत बनवणे. आपले सहकार्य आणि सहभागाशिवाय हे साध्य होणार नाही.</p>
+                    <p>आपल्या गावाच्या सर्वांगीण विकासासाठी ही वेबसाइट उपयुक्त ठरेल, असा विश्वास आहे.</p>
+                    <div class="signature" id="sarpanchName">श्री. प्रविण दाशरथ डोंगरे<br>सर्पंच, निमगाव केतकी ग्रामपंचायत.</div>
+                `;
+                document.getElementById("nextButton").textContent = "पुढे";
+                document.getElementById("homeNav").textContent = "मुखपृष्ठ";
+                document.getElementById("aboutNav").textContent = "आमच्याबद्दल";
+                document.getElementById("ExecutiveBoardNav").textContent = "कार्यकारी मंडल";
+                document.getElementById("servicesNav").textContent = "सेवा";
+                document.getElementById("schemesNav").textContent = "योजना";
+                document.getElementById("newsNav").textContent = "ताज्या बातम्या";
+                document.getElementById("galleryNav").textContent = "गॅलरी";
+                document.getElementById("AboutNimgoanKetkiNav").textContent = "निमगाव बद्दल";
+                document.getElementById("contactNav").textContent = "संपर्क";
+                document.getElementById("gramSevakName").textContent = "ग्राम सेवक";
+                document.getElementById("sarpanchFooterName").textContent = "सर्पंच";
+                document.getElementById("policePatilName").textContent = "पोलीस पाटील";
+            }
+        }
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section.style.display === "block") {
+                section.style.display = "none";
+            } else {
+                section.style.display = "block";
+            }
+        }
+    
+
+        
+        toggleLanguage();
+    </script>
+</body>
+</html>

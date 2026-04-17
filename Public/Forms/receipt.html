@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Receipt</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="paper">
+  <div class="gov-header">
+    <div class="topline">Payment Receipt / शुल्क पावती</div>
+    <div class="subline">Grampanchayat Nimgoan Ketki</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="two-col" style="margin-top:0;">
+    <div class="field">
+      <div class="cap">Receipt No:</div>
+      <div class="u-line"><span id="rcptNo"></span></div>
+    </div>
+    <div class="field right">
+      <div class="cap">Date:</div>
+      <div class="u-line"><span id="dt"></span></div>
+    </div>
+  </div>
+
+  <div id="dbMsg" class="small" style="margin:8px 0;"></div>
+
+  <div class="hr"></div>
+
+  <div class="receipt-grid">
+    <div style="font-size:14px; line-height:1.9;">
+      <b>Applicant / अर्जदार:</b> <span id="nm"></span><br>
+      <b>Mobile / मोबाईल:</b> <span id="mb"></span><br>
+      <b>Certificate / प्रमाणपत्र:</b> <span id="cert"></span><br>
+      <b>Amount / रक्कम:</b> ₹ <span id="amt"></span><br>
+      <b>Status / स्थिती:</b> <span id="st"></span><br>
+      <b>Mode / पद्धत:</b> <span id="mode"></span><br>
+
+      <div id="upiBlock" style="display:none;">
+        <b>UPI UTR:</b> <span id="utr"></span><br>
+      </div>
+
+      <div id="rzpBlock" style="display:none;">
+        <b>Razorpay Order ID:</b> <span id="oid"></span><br>
+        <b>Razorpay Payment ID:</b> <span id="pid"></span><br>
+      </div>
+    </div>
+
+    <div>
+      <div class="label">Receipt QR</div>
+      <div id="rcptQR" class="qr-box"></div>
+      <div class="small" style="margin-top:6px;">
+        Scan to verify receipt details (local).
+      </div>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="small">
+    Note: This is system generated receipt. Please keep it for record.
+  </div>
+
+  <div class="btnbar">
+    <button id="nextBtn" type="button" onclick="openSelectedForm()">Next: Open Certificate</button>
+    <button type="button" class="secondary" onclick="window.print()">Print Receipt</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="api.js"></script>
+
+<script>
+function certLabel(v){
+  return {
+    birth:"Birth Certificate",
+    death:"Death Certificate",
+    marriage:"Marriage Certificate",
+    nodues:"No Dues Certificate",
+    houseTax:"Form 8 (House Tax Extract)",
+    niradhar:"Niradhar Certificate",
+    bpl:"BPL Certificate"
+  }[v] || v;
+}
+
+function genReceiptNo(){
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,"0");
+  const day = String(d.getDate()).padStart(2,"0");
+  const rand = Math.floor(1000 + Math.random()*9000);
+  return `RCPT-NK-${y}${m}${day}-${rand}`;
+}
+
+function setDBMsg(text, ok){
+  const el = document.getElementById("dbMsg");
+  el.style.color = ok ? "green" : "red";
+  el.innerHTML = ok ? `✅ ${text}` : `⚠️ ${text}`;
+}
+
+async function saveReceiptToDB(payload){
+  // prevent double save
+  const key = "GP_RECEIPT_DB_SAVED_" + payload.receiptNo;
+  if(localStorage.getItem(key) === "YES") {
+    setDBMsg("Receipt already saved in database.", true);
+    return;
+  }
+
+  try{
+    const r = await submitToMongo("receipt", payload);
+    localStorage.setItem(key, "YES");
+    localStorage.setItem("GP_RECEIPT_DB_ID", r.id);
+    setDBMsg("Receipt saved in database.", true);
+  }catch(err){
+    console.log("Receipt DB error:", err.message);
+    setDBMsg("Database save error. (Check server running + MongoDB connected)", false);
+  }
+}
+
+(function fill(){
+  const raw = localStorage.getItem("GP_APPLICANT");
+  const d = raw ? JSON.parse(raw) : {};
+
+  const cert = localStorage.getItem("GP_SELECTED_CERT") || "";
+  const fee  = localStorage.getItem("GP_FEE") || "0";
+  const st   = localStorage.getItem("GP_PAYMENT_STATUS") || "PENDING";
+  const mode = localStorage.getItem("GP_PAYMENT_MODE") || "-";
+
+  const utr = localStorage.getItem("GP_UPI_UTR") || "-";
+  const oid = localStorage.getItem("GP_RZP_ORDER_ID") || "-";
+  const pid = localStorage.getItem("GP_RZP_PAYMENT_ID") || "-";
+
+  let rcptNo = localStorage.getItem("GP_RECEIPT_NO");
+  if(!rcptNo){
+    rcptNo = genReceiptNo();
+    localStorage.setItem("GP_RECEIPT_NO", rcptNo);
+  }
+
+  let rcptDate = localStorage.getItem("GP_RECEIPT_DATE");
+  if(!rcptDate){
+    rcptDate = new Date().toLocaleString();
+    localStorage.setItem("GP_RECEIPT_DATE", rcptDate);
+  }
+
+  document.getElementById("rcptNo").textContent = rcptNo;
+  document.getElementById("dt").textContent = rcptDate;
+
+  document.getElementById("nm").textContent = d.name || "-";
+  document.getElementById("mb").textContent = d.mobile || "-";
+  document.getElementById("cert").textContent = certLabel(cert);
+  document.getElementById("amt").textContent = fee;
+  document.getElementById("st").textContent = st;
+  document.getElementById("mode").textContent = mode;
+
+  if(mode === "UPI"){
+    document.getElementById("upiBlock").style.display = "block";
+    document.getElementById("utr").textContent = utr;
+  }
+  if(mode === "RAZORPAY"){
+    document.getElementById("rzpBlock").style.display = "block";
+    document.getElementById("oid").textContent = oid;
+    document.getElementById("pid").textContent = pid;
+  }
+
+  // QR
+  const qrText = JSON.stringify({
+    receiptNo: rcptNo,
+    receiptDate: rcptDate,
+    applicationNo: d.regNo || "",
+    applicant: d.name || "",
+    mobile: d.mobile || "",
+    certificate: cert,
+    amount: fee,
+    status: st,
+    mode: mode,
+    utr: mode === "UPI" ? utr : "",
+    razorpayOrderId: mode === "RAZORPAY" ? oid : "",
+    razorpayPaymentId: mode === "RAZORPAY" ? pid : ""
+  });
+
+  const box = document.getElementById("rcptQR");
+  box.innerHTML = "";
+  new QRCode(box, { text: qrText, width: 180, height: 180 });
+
+  // ✅ Save receipt to DB
+  saveReceiptToDB({
+    receiptNo: rcptNo,
+    receiptDate: rcptDate,
+    applicationNo: d.regNo || "",
+    applicant: d.name || "",
+    mobile: d.mobile || "",
+    certificate: certLabel(cert),
+    amount: fee,
+    status: st,
+    mode: mode,
+    utr: mode === "UPI" ? utr : "",
+    razorpayOrderId: mode === "RAZORPAY" ? oid : "",
+    razorpayPaymentId: mode === "RAZORPAY" ? pid : ""
+  });
+})();
+
+function openSelectedForm(){
+  const st = localStorage.getItem("GP_PAYMENT_STATUS") || "PENDING";
+  if(st !== "SUCCESS" && st !== "FREE"){
+    alert("Payment not successful yet.");
+    return;
+  }
+
+  const cert = localStorage.getItem("GP_SELECTED_CERT") || "";
+  const pages = {
+    birth: "birth-certificate.html",
+    death: "death-certificate.html",
+    marriage: "marriage-certificate.html",
+    nodues: "nodues-certificate.html",
+    houseTax: "form8.html",
+    niradhar: "niradhar-certificate.html",
+    bpl: "bpl-certificate.html"
+  };
+
+  const page = pages[cert];
+  if(!page){
+    alert("Certificate selection missing. Please fill main form again.");
+    location.href = "main-application.html";
+    return;
+  }
+
+  location.href = page;
+}
+</script>
+<script src="api.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certificate of Niradhar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="paper">
+
+  <div class="watermark">GRAM PANCHAYAT</div>
+
+  <div class="gov-header">
+    <div class="topline">महाराष्ट्र शासन / Government of Maharashtra</div>
+    <div class="subline">ग्रामपंचायत कार्यालय / Grampanchayat Office</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="row" style="justify-content:space-between; align-items:center;">
+    <div class="small">जा.क्र./Dispatch No.: <span class="line" style="min-width:55mm;"></span></div>
+    <div class="small">दिनांक/Date: <span class="line" style="min-width:45mm;"></span></div>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="header-title">निराधार असल्याचा दाखला</div>
+  <div class="header-title" style="margin-top:2mm;">Certificate of Niradhar</div>
+
+  <div class="hr"></div>
+
+  <div class="row">
+    <div class="col">
+      <div class="label">Name of Applicant (Mr./Mrs.)</div>
+      <input class="input" id="name" placeholder="Full Name">
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="label">Aadhaar Card Number</div>
+      <input class="input" id="aadhaar" maxlength="12" inputmode="numeric" placeholder="0000-0000-0000">
+    </div>
+    <div>
+      <div class="label">Age (optional)</div>
+      <input class="input" id="age" inputmode="numeric" placeholder="Age">
+    </div>
+
+    <div>
+      <div class="label">Village</div>
+      <input class="input" id="village" placeholder="Village name">
+    </div>
+    <div>
+      <div class="label">Taluka</div>
+      <input class="input" id="taluka" placeholder="Taluka">
+    </div>
+
+    <div>
+      <div class="label">District</div>
+      <input class="input" id="district" placeholder="District">
+    </div>
+    <div>
+      <div class="label">State</div>
+      <input class="input" id="state" value="Maharashtra" readonly>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="small" style="line-height:1.9;">
+    As per local enquiry at village level, it is certified that the above applicant is <b>Niradhar</b>
+    (destitute) and has no regular support. This certificate is issued on request of the applicant
+    for official purpose.
+  </div>
+
+  <div class="gov-footer">
+    <div>
+      Place: <span class="line" style="min-width:45mm;"></span><br>
+      Date: <span class="line" style="min-width:45mm;"></span>
+    </div>
+
+    <div style="text-align:right;">
+      Signature with stamp<br>
+      <span class="line" style="min-width:60mm;"></span><br>
+      Gramsevak / Village Development Officer
+    </div>
+  </div>
+
+  <div class="btnbar">
+    <button type="button" class="secondary" onclick="history.back()">Back</button>
+    <button type="button" class="secondary" onclick="saveNiradharToMongo()">Save</button>
+    <button type="button" onclick="window.print()">Print</button>
+  </div>
+
+</div>
+
+<!-- ✅ Mongo helper -->
+<script src="api.js"></script>
+
+<script>
+(function fill(){
+  const raw = localStorage.getItem("GP_APPLICANT");
+  if(!raw) return;
+  const d = JSON.parse(raw);
+
+  document.getElementById("name").value = d.name || "";
+  document.getElementById("aadhaar").value = d.aadhaar || "";
+  document.getElementById("village").value = d.village || "";
+  document.getElementById("taluka").value = d.taluka || "";
+  document.getElementById("district").value = d.district || "";
+})();
+
+function onlyDigits(str){ return (str || "").replace(/\\D/g, ""); }
+
+async function saveNiradharToMongo(){
+  const data = {
+    applicantName: document.getElementById("name").value.trim(),
+    aadhaar: onlyDigits(document.getElementById("aadhaar").value.trim()),
+    age: onlyDigits(document.getElementById("age").value.trim()),
+    village: document.getElementById("village").value.trim(),
+    taluka: document.getElementById("taluka").value.trim(),
+    district: document.getElementById("district").value.trim(),
+    state: document.getElementById("state").value.trim(),
+  };
+
+  // ✅ validation
+  if (!data.applicantName){
+    alert("❌ Please enter Applicant Name");
+    return;
+  }
+  if (data.aadhaar.length !== 12){
+    alert("❌ Please enter valid Aadhaar (12 digits)");
+    return;
+  }
+  if (data.age && (Number(data.age) <= 0 || Number(data.age) > 120)){
+    alert("❌ Please enter a valid age (1 to 120) or keep empty");
+    return;
+  }
+
+  const result = await submitToMongo("niradhar", data);
+
+  if(result.success){
+    alert("✅ Niradhar form saved to MongoDB!\nID: " + result.id);
+  } else {
+    alert("❌ Error: " + (result.message || result.error));
+  }
+}
+</script>
+<script src="api.js"></script>
+
+</body>
+</html>

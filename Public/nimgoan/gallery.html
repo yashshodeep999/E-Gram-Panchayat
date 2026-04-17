@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nimgoan Ketki Gram Panchayat - Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4F4F4; /* Light Grey background */
+            margin: 0;
+            padding: 0;
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17); /* Gradient Header */
+            padding: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow */
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+        
+        .header .right-logo {
+            position: absolute;
+            left: 20px;
+            top: 1px;
+            width: 150px;
+            height: auto;
+        }
+        
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow */
+            margin-bottom: 20px;
+        }
+        
+        nav ul li {
+            margin: 0;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: block;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #DAA520; /* Goldenrod */
+            color: #333;
+        }
+
+        .filter-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .filter-buttons button {
+            background-color: #3E7C17; /* Forest Green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 5px;
+        }
+
+        .filter-buttons button:hover {
+            background-color: #DAA520; /* Goldenrod */
+        }
+
+        .gallery-container {
+            padding: 0 15px;
+            background-color: #FFF5E1; /* Light beige */
+        }
+
+        .gallery-section {
+            margin-bottom: 50px;
+        }
+
+        .gallery-section h2 {
+            font-size: 28px;
+            color: #3E7C17; /* Forest Green */
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px #333; /* Text Shadow */
+        }
+
+        .gallery-subsection {
+            font-size: 22px;
+            color: #DAA520; /* Goldenrod */
+            margin: 10px 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 150%;
+            height: 200px; /* Set a fixed height */
+            object-fit: cover; /* Ensures the image fills the container without distortion */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+
+        .gallery-item img:hover {
+            transform: scale(1.1); /* Zoom effect */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
+        }
+
+        .gallery-item p {
+            font-size: 16px;
+            margin-top: 10px;
+            color: #333;
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            padding: 10px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+
+        .gallery-item:hover p {
+            opacity: 1; /* Show caption on hover */
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox img {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .mySlides {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: auto;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slideshow-container img {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nimgoan Ketki Gram Panchayat - Gallery</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="header">
+            <h1>Gallery</h1>
+            <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="Executive Board.html">Executive Board</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="schemes.html">Schemes</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="NimgoanKetki.html" id="AboutNimgoanKetkiNav">About Nimgoan Ketki</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    
+        <div class="filter-buttons">
+            <button onclick="filterGallery('all')">All</button>
+            <button onclick="filterGallery('market')">Market</button>
+            <button onclick="filterGallery('cultural')">Cultural</button>
+            <button onclick="filterGallery('farming')">Farming</button>
+            <button onclick="filterGallery('events')">Events</button>
+            <button onclick="filterGallery('visitors')">Visitors</button>
+        </div>
+    
+        <!-- Slideshow -->
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="Sarpanch.jpg" alt="Featured Image 1">
+            </div>
+            <div class="mySlides fade">
+                <img src="featured2.jpg" alt="Featured Image 2">
+            </div>
+            <div class="mySlides fade">
+                <img src="featured3.jpg" alt="Featured Image 3">
+            </div>
+        </div>
+    
+        <div class="gallery-container">
+            <!-- Market Section -->
+            <div class="gallery-section" id="market">
+                <h2>Market</h2>
+                <div class="gallery-subsection">Leaf Market</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="leaf.1.jpg" alt="Leaf Market" onclick="openLightbox('leaf.1.jpg')"/>
+                        <p>Leaf Market</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="leaf.2.jpg" alt="Leaf Market" onclick="openLightbox('leaf.2.jpg')"/>
+                        <p>Leaf Market</p>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="leaf.3.jpg" alt="Leaf Market" onclick="openLightbox('leaf.3.jpg')"/>
+                        <p>Leaf Market</p>
+                    </div>
+                </div>
+                <div class="gallery-subsection">Weekly Market</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="weekly1.jpg" alt="Weekly Market" onclick="openLightbox('weekly1.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="weekly2.jpg" alt="Weekly Market" onclick="openLightbox('weekly2.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="weekly3.jpg" alt="Weekly Market" onclick="openLightbox('weekly3.jpg')">
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Festival Section -->
+            <div class="gallery-section" id="Cultural">
+                <h2>Cultural</h2>
+                <div class="gallery-subsection">Suvarnoyog Yatra</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="festival_suvarnoyog1.jpg" alt="Suvarnoyog Yatra" onclick="openLightbox('festival_suvarnoyog1.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="festival_suvarnoyog2.jpg" alt="Suvarnoyog Yatra" onclick="openLightbox('festival_suvarnoyog2.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="festival_suvarnoyog3.jpg" alt="Suvarnoyog Yatra" onclick="openLightbox('festival_suvarnoyog3.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="festival_suvarnoyog4.jpg" alt="Suvarnoyog Yatra" onclick="openLightbox('festival_suvarnoyog4.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="festival_suvarnoyog5.jpg" alt="Suvarnoyog Yatra" onclick="openLightbox('festival_suvarnoyog5.jpg')">
+                    </div>
+                    
+                </div>
+                <div class="gallery-subsection">Ketkeshvar Yatra</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="ketkeshvar1.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar1.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar2.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar2.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar3.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar3.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar4.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar4.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar5.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar5.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar6.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar6.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar7.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar7.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar8.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar8.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar9.JPG" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar9.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="ketkeshvar10.jpg" alt="Ketkeshvar Yatra" onclick="openLightbox('ketkeshvar10.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <video controls width="400">
+                            <source src="ketkeshvar-video2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="gallery-item">
+                        <video controls width="400">
+                            <source src="ketkeshvar-video3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+    <!-- Farming Section -->
+<div class="gallery-section" id="farming">
+    <h2>Farming</h2>
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="farm1.1.jpg" alt="Modern Farming Techniques" onclick="openLightbox('farm1.1.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm0.jpg" alt="Harvest Season" onclick="openLightbox('farm0.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm3.jpg" alt="Organic Farming" onclick="openLightbox('farm3.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm4.jpg" alt="Irrigation Techniques" onclick="openLightbox('farm4.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm.jpg" alt="Community Farming" onclick="openLightbox('farm.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm5.jpeg" alt="Community Farming" onclick="openLightbox('farm5.jpeg')">
+        </div>
+        <!-- Additional Images -->
+        <div class="gallery-item">
+            <img src="farm6.jpg" alt="Crop Rotation" onclick="openLightbox('farm6.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm7.jpg " alt="Tractor Plowing" onclick="openLightbox('farm7.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm8.jpg" alt="Greenhouse Farming" onclick="openLightbox('farm8.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm9.jpg" alt="Paddy Fields" onclick="openLightbox('farm9.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm10.jpg" alt="Wheat Harvest" onclick="openLightbox('farm10.jpg')">
+        </div>
+        <div class="gallery-item">
+            <img src="farm11.jpg" alt="Farm Equipment" onclick="openLightbox('farm11.jpg')">
+        </div>
+        
+    </div>
+</div>
+
+
+    <!-- Events Section -->
+<div class="gallery-section" id="events">
+    <h2>Events</h2>
+    
+    <!-- Cultural Events Subsection -->
+    <div class="event-subsection">
+        <h3>अखंड हरिनाम सप्ताह</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="cultural1.jpg" alt="Cultural Event 1" onclick="openLightbox('cultural1.jpg')">
+                <p>Cultural Event 1</p>
+            </div>
+            <div class="gallery-item">
+                <img src="cultural2.jpg" alt="Cultural Event 2" onclick="openLightbox('cultural2.jpg')">
+                <p>Cultural Event 2</p>
+            </div>
+            <div class="gallery-item">
+                <img src="cultural3.jpg" alt="Cultural Event 3" onclick="openLightbox('cultural3.jpg')">
+                <p>Cultural Event 3</p>
+            </div>
+            <div class="gallery-item">
+                <img src="cultural4.jpg" alt="Cultural Event 4" onclick="openLightbox('cultural4.jpg')">
+                <p>Cultural Event 4</p>
+            </div>
+            <div class="gallery-item">
+                <video controls width="400">
+                    <source src="cultural5.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Gatherings Subsection -->
+    <div class="event-subsection">
+        <h3>दहीहंडी उत्सव</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="community1.jpg" alt="Community Gathering 1" onclick="openLightbox('community1.jpg')">
+                <p>Community Gathering 1</p>
+            </div>
+            <div class="gallery-item">
+                <img src="community2.jpg" alt="Community Gathering 2" onclick="openLightbox('community2.jpg')">
+                <p>Community Gathering 2</p>
+            </div>
+            <div class="gallery-item">
+                <img src="community3.jpg" alt="Community Gathering 3" onclick="openLightbox('community3.jpg')">
+                <p>Community Gathering 3</p>
+            </div>
+            <div class="gallery-item">
+                <img src="community4.jpg" alt="Community Gathering 4" onclick="openLightbox('community4.jpg')">
+                <p>Community Gathering 4</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Festivals Subsection -->
+    <div class="event-subsection">
+        <h3>गणेशोत्सव</h3>
+        <h4>गावातील काही सार्वजनिक गणेश मंडळे</h4>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="festival1.JPG" alt="Festival 1" onclick="openLightbox('festival1.jpg')">
+                <p>Festival 1</p>
+            </div>
+            <div class="gallery-item">
+                <img src="festival2.jpg" alt="Festival 2" onclick="openLightbox('festival2.jpg')">
+                <p>Festival 2</p>
+            </div>
+            <div class="gallery-item">
+                <img src="festival3.jpg" alt="Festival 3" onclick="openLightbox('festival3.jpg')">
+                <p>Festival 3</p>
+            </div>
+            <div class="gallery-item">
+                <img src="festival4.jpg" alt="Festival 4" onclick="openLightbox('festival4.jpg')">
+                <p>Festival 4</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sports Events Subsection -->
+    <div class="event-subsection">
+        <h3>Sports Events</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="sports1.jpg" alt="Sports Event 1" onclick="openLightbox('sports1.jpg')">
+                <p>Sports Event 1</p>
+            </div>
+            <div class="gallery-item">
+                <img src="sports2.jpg" alt="Sports Event 2" onclick="openLightbox('sports2.jpg')">
+                <p>Sports Event 2</p>
+            </div>
+            <div class="gallery-item">
+                <img src="sports3.jpg" alt="Sports Event 3" onclick="openLightbox('sports3.jpg')">
+                <p>Sports Event 3</p>
+            </div>
+            <div class="gallery-item">
+                <img src="sports4.jpg" alt="Sports Event 4" onclick="openLightbox('sports4.jpg')">
+                <p>Sports Event 4</p>
+            </div>
+        </div>
+    </div>
+
+    
+            <div class="gallery-section" id="visitors">
+                <h2>Visitors</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="g.0.jpg" alt="Guest of Honor" onclick="openLightbox('g.0.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="g.1.jpg" alt="Dignitaries Visit" onclick="openLightbox('g.1.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="g.2.jpg" alt="Guest of Honor" onclick="openLightbox('g.2.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="g.3.jpg" alt="Guest of Honor" onclick="openLightbox('g.3.jpg')">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="g.4.jpg" alt="Guest of Honor" onclick="openLightbox('g.4.jpg')">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+           <!-- Slideshow and Gallery Code Here -->
+
+    <!-- Lightbox Structure -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-img" id="lightbox-img" alt="">
+    </div>
+
+    <div class="footer">
+        
+    </div>
+
+    <script>
+        // Slideshow script
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            const slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex - 1].style.display = "block";  
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+
+        // Filter Gallery
+        function filterGallery(category) {
+            const sections = document.getElementsByClassName("gallery-section");
+            for (let section of sections) {
+                if (category === 'all' || section.id === category) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            }
+        }
+
+        // Function to open the lightbox
+        function openLightbox(imageSrc) {
+            document.getElementById("lightbox-img").src = imageSrc;
+            document.getElementById("lightbox").style.display = "block";
+        }
+
+        // Function to close the lightbox
+        function closeLightbox() {
+            document.getElementById("lightbox").style.display = "none";
+        }
+    </script>

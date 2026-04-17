@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News - Nimgoan Ketki Gram Panchayat</title>
+
+  <!-- Font Awesome (for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root{
+      --green:#3E7C17;
+      --gold:#DAA520;
+      --bg:#f9f9f9;
+      --text:#333;
+      --muted:#666;
+      --card:#fff;
+      --border:#e8e8e8;
+      --shadow:0 4px 10px rgba(0,0,0,0.08);
+      --radius:12px;
+    }
+
+    *{ box-sizing:border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+      background: linear-gradient(180deg,#f9f9f9 0%, #FFFFFF 100%);
+    }
+
+    /* Top Utility Bar */
+    .topbar{
+      background:#222;
+      color:#fff;
+      padding:8px 14px;
+      font-size:14px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .topbar .left, .topbar .right{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .topbar a{ color:#fff; text-decoration:none; }
+    .topbar a:hover{ text-decoration:underline; }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,0.12);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    /* Breaking News */
+    .breaking-news {
+      background: #c70000;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      letter-spacing: .2px;
+    }
+    .breaking-news marquee { font-weight: 700; }
+
+    /* Header */
+    .header {
+      background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+      color: white;
+      padding: 28px 18px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow:hidden;
+    }
+    .header h1 { margin:0; font-size: 36px; }
+    .header p { margin:8px 0 0; opacity:.95; }
+    .header .right-logo {
+      position: absolute;
+      left: 20px;
+      top: 6px;
+      width: 140px;
+      height: auto;
+    }
+
+    /* Nav */
+    nav {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+    nav ul { list-style: none; margin: 0; padding: 0; }
+    nav ul li { display: inline; margin-right: 18px; }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 14px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      border-radius: 8px;
+    }
+    nav ul li a:hover { background-color: var(--gold); }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 18px auto 30px;
+      padding: 0 16px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      gap: 18px;
+      align-items:start;
+    }
+
+    .card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    /* Tools Bar: search + filters */
+    .tools{
+      padding: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .tools .group{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .input, select{
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      outline:none;
+      background:#fff;
+    }
+    .input:focus, select:focus{
+      border-color: rgba(62,124,23,0.6);
+      box-shadow: 0 0 0 3px rgba(62,124,23,0.15);
+    }
+    .btn{
+      padding:10px 14px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      background: var(--green);
+      color:#fff;
+      transition: transform .15s, background .2s;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+    }
+    .btn:hover{ background: var(--gold); transform: translateY(-1px); }
+    .btn.secondary{
+      background:#444;
+    }
+    .btn.secondary:hover{ background:#666; }
+
+    /* Featured / Top story */
+    .section-title{
+      padding: 14px 14px 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .section-title h2{
+      margin:0;
+      color: var(--green);
+      font-size: 22px;
+    }
+    .section-title small{
+      color: var(--muted);
+    }
+
+    .top-story{
+      margin: 14px;
+      overflow:hidden;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      position:relative;
+    }
+    .top-story img{
+      width:100%;
+      height: 280px;
+      object-fit: cover;
+      display:block;
+      cursor:pointer;
+      transition: transform .35s;
+    }
+    .top-story:hover img{ transform: scale(1.03); }
+    .top-story .overlay{
+      position:absolute;
+      inset:auto 0 0 0;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 70%);
+      color:#fff;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background: rgba(255,255,255,0.18);
+      border:1px solid rgba(255,255,255,0.28);
+      padding: 6px 10px;
+      border-radius:999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .overlay h3{
+      margin: 10px 0 6px;
+      font-size: 22px;
+    }
+    .meta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      font-size: 13px;
+      opacity: .95;
+    }
+    .meta i{ opacity:.95; }
+
+    /* Featured Cards */
+    .featured-articles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      padding: 14px;
+    }
+    .featured-article {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--border);
+      transition: transform 0.25s;
+      cursor: pointer;
+    }
+    .featured-article img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display:block;
+    }
+    .featured-article-content { padding: 12px; }
+    .featured-article-content h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--green);
+    }
+    .featured-article-content p { margin:0; color: var(--muted); font-size: 14px; line-height:1.35; }
+    .featured-article:hover { transform: translateY(-4px); }
+
+    /* News List */
+    .news-list{
+      padding: 0 14px 14px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .news-item{
+      display:flex;
+      gap: 12px;
+      padding: 12px;
+      border:1px solid var(--border);
+      border-radius: 12px;
+      align-items:flex-start;
+      background:#fff;
+      transition: background .2s, transform .15s;
+    }
+    .news-item:hover{ background:#fafafa; transform: translateY(-1px); }
+    .thumb{
+      width: 120px;
+      height: 86px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex: 0 0 120px;
+      cursor:pointer;
+      border:1px solid #eee;
+    }
+    .news-item h4{
+      margin: 0 0 6px;
+      font-size: 16px;
+      color: var(--green);
+    }
+    .news-item p{ margin: 0 0 8px; color: var(--muted); font-size: 14px; line-height:1.35; }
+    .news-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 6px;
+    }
+    .link{
+      text-decoration:none;
+      font-weight:700;
+      color: var(--green);
+    }
+    .link:hover{ text-decoration:underline; }
+    .tag{
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(218,165,32,0.18);
+      color: #7a5200;
+      border: 1px solid rgba(218,165,32,0.25);
+    }
+
+    /* Sidebar */
+    .sidebar .box{
+      padding: 14px;
+    }
+    .sidebar h3{
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 18px;
+    }
+    .sidebar ul{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .sidebar li{
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      background:#fff;
+    }
+    .sidebar li small{ color: var(--muted); display:block; margin-top:6px; }
+    .sidebar .mini{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .sidebar .mini i{
+      color: var(--green);
+      margin-top:2px;
+    }
+
+    /* Downloads */
+    .downloads a{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      color:#222;
+      padding: 10px;
+      border:1px dashed #ddd;
+      border-radius: 12px;
+      background:#fff;
+    }
+    .downloads a:hover{
+      border-color: rgba(62,124,23,0.5);
+      box-shadow: 0 0 0 3px rgba(62,124,23,0.12);
+    }
+
+    /* Newsletter */
+    .newsletter{
+      padding: 14px;
+      text-align:center;
+    }
+    .newsletter p{ color: var(--muted); margin-top:6px; }
+    .newsletter form{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    /* Comments / Feedback */
+    .feedback{
+      padding: 14px;
+    }
+    textarea{
+      width:100%;
+      padding: 10px;
+      font-size: 15px;
+      border:1px solid #ddd;
+      border-radius: 12px;
+      outline:none;
+      resize: vertical;
+      min-height: 90px;
+    }
+    textarea:focus{
+      border-color: rgba(62,124,23,0.6);
+      box-shadow: 0 0 0 3px rgba(62,124,23,0.15);
+    }
+    .comment-list{
+      margin-top: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .comment{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .comment .cmeta{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    /* Social buttons */
+    .social-media {
+      margin: 18px 0 0;
+      text-align: center;
+      padding: 0 14px 14px;
+    }
+    .social-button {
+      display: inline-block;
+      padding: 10px 15px;
+      margin: 6px 8px;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: transform 0.3s;
+      font-weight:700;
+    }
+    .social-button i { margin-right: 8px; }
+    .social-button:hover { transform: scale(1.05); }
+    .facebook { background: #3b5998; }
+    .twitter { background: #1da1f2; }
+    .linkedin { background: #0077b5; }
+    .instagram { background: #e4405f; }
+    .whatsapp { background: #25D366; }
+
+    /* Footer */
+    .footer {
+      margin-top: 22px;
+      background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+      color: white;
+      text-align: center;
+      padding: 14px 10px;
+    }
+    .footer small{ opacity:.95; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.92);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .lightbox-content {
+      max-width: 92%;
+      max-height: 92%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 26px;
+      color: white;
+      font-size: 34px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select:none;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      nav ul li{ display:inline-block; margin: 6px 10px; }
+      .featured-articles{ grid-template-columns: 1fr; }
+      .header .right-logo{ width: 120px; }
+    }
+    @media (max-width: 520px){
+      .news-item{ flex-direction:column; }
+      .thumb{ width:100%; height: 170px; flex: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Top utility bar -->
+  <div class="topbar">
+    <div class="left">
+      <span class="badge"><i class="fa-solid fa-phone"></i> Helpline: <a href="tel:+911234567890">+91 12345 67890</a></span>
+      <span class="badge"><i class="fa-solid fa-envelope"></i> <a href="mailto:grampanchayat@example.com">grampanchayat@example.com</a></span>
+    </div>
+    <div class="right">
+      <span class="badge" id="todayDate"><i class="fa-regular fa-calendar"></i> </span>
+      <a class="badge" href="#subscribe"><i class="fa-regular fa-bell"></i> Subscribe</a>
+      <a class="badge" href="#downloads"><i class="fa-solid fa-file-arrow-down"></i> Downloads</a>
+    </div>
+  </div>
+
+  <!-- Breaking News -->
+  <div class="breaking-news">
+    <marquee>Breaking News: New water conservation measures announced!</marquee>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo" />
+    <h1>News</h1>
+    <p>Official updates, announcements, tenders, and village activities</p>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="Executive Board.html">Executive Board</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="NimgoanKetki.html">About Nimgoan Ketki</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- Tools (Search + Filters + Quick Actions) -->
+    <div class="card tools">
+      <div class="group">
+        <input class="input" type="text" id="searchInput" placeholder="Search news (title, keyword)..." />
+        <select id="categoryFilter">
+          <option value="all">All Categories</option>
+          <option value="announcement">Announcements</option>
+          <option value="development">Development</option>
+          <option value="health">Health</option>
+          <option value="water">Water</option>
+          <option value="tender">Tender</option>
+          <option value="event">Events</option>
+        </select>
+
+        <select id="sortFilter">
+          <option value="new">Sort: Newest First</option>
+          <option value="old">Sort: Oldest First</option>
+          <option value="az">Sort: Title A–Z</option>
+        </select>
+      </div>
+
+      <div class="group">
+        <button class="btn secondary" onclick="resetFilters()"><i class="fa-solid fa-rotate"></i> Reset</button>
+        <a class="btn" href="#feedback"><i class="fa-regular fa-message"></i> Feedback</a>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <!-- MAIN -->
+      <div>
+
+        <!-- Top Story -->
+        <div class="card">
+          <div class="section-title">
+            <h2><i class="fa-solid fa-star"></i> Top Story</h2>
+            <small>Latest important update</small>
+          </div>
+
+          <div class="top-story">
+            <img src="news1.jpg" alt="Top Story" onclick="openLightbox(this)" />
+            <div class="overlay">
+              <span class="pill"><i class="fa-solid fa-bolt"></i> Announcement</span>
+              <h3>Village Development Program Launched</h3>
+              <div class="meta">
+                <span><i class="fa-regular fa-calendar"></i> 11 Feb 2026</span>
+                <span><i class="fa-regular fa-user"></i> Gram Panchayat Office</span>
+                <span><i class="fa-solid fa-location-dot"></i> Nimgoan Ketki</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-list">
+            <div style="padding:0 2px 8px; color:var(--muted); font-size:14px;">
+              The new development program aims to improve village infrastructure including roads, drainage, street lights, and clean water supply.
+              <a class="link" href="news-top-story.html">Read full update</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Articles -->
+        <div class="card" style="margin-top:16px;">
+          <div class="section-title">
+            <h2><i class="fa-regular fa-newspaper"></i> Featured Updates</h2>
+            <small>Highlighted news & activities</small>
+          </div>
+
+          <div class="featured-articles">
+            <div class="featured-article" onclick="window.location.href='news-page-featured1.html'">
+              <img src="news2.jpg" alt="Featured Article 1" onclick="event.stopPropagation(); openLightbox(this)">
+              <div class="featured-article-content">
+                <h3>Health Camp Organized</h3>
+                <p>Free checkups and guidance were provided to villagers. Medicines were distributed for common illnesses.</p>
+                <div class="meta" style="margin-top:10px; color:#777;">
+                  <span><i class="fa-regular fa-calendar"></i> 05 Feb 2026</span>
+                  <span class="tag">Health</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="featured-article" onclick="window.location.href='news-page-featured2.html'">
+              <img src="water.webp" alt="Featured Article 2" onclick="event.stopPropagation(); openLightbox(this)">
+              <div class="featured-article-content">
+                <h3>Water Conservation Meeting Held</h3>
+                <p>New water-saving practices were discussed with farmers and residents to ensure long-term sustainability.</p>
+                <div class="meta" style="margin-top:10px; color:#777;">
+                  <span><i class="fa-regular fa-calendar"></i> 01 Feb 2026</span>
+                  <span class="tag">Water</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest News List (Filterable) -->
+        <div class="card" style="margin-top:16px;">
+          <div class="section-title">
+            <h2><i class="fa-solid fa-list"></i> Latest News</h2>
+            <small>Search + filter works below</small>
+          </div>
+
+          <div class="news-list" id="newsList">
+
+            <!-- NEWS ITEM 1 -->
+            <div class="news-item" data-title="New Road Construction Project Started" data-category="development" data-date="2026-02-08">
+              <img class="thumb" src="road-construction.jpg" alt="Road Work" onclick="openLightbox(this)">
+              <div>
+                <h4>New Road Construction Project Started</h4>
+                <div class="meta" style="color:#777; margin-bottom:6px;">
+                  <span><i class="fa-regular fa-calendar"></i> 08 Feb 2026</span>
+                  <span><i class="fa-regular fa-user"></i> GP Engineering Team</span>
+                  <span class="tag">Development</span>
+                </div>
+                <p>Work has started on internal village road repairs and new paving to improve transport and safety.</p>
+                <div class="news-actions">
+                  <a class="link" href="news-page2.html"><i class="fa-solid fa-book-open"></i> Read More</a>
+                  <a class="link" href="#" onclick="shareNews(event, 'New Road Construction Project Started')"><i class="fa-solid fa-share-nodes"></i> Share</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- NEWS ITEM 2 -->
+            <div class="news-item" data-title="Village Fair Scheduled" data-category="event" data-date="2026-02-02">
+              <img class="thumb" src="news1.jpg" alt="Village Fair" onclick="openLightbox(this)">
+              <div>
+                <h4>Village Fair Scheduled for Next Month</h4>
+                <div class="meta" style="color:#777; margin-bottom:6px;">
+                  <span><i class="fa-regular fa-calendar"></i> 02 Feb 2026</span>
+                  <span><i class="fa-regular fa-user"></i> Cultural Committee</span>
+                  <span class="tag">Event</span>
+                </div>
+                <p>The annual village fair will include local stalls, cultural programs, and sports activities.</p>
+                <div class="news-actions">
+                  <a class="link" href="news-page3.html"><i class="fa-solid fa-book-open"></i> Read More</a>
+                  <a class="link" href="#" onclick="shareNews(event, 'Village Fair Scheduled for Next Month')"><i class="fa-solid fa-share-nodes"></i> Share</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- NEWS ITEM 3 -->
+            <div class="news-item" data-title="Tender Notice: Street Light Maintenance" data-category="tender" data-date="2026-01-28">
+              <img class="thumb" src="news_tender.jpg" alt="Tender" onclick="openLightbox(this)">
+              <div>
+                <h4>Tender Notice: Street Light Maintenance</h4>
+                <div class="meta" style="color:#777; margin-bottom:6px;">
+                  <span><i class="fa-regular fa-calendar"></i> 28 Jan 2026</span>
+                  <span><i class="fa-regular fa-user"></i> Gram Panchayat Office</span>
+                  <span class="tag">Tender</span>
+                </div>
+                <p>Sealed quotations are invited for maintenance and replacement of village street lights.</p>
+                <div class="news-actions">
+                  <a class="link" href="tender-streetlight.html"><i class="fa-solid fa-file-lines"></i> View Tender</a>
+                  <a class="link" href="#downloads"><i class="fa-solid fa-file-arrow-down"></i> Download PDF</a>
+                  <a class="link" href="#" onclick="shareNews(event, 'Tender Notice: Street Light Maintenance')"><i class="fa-solid fa-share-nodes"></i> Share</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- NEWS ITEM 4 -->
+            <div class="news-item" data-title="Water Tank Cleaning Drive Completed" data-category="water" data-date="2026-01-20">
+              <img class="thumb" src="news_water.jpg" alt="Water Drive" onclick="openLightbox(this)">
+              <div>
+                <h4>Water Tank Cleaning Drive Completed</h4>
+                <div class="meta" style="color:#777; margin-bottom:6px;">
+                  <span><i class="fa-regular fa-calendar"></i> 20 Jan 2026</span>
+                  <span><i class="fa-regular fa-user"></i> Water & Sanitation Team</span>
+                  <span class="tag">Water</span>
+                </div>
+                <p>Village water tanks were cleaned and disinfected to ensure safe drinking water for residents.</p>
+                <div class="news-actions">
+                  <a class="link" href="news-water-cleaning.html"><i class="fa-solid fa-book-open"></i> Read More</a>
+                  <a class="link" href="#" onclick="shareNews(event, 'Water Tank Cleaning Drive Completed')"><i class="fa-solid fa-share-nodes"></i> Share</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pagination (Static UI - if you later add backend you can make it real) -->
+          <div class="pagination" style="padding:0 14px 16px;">
+            <a href="#" class="active" onclick="event.preventDefault();">1</a>
+            <a href="#" onclick="event.preventDefault(); alert('Add page-2.html when you create it');">2</a>
+            <a href="#" onclick="event.preventDefault(); alert('Add page-3.html when you create it');">3</a>
+          </div>
+        </div>
+
+        <!-- Notice Board (quick announcements) -->
+        <div class="card" style="margin-top:16px;">
+          <div class="section-title">
+            <h2><i class="fa-solid fa-bullhorn"></i> Notice Board</h2>
+            <small>Important notices for villagers</small>
+          </div>
+          <div class="news-list">
+            <div class="news-item" style="align-items:center;">
+              <img class="thumb" src="notice.jpg" alt="Notice" onclick="openLightbox(this)">
+              <div>
+                <h4>Grievance Camp (Complaint Collection) - Ward Wise</h4>
+                <p>Submit complaints related to water, street lights, sanitation, and roads. Please carry your ID proof.</p>
+                <div class="meta" style="color:#777;">
+                  <span><i class="fa-regular fa-calendar"></i> 15 Feb 2026</span>
+                  <span><i class="fa-solid fa-clock"></i> 10:00 AM - 02:00 PM</span>
+                  <span><i class="fa-solid fa-location-dot"></i> Gram Panchayat Office</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feedback / Comments -->
+        <div class="card" id="feedback" style="margin-top:16px;">
+          <div class="section-title">
+            <h2><i class="fa-regular fa-message"></i> Feedback / Comments</h2>
+            <small>Your feedback helps improve village services</small>
+          </div>
+
+          <div class="feedback">
+            <input class="input" id="nameInput" type="text" placeholder="Your name (optional)" style="width:100%; margin-bottom:10px;">
+            <textarea id="commentInput" placeholder="Write your feedback here..."></textarea>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+              <button class="btn" onclick="addComment()"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+              <button class="btn secondary" onclick="clearComments()"><i class="fa-solid fa-trash"></i> Clear (This Device)</button>
+            </div>
+
+            <div class="comment-list" id="commentList"></div>
+            <small style="display:block; margin-top:10px; color:var(--muted);">
+              Note: comments are saved on this device (LocalStorage). For official complaints, use the Contact page.
+            </small>
+          </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="card" style="margin-top:16px;">
+          <div class="section-title">
+            <h2><i class="fa-solid fa-share-from-square"></i> Follow & Share</h2>
+            <small>Stay connected with updates</small>
+          </div>
+
+          <div class="social-media">
+            <a href="https://facebook.com" class="social-button facebook"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="https://twitter.com" class="social-button twitter"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="https://instagram.com" class="social-button instagram"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://linkedin.com" class="social-button linkedin"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://wa.me/?text=News%20from%20Nimgoan%20Ketki%20Gram%20Panchayat" class="social-button whatsapp">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+
+        <!-- Upcoming Events -->
+        <div class="card box">
+          <h3><i class="fa-regular fa-calendar-check"></i> Upcoming Events</h3>
+          <ul>
+            <li>
+              <div class="mini">
+                <i class="fa-solid fa-flag"></i>
+                <div>
+                  <strong>Village Fair</strong>
+                  <small>Date: 25 Dec 2026 (example)</small>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="mini">
+                <i class="fa-solid fa-tree"></i>
+                <div>
+                  <strong>Tree Plantation Drive</strong>
+                  <small>Date: 05 Jul 2026 (example)</small>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="mini">
+                <i class="fa-solid fa-hand-holding-droplet"></i>
+                <div>
+                  <strong>Clean Water Awareness</strong>
+                  <small>Date: 20 Feb 2026</small>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <small style="display:block; margin-top:10px; color:var(--muted);">
+            Tip: update dates to future events only.
+          </small>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="card box" style="margin-top:16px;">
+          <h3><i class="fa-solid fa-link"></i> Quick Links</h3>
+          <ul>
+            <li><a class="link" href="schemes.html"><i class="fa-solid fa-gift"></i> Government Schemes</a></li>
+            <li><a class="link" href="services.html"><i class="fa-solid fa-gear"></i> Online Services</a></li>
+            <li><a class="link" href="contact.html"><i class="fa-solid fa-phone"></i> Emergency Contacts</a></li>
+            <li><a class="link" href="gallery.html"><i class="fa-regular fa-image"></i> Photo Gallery</a></li>
+          </ul>
+        </div>
+
+        <!-- Downloads -->
+        <div class="card box" id="downloads" style="margin-top:16px;">
+          <h3><i class="fa-solid fa-file-arrow-down"></i> Downloads</h3>
+          <div class="downloads" style="display:flex; flex-direction:column; gap:10px;">
+            <a href="downloads/tender-streetlight.pdf" download>
+              <i class="fa-solid fa-file-pdf" style="color:#b00000;"></i>
+              <div>
+                <strong>Street Light Tender (PDF)</strong><br>
+                <small style="color:var(--muted);">Download official tender document</small>
+              </div>
+            </a>
+
+            <a href="downloads/notice-water.pdf" download>
+              <i class="fa-solid fa-file-pdf" style="color:#b00000;"></i>
+              <div>
+                <strong>Water Conservation Notice (PDF)</strong><br>
+                <small style="color:var(--muted);">Guidelines and schedule</small>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="card newsletter" id="subscribe" style="margin-top:16px;">
+          <h3><i class="fa-regular fa-bell"></i> Newsletter</h3>
+          <p>Get updates on announcements, meetings, and events.</p>
+          <form onsubmit="subscribe(event)">
+            <input class="input" type="email" id="emailInput" placeholder="Enter your email" required />
+            <button class="btn" type="submit"><i class="fa-solid fa-envelope"></i> Subscribe</button>
+          </form>
+          <small id="subscribeMsg" style="display:block; margin-top:10px; color:var(--muted);"></small>
+        </div>
+
+        <!-- Contact box -->
+        <div class="card box" style="margin-top:16px;">
+          <h3><i class="fa-solid fa-phone-volume"></i> Contact</h3>
+          <ul>
+            <li><strong>Gram Panchayat Office:</strong><br><small>9:00 AM – 5:00 PM</small></li>
+            <li><strong>Phone:</strong> <small><a class="link" href="tel:+911234567890">+91 12345 67890</a></small></li>
+            <li><strong>Email:</strong> <small><a class="link" href="mailto:grampanchayat@example.com">grampanchayat@example.com</a></small></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" class="lightbox-content" alt="Preview" />
+  </div>
+
+  <div class="footer">
+    <small>
+      © <span id="year"></span> Nimgoan Ketki Gram Panchayat • All Rights Reserved •
+      <a href="privacy.html" style="color:#fff; font-weight:700; text-decoration:underline;">Privacy</a>
+    </small>
+  </div>
+
+  <script>
+    // ===== Date in topbar + footer year =====
+    (function(){
+      const d = new Date();
+      const opts = { year:'numeric', month:'short', day:'2-digit' };
+      document.getElementById("todayDate").innerHTML = '<i class="fa-regular fa-calendar"></i> ' + d.toLocaleDateString('en-IN', opts);
+      document.getElementById("year").textContent = d.getFullYear();
+    })();
+
+    // ===== Lightbox =====
+    function openLightbox(img) {
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightbox-img');
+      lightbox.style.display = 'flex';
+      lightboxImg.src = img.src;
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    // Close lightbox on ESC
+    document.addEventListener('keydown', function(e){
+      if(e.key === "Escape") closeLightbox();
+    });
+
+    // ===== Search + Filter + Sort =====
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const sortFilter = document.getElementById("sortFilter");
+    const newsList = document.getElementById("newsList");
+
+    function filterNews(){
+      const q = (searchInput.value || "").toLowerCase().trim();
+      const cat = categoryFilter.value;
+
+      const items = Array.from(newsList.querySelectorAll(".news-item"));
+
+      // filter
+      items.forEach(item => {
+        const title = (item.getAttribute("data-title") || "").toLowerCase();
+        const category = item.getAttribute("data-category") || "all";
+        const okText = !q || title.includes(q);
+        const okCat = (cat === "all") || (category === cat);
+        item.style.display = (okText && okCat) ? "flex" : "none";
+      });
+
+      // sort (only visible ones)
+      const visible = items.filter(i => i.style.display !== "none");
+      const mode = sortFilter.value;
+
+      visible.sort((a,b)=>{
+        if(mode === "az"){
+          return (a.getAttribute("data-title")||"").localeCompare(b.getAttribute("data-title")||"");
+        }
+        const da = new Date(a.getAttribute("data-date") || "2000-01-01").getTime();
+        const db = new Date(b.getAttribute("data-date") || "2000-01-01").getTime();
+        return (mode === "new") ? (db - da) : (da - db);
+      });
+
+      // re-append in sorted order (keeps hidden ones in place)
+      visible.forEach(v => newsList.appendChild(v));
+    }
+
+    function resetFilters(){
+      searchInput.value = "";
+      categoryFilter.value = "all";
+      sortFilter.value = "new";
+      filterNews();
+    }
+
+    searchInput.addEventListener("input", filterNews);
+    categoryFilter.addEventListener("change", filterNews);
+    sortFilter.addEventListener("change", filterNews);
+
+    // ===== Share =====
+    async function shareNews(event, title){
+      event.preventDefault();
+      const text = `${title} - Nimgoan Ketki Gram Panchayat`;
+      const url = window.location.href;
+
+      try{
+        if(navigator.share){
+          await navigator.share({ title, text, url });
+        } else {
+          await navigator.clipboard.writeText(text + " | " + url);
+          alert("Link copied to clipboard!");
+        }
+      }catch(err){
+        // user cancelled share
+      }
+    }
+
+    // ===== Newsletter (demo) =====
+    function subscribe(event){
+      event.preventDefault();
+      const email = document.getElementById("emailInput").value.trim();
+      const msg = document.getElementById("subscribeMsg");
+
+      if(!email){
+        msg.textContent = "Please enter a valid email.";
+        return;
+      }
+
+      // Demo only: store locally
+      localStorage.setItem("nk_news_subscriber", email);
+      msg.textContent = "✅ Subscribed successfully (saved on this device).";
+      document.getElementById("emailInput").value = "";
+    }
+
+    // ===== Comments (LocalStorage) =====
+    const commentList = document.getElementById("commentList");
+
+    function loadComments(){
+      const data = JSON.parse(localStorage.getItem("nk_comments") || "[]");
+      commentList.innerHTML = "";
+      data.forEach(c => renderComment(c));
+    }
+
+    function renderComment(c){
+      const div = document.createElement("div");
+      div.className = "comment";
+      div.innerHTML = `
+        <div class="cmeta">
+          <span><i class="fa-regular fa-user"></i> ${escapeHtml(c.name || "Anonymous")}</span>
+          <span><i class="fa-regular fa-clock"></i> ${escapeHtml(c.time)}</span>
+        </div>
+        <div>${escapeHtml(c.text)}</div>
+      `;
+      commentList.prepend(div);
+    }
+
+    function addComment(){
+      const name = document.getElementById("nameInput").value.trim();
+      const text = document.getElementById("commentInput").value.trim();
+      if(!text){
+        alert("Please write your feedback.");
+        return;
+      }
+      const now = new Date();
+      const payload = {
+        name: name,
+        text: text,
+        time: now.toLocaleString("en-IN")
+      };
+      const data = JSON.parse(localStorage.getItem("nk_comments") || "[]");
+      data.push(payload);
+      localStorage.setItem("nk_comments", JSON.stringify(data));
+      document.getElementById("commentInput").value = "";
+      renderComment(payload);
+    }
+
+    function clearComments(){
+      if(confirm("Clear all saved comments from this device?")){
+        localStorage.removeItem("nk_comments");
+        loadComments();
+      }
+    }
+
+    function escapeHtml(str){
+      return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    // Init
+    filterNews();
+    loadComments();
+  </script>
+
+</body>
+</html>

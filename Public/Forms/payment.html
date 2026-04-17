@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="paper">
+  <div class="gov-header">
+    <div class="topline">Payment</div>
+    <div class="subline">Grampanchayat Nimgoan Ketki</div>
+    <div class="rule"></div>
+  </div>
+
+  <div style="font-size:14px; line-height:1.9;">
+    <b>Applicant:</b> <span id="nm"></span><br>
+    <b>Certificate:</b> <span id="cert"></span><br>
+    <b>Amount:</b> ₹ <span id="amt"></span>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- ================= UPI ================= -->
+  <div style="font-size:14px;">
+    <b>Option 1: Pay via UPI QR (Static)</b><br>
+    Scan this QR in Google Pay / PhonePe / Paytm.
+  </div>
+
+  <div style="display:flex; gap:20px; margin-top:12px; flex-wrap:wrap;">
+    <div id="upiQR" style="border:1px solid #000; width:240px; height:240px;
+         display:flex; align-items:center; justify-content:center;"></div>
+
+    <div style="font-size:14px; line-height:1.8; flex:1; min-width:260px;">
+      <b>UPI ID:</b> yashodeepraut999@okhdfcbank<br>
+      <b>Payee:</b> Nimgoan Ketki GP<br>
+      <b>Note:</b> Certificate Fee<br><br>
+
+      <div class="small">
+        * After payment, enter UPI Transaction ID / UTR below.
+      </div>
+
+      <div style="margin-top:10px;">
+        <div class="label">UPI Transaction ID / UTR</div>
+        <input class="input" id="utr" type="text"
+               placeholder="Enter 10–18 digit UTR">
+      </div>
+
+      <div class="btnbar" style="margin-top:10px;">
+        <button type="button" onclick="iPaidUPI()">I Paid via UPI</button>
+        <button type="button" class="secondary" onclick="history.back()">Back</button>
+      </div>
+
+      <div id="msg" class="small" style="margin-top:10px;"></div>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- ================= RAZORPAY ================= -->
+  <div style="font-size:14px;">
+    <b>Option 2: Pay using Razorpay</b> (Auto-verified)<br>
+    <div class="small">* Recommended: Auto verification + receipt generation</div>
+    <div class="btnbar" style="margin-top:10px;">
+      <button type="button" onclick="payRazorpay()">Pay with Razorpay</button>
+    </div>
+  </div>
+</div>
+
+<!-- Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+const BACKEND = "http://localhost:5000";
+const RAZORPAY_KEY_ID = "rzp_test_xxxxxxxxxxxx"; // <-- YOUR KEY
+
+function certLabel(v){
+  return {
+    birth:"Birth Certificate",
+    death:"Death Certificate",
+    marriage:"Marriage Certificate",
+    nodues:"No Dues Certificate",
+    bpl:"BPL Certificate",
+    niradhar:"Niradhar Certificate"
+  }[v] || v;
+}
+
+/* ================= INIT ================= */
+(function init(){
+  const d = JSON.parse(localStorage.getItem("GP_APPLICANT") || "{}");
+  const fee = localStorage.getItem("GP_FEE") || "0";
+  const cert = localStorage.getItem("GP_SELECTED_CERT") || "";
+
+  document.getElementById("nm").textContent = d.name || "-";
+  document.getElementById("cert").textContent = certLabel(cert);
+  document.getElementById("amt").textContent = fee;
+
+  const upiLink =
+    `upi://pay?pa=yashodeepraut999@okhdfcbank&pn=Nimgoan Ketki GP&am=${fee}&cu=INR&tn=Certificate Fee`;
+
+  new QRCode(document.getElementById("upiQR"), {
+    text: upiLink, width:220, height:220
+  });
+})();
+
+/* ================= UPI FIXED ================= */
+function iPaidUPI(){
+  const utr = document.getElementById("utr").value.trim();
+  const msg = document.getElementById("msg");
+
+  // ✅ REAL UTR VALIDATION
+  const utrRegex = /^[0-9]{10,18}$/;
+
+  if(!utrRegex.test(utr)){
+    msg.style.color = "red";
+    msg.textContent = "Please enter valid UTR (10–18 digits).";
+    return;
+  }
+
+  // ✅ SAVE PAYMENT
+  localStorage.setItem("GP_PAYMENT_MODE", "UPI");
+  localStorage.setItem("GP_UPI_UTR", utr);
+  localStorage.setItem("GP_PAYMENT_STATUS", "SUCCESS");
+
+  msg.style.color = "green";
+  msg.textContent = "UPI payment recorded successfully.";
+
+  setTimeout(() => {
+    location.href = "receipt.html";
+  }, 500);
+}
+
+/* ================= RAZORPAY ================= */
+async function payRazorpay(){
+  const fee = Number(localStorage.getItem("GP_FEE") || "0");
+  const d = JSON.parse(localStorage.getItem("GP_APPLICANT") || "{}");
+  const cert = localStorage.getItem("GP_SELECTED_CERT") || "";
+
+  if(fee <= 0){
+    localStorage.setItem("GP_PAYMENT_STATUS", "FREE");
+    localStorage.setItem("GP_PAYMENT_MODE", "FREE");
+    location.href = "receipt.html";
+    return;
+  }
+
+  const orderRes = await fetch(`${BACKEND}/api/create-order`, {
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({ amount: fee })
+  });
+
+  const order = await orderRes.json();
+  if(!order.ok){ alert("Order failed"); return; }
+
+  const rzp = new Razorpay({
+    key: RAZORPAY_KEY_ID,
+    amount: order.amount,
+    currency: order.currency,
+    name: "Grampanchayat Nimgoan Ketki",
+    description: certLabel(cert),
+    order_id: order.orderId,
+    prefill: {
+      name: d.name || "",
+      contact: d.mobile || "",
+      email: d.email || ""
+    },
+    handler: async function (res){
+      const vr = await fetch(`${BACKEND}/api/verify-payment`, {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify(res)
+      });
+
+      const ok = await vr.json();
+      if(!ok.ok){ alert("Verification failed"); return; }
+
+      localStorage.setItem("GP_PAYMENT_STATUS", "SUCCESS");
+      localStorage.setItem("GP_PAYMENT_MODE", "RAZORPAY");
+      localStorage.setItem("GP_RZP_PAYMENT_ID", res.razorpay_payment_id);
+      localStorage.setItem("GP_RZP_ORDER_ID", res.razorpay_order_id);
+
+      location.href = "receipt.html";
+    }
+  });
+
+  rzp.open();
+}
+</script>
+<script src="api.js"></script>
+
+</body>
+</html>

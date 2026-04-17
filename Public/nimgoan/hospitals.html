@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Government Hospital - Nimgoan Ketki</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#FFFFF0;
+      margin:0; padding:0; color:#333;
+      background:linear-gradient(180deg,#f9f9f9 0%, #FFFFFF 100%);
+    }
+
+    .header{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      padding:30px;
+      text-align:center;
+      box-shadow:0 4px 6px rgba(0,0,0,0.1);
+      position:relative;
+    }
+    .header h1{ margin:0; font-size:36px; }
+    .header p{ margin:8px 0 0; opacity:0.95; }
+    .header .right-logo{
+      position:absolute;
+      left:20px; top:1px;
+      width:150px; height:auto;
+    }
+
+    nav{
+      background:#333;
+      color:white;
+      text-align:center;
+      padding:10px 0;
+    }
+    nav ul{ list-style:none; margin:0; padding:0; }
+    nav ul li{ display:inline; margin-right:20px; }
+    nav ul li a{
+      color:white; text-decoration:none;
+      padding:10px 20px;
+      font-weight:bold;
+      transition:0.3s;
+      border-radius:8px;
+      display:inline-block;
+    }
+    nav ul li a:hover{ background:#DAA520; }
+
+    .container{
+      padding:40px 20px;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    /* ===== Top actions ===== */
+    .top-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      font-weight:900;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid #eee;
+      background:#fff;
+      color:#333;
+      box-shadow:0 6px 14px rgba(0,0,0,0.06);
+      cursor:pointer;
+      transition:0.2s;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .btn i{ color:#2e7d32; }
+
+    /* ===== Card ===== */
+    .card{
+      background:#fff;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      margin-bottom:22px;
+    }
+    .card-head{
+      padding:18px 22px;
+      border-bottom:1px solid #f0f0f0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .card-head h2{
+      margin:0;
+      color:#2e7d32;
+      font-size:22px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#faf7e8;
+      border:1px solid #f3e7b9;
+      font-weight:800;
+      color:#7a5a00;
+      font-size:13px;
+    }
+    .card-body{ padding:22px; }
+    .muted{ color:#666; line-height:1.7; }
+
+    /* ===== Hospital card (image + info) ===== */
+    .hospital-card{
+      display:flex;
+      flex-wrap:wrap;
+      background:#fff;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      border-radius:15px;
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+    .hospital-card img{
+      width:100%;
+      max-width:450px;
+      object-fit:cover;
+      display:block;
+    }
+    .hospital-info{
+      flex:1;
+      padding:28px;
+    }
+    .hospital-info h3{
+      margin-top:0;
+      color:#2e7d32;
+      font-size:26px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    /* ===== Info grid ===== */
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .info-item{
+      border:1px solid #f0f0f0;
+      border-radius:12px;
+      padding:12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:linear-gradient(180deg,#fff 0%, #fbfbfb 100%);
+    }
+    .info-item i{
+      font-size:18px;
+      color:#DAA520;
+      margin-top:2px;
+      min-width:20px;
+    }
+    .info-item b{ display:block; margin-bottom:3px; }
+
+    /* ===== Lists ===== */
+    ul.list{
+      padding-left:18px;
+      line-height:1.85;
+      margin:10px 0 0;
+    }
+    ul.list li{ margin-bottom:6px; }
+
+    /* ===== Timeline ===== */
+    .timeline{
+      background:#f1f8e9;
+      border-radius:15px;
+      padding:22px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      margin-bottom:22px;
+    }
+    .timeline h3{
+      color:#33691e;
+      margin:0 0 14px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .step{
+      background:#fff;
+      padding:14px 16px;
+      margin-bottom:12px;
+      border-left:6px solid #66bb6a;
+      border-radius:12px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .step i{ color:#2e7d32; font-size:18px; }
+
+    /* ===== Map ===== */
+    .map-wrap{
+      border-radius:15px;
+      overflow:hidden;
+      border:1px solid #eee;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+    .map-iframe{
+      width:100%;
+      height:360px;
+      border:0;
+      display:block;
+    }
+
+    /* ===== Emergency strip ===== */
+    .emergency{
+      border:1px solid #ffe1e1;
+      background:#fff5f5;
+      padding:14px 16px;
+      border-radius:15px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+    .emergency b{ color:#b71c1c; }
+    .emergency .small{ color:#555; line-height:1.6; }
+
+    .note{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:12px;
+      background:#f9f9f9;
+      border:1px dashed #ddd;
+      line-height:1.7;
+    }
+
+    /* ===== Footer ===== */
+    .footer{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      text-align:center;
+      padding:12px;
+      margin-top:30px;
+    }
+
+    @media (max-width: 900px){
+      .info-grid{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 768px){
+      .hospital-card{ flex-direction:column; }
+      .hospital-card img{ width:100%; }
+      .header h1{ font-size:28px; }
+      .header .right-logo{ width:110px; top:10px; }
+      nav ul li{ display:inline-block; margin:6px 6px; }
+      .map-iframe{ height:320px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo">
+    <h1 data-en="Government Hospital – Nimgoan Ketki" data-mr="शासकीय रुग्णालय – निमगाव केतकी">Government Hospital – Nimgoan Ketki</h1>
+    <p data-en="OPD, vaccinations, maternity care, lab tests and emergency guidance"
+       data-mr="OPD, लसीकरण, मातृ-शिशू सेवा, तपासण्या व आपत्कालीन मार्गदर्शन">
+      OPD, vaccinations, maternity care, lab tests and emergency guidance
+    </p>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="Home.html" data-en="Home" data-mr="मुख्यपृष्ठ">Home</a></li>
+      <li><a href="about.html" data-en="About Us" data-mr="आमच्याबद्दल">About Us</a></li>
+      <li><a href="Executive Board.html" data-en="Executive Board" data-mr="कार्यकारी मंडळ">Executive Board</a></li>
+      <li><a href="services.html" data-en="Services" data-mr="सेवा">Services</a></li>
+      <li><a href="schemes.html" data-en="Schemes" data-mr="योजना">Schemes</a></li>
+      <li><a href="news.html" data-en="News" data-mr="बातम्या">News</a></li>
+      <li><a href="NimgoanKetki.html" data-en="About Village" data-mr="गाव माहिती">About Village</a></li>
+      <li><a href="gallery.html" data-en="Gallery" data-mr="गॅलरी">Gallery</a></li>
+      <li><a href="contact.html" data-en="Contact Us" data-mr="संपर्क">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- TOP ACTIONS -->
+    <div class="top-actions">
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" id="mapsBtn" target="_blank" rel="noopener" href="#"><i class="fa-solid fa-map-location-dot"></i><span data-en="Open in Maps" data-mr="नकाशावर उघडा">Open in Maps</span></a>
+        <a class="btn" id="dirBtn" target="_blank" rel="noopener" href="#"><i class="fa-solid fa-route"></i><span data-en="Directions" data-mr="दिशा">Directions</span></a>
+      </div>
+    </div>
+
+    <!-- EMERGENCY STRIP -->
+    <div class="emergency">
+      <div>
+        <b data-en="Emergency Numbers" data-mr="आपत्कालीन क्रमांक">Emergency Numbers</b>
+        <div class="small"
+             data-en="Ambulance: 108 | Health Helpline: 104 | Emergency: 112"
+             data-mr="रुग्णवाहिका: 108 | आरोग्य हेल्पलाईन: 104 | आपत्काल: 112">
+          Ambulance: 108 | Health Helpline: 104 | Emergency: 112
+        </div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="tel:108"><i class="fa-solid fa-truck-medical"></i>108</a>
+        <a class="btn" href="tel:104"><i class="fa-solid fa-headset"></i>104</a>
+        <a class="btn" href="tel:112"><i class="fa-solid fa-phone-volume"></i>112</a>
+      </div>
+    </div>
+
+    <!-- HOSPITAL MAIN CARD -->
+    <div class="hospital-card">
+      <img src="healthcare.jpg" alt="Government Hospital Image">
+      <div class="hospital-info">
+        <h3><i class="fa-solid fa-hospital"></i> Primary Health Center, Nimgoan Ketki</h3>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+              <b data-en="Type" data-mr="प्रकार">Type</b>
+              <span data-en="Rural Government Hospital / PHC"
+                    data-mr="ग्रामीण शासकीय रुग्णालय / PHC">
+                Rural Government Hospital / PHC
+              </span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <b data-en="Location" data-mr="ठिकाण">Location</b>
+              <span data-en="Near Gram Panchayat Office, Main Road (Update exact address)"
+                    data-mr="ग्रामपंचायत कार्यालयाजवळ, मुख्य रस्ता (अचूक पत्ता अपडेट करा)">
+                Near Gram Panchayat Office, Main Road (Update exact address)
+              </span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <b data-en="Contact" data-mr="संपर्क">Contact</b>
+              <span data-en="+91-9876543210 (Update)" data-mr="+91-9876543210 (अपडेट करा)">+91-9876543210 (Update)</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <b data-en="OPD Timings" data-mr="OPD वेळ">OPD Timings</b>
+              <span data-en="(Add OPD timing e.g., 10:00 AM – 2:00 PM)"
+                    data-mr="(OPD वेळ लिहा उदा., १०:०० – २:००)">
+                (Add OPD timing e.g., 10:00 AM – 2:00 PM)
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <b data-en="What to bring:" data-mr="काय सोबत ठेवावे:">What to bring:</b>
+          <span data-en="Aadhaar / ABHA (if available), previous reports, prescriptions, and child immunization card."
+                data-mr="आधार / ABHA (असल्यास), जुने रिपोर्ट, प्रिस्क्रिप्शन, आणि लसीकरण कार्ड.">
+            Aadhaar / ABHA (if available), previous reports, prescriptions, and child immunization card.
+          </span>
+        </div>
+
+        <div class="note">
+          <b data-en="Note:" data-mr="टीप:">Note:</b>
+          <span data-en="This page provides general guidance. For emergencies call 108/112."
+                data-mr="ही माहिती सामान्य मार्गदर्शनासाठी आहे. आपत्कालीन प्रसंगी 108/112 वर कॉल करा.">
+            This page provides general guidance. For emergencies call 108/112.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-stethoscope"></i>
+          <span data-en="Available Services" data-mr="उपलब्ध सेवा">Available Services</span>
+        </h2>
+        <div class="badge"><i class="fa-solid fa-circle-check"></i><span data-en="Low/No Cost" data-mr="कमी/मोफत">Low/No Cost</span></div>
+      </div>
+      <div class="card-body">
+        <ul class="list">
+          <li><i class="fa-solid fa-user-doctor"></i> OPD and General Consultation</li>
+          <li><i class="fa-solid fa-baby"></i> Maternal & Child Health Services (ANC/PNC)</li>
+          <li><i class="fa-solid fa-syringe"></i> Vaccination & Immunization</li>
+          <li><i class="fa-solid fa-heart-pulse"></i> BP / Sugar Check-up</li>
+          <li><i class="fa-solid fa-pills"></i> Free / Generic Medicines (as per stock)</li>
+          <li><i class="fa-solid fa-vial"></i> Basic Lab Tests (as available)</li>
+          <li><i class="fa-solid fa-bandage"></i> Emergency First Aid</li>
+          <li><i class="fa-solid fa-hospital"></i> Referral to Taluka / District Hospital</li>
+        </ul>
+
+        <div class="note">
+          <b data-en="Update Tip:" data-mr="अपडेट टीप:">Update Tip:</b>
+          <span data-en="If you know doctor name, nurse/ANM name, ambulance availability or OPD schedule, add it here for more accuracy."
+                data-mr="डॉक्टरचे नाव, ANM/नर्सचे नाव, रुग्णवाहिका उपलब्धता किंवा OPD वेळापत्रक माहित असल्यास येथे जोडा.">
+            If you know doctor name, nurse/ANM name, ambulance availability or OPD schedule, add it here for more accuracy.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOW TO AVAIL -->
+    <div class="timeline">
+      <h3><i class="fa-solid fa-list-check"></i>
+        <span data-en="How to Avail Services" data-mr="सेवा कशी घ्यावी">How to Avail Services</span>
+      </h3>
+      <div class="step"><i class="fas fa-sign-in-alt"></i><span data-en="Visit Hospital & Register at OPD" data-mr="रुग्णालयात येऊन OPD नोंदणी करा">Visit Hospital & Register at OPD</span></div>
+      <div class="step"><i class="fas fa-user-md"></i><span data-en="Meet Doctor / Health Worker" data-mr="डॉक्टर / आरोग्य कर्मचाऱ्यांना भेटा">Meet Doctor / Health Worker</span></div>
+      <div class="step"><i class="fas fa-vial"></i><span data-en="Get Tests Done (if required)" data-mr="गरज असल्यास तपासण्या करा">Get Tests Done (if required)</span></div>
+      <div class="step"><i class="fas fa-pills"></i><span data-en="Collect Medicines" data-mr="औषधे घ्या">Collect Medicines</span></div>
+      <div class="step"><i class="fas fa-hospital-user"></i><span data-en="Referral (if advanced care needed)" data-mr="अधिक उपचारासाठी रेफरल (गरज असल्यास)">Referral (if advanced care needed)</span></div>
+    </div>
+
+    <!-- MAP -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-map"></i>
+          <span data-en="Hospital Location (Map)" data-mr="रुग्णालय लोकेशन (नकाशा)">Hospital Location (Map)</span>
+        </h2>
+        <div class="badge"><i class="fa-solid fa-location-dot"></i><span data-en="Nimgoan Ketki" data-mr="निमगाव केतकी">Nimgoan Ketki</span></div>
+      </div>
+      <div class="card-body">
+        <p class="muted"
+           data-en="This map shows a search-based location. For exact pin, paste the hospital’s Google Maps link and I will update it."
+           data-mr="हा नकाशा शोध-आधारित लोकेशन दाखवतो. अचूक पिनसाठी रुग्णालयाची Google Maps लिंक द्या.">
+          This map shows a search-based location. For exact pin, paste the hospital’s Google Maps link and I will update it.
+        </p>
+
+        <div class="map-wrap">
+          <iframe id="mapFrame" class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p data-en="© 2024 Nimgoan Ketki Gram Panchayat. All Rights Reserved."
+       data-mr="© 2024 निमगाव केतकी ग्रामपंचायत. सर्व हक्क राखीव.">
+      © 2024 Nimgoan Ketki Gram Panchayat. All Rights Reserved.
+    </p>
+  </div>
+
+  <script>
+    // -------- AUTO LANGUAGE (NO BUTTON) --------
+    function autoLanguage(){
+      const userLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+      const isMarathi = userLang.startsWith("mr");
+
+      document.querySelectorAll("[data-en][data-mr]").forEach(el => {
+        el.textContent = isMarathi ? el.getAttribute("data-mr") : el.getAttribute("data-en");
+      });
+
+      document.documentElement.lang = isMarathi ? "mr" : "en";
+    }
+    autoLanguage();
+
+    // -------- MAP (SEARCH-BASED) --------
+    const hospitalQuery = encodeURIComponent("Primary Health Center Nimgoan Ketki");
+    document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + hospitalQuery + "&output=embed";
+    document.getElementById("mapsBtn").href = "https://www.google.com/maps/search/?api=1&query=" + hospitalQuery;
+    document.getElementById("dirBtn").href = "https://www.google.com/maps/dir/?api=1&destination=" + hospitalQuery;
+  </script>
+</body>
+</html>

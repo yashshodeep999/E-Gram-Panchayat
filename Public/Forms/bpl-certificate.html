@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Below Poverty Line (BPL) Certificate</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="paper">
+
+  <div class="gov-header">
+    <div class="topline">महाराष्ट्र शासन / Government of Maharashtra</div>
+    <div class="subline">ग्रामपंचायत कार्यालय / Grampanchayat Office</div>
+    <div class="rule"></div>
+  </div>
+
+  <!-- ✅ Editable Dispatch No + Date -->
+  <div class="row" style="justify-content:space-between; align-items:center;">
+    <div class="small">
+      जा.क्र./Dispatch No.:
+      <input class="input" id="dispatchNo" style="min-width:55mm; display:inline-block;" placeholder="Enter Dispatch No.">
+    </div>
+
+    <div class="small">
+      दिनांक/Date:
+      <input class="input" id="dispatchDate" style="min-width:45mm; display:inline-block;" type="date">
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="header-title">दारिद्र्य रेषेखालील कुटुंबाचा दाखला</div>
+  <div class="header-title" style="margin-top:2mm;">Below Poverty Line Certificate</div>
+
+  <div class="hr"></div>
+
+  <div class="row">
+    <div class="col">
+      <div class="label">Gramsevak / Village Development Officer (Issuing Authority)</div>
+      <input class="input" id="issuingAuthority" placeholder="Name of Gramsevak / VDO">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="label">Name of Applicant (Mr./Mrs.)</div>
+      <input class="input" id="name" placeholder="Full Name">
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="label">Aadhaar Card No.</div>
+      <input class="input" id="aadhaar" maxlength="12" inputmode="numeric" placeholder="0000-0000-0000">
+    </div>
+    <div>
+      <div class="label">Mobile No. (optional)</div>
+      <input class="input" id="mobile" maxlength="10" inputmode="numeric" placeholder="10 digit mobile">
+    </div>
+
+    <div>
+      <div class="label">Village</div>
+      <input class="input" id="village" placeholder="Village name">
+    </div>
+    <div>
+      <div class="label">Taluka</div>
+      <input class="input" id="taluka" placeholder="Taluka">
+    </div>
+
+    <div>
+      <div class="label">District</div>
+      <input class="input" id="district" placeholder="District">
+    </div>
+    <div>
+      <div class="label">State</div>
+      <input class="input" id="state" value="Maharashtra" readonly>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="small" style="line-height:1.8;">
+    This is to certify that the above applicant belongs to <b>Below Poverty Line (BPL)</b> family,
+    and his/her name is included in the official BPL list.
+  </div>
+
+  <div class="grid-2" style="margin-top:8px;">
+    <div>
+      <div class="label">BPL List Year</div>
+      <input class="input" id="bplYear" placeholder="e.g. 2002-2007">
+    </div>
+    <div>
+      <div class="label">BPL List No.</div>
+      <input class="input" id="bplNo" placeholder="e.g. 338">
+    </div>
+  </div>
+
+  <div class="small" style="margin-top:8px;">
+    Certificate is issued on request of the applicant for official purpose.
+  </div>
+
+  <div class="gov-footer">
+    <!-- ✅ Editable Place + Date -->
+    <div>
+      Place:
+      <input class="input" id="place" style="min-width:45mm; display:inline-block;" placeholder="Place"><br>
+      Date:
+      <input class="input" id="certDate" style="min-width:45mm; display:inline-block;" type="date">
+    </div>
+
+    <!-- ✅ Fixed stamp/signature image (upload once) -->
+    <div style="text-align:right;">
+      Signature with stamp<br>
+
+      <div style="display:inline-block; text-align:center;">
+        <img id="stampPreview" alt="Stamp" style="height:60px; margin-top:6px; border:1px solid #000; padding:4px; background:#fff; display:none;">
+        <div class="no-print" style="margin-top:6px;">
+          <input type="file" id="stampUpload" accept="image/*">
+        </div>
+      </div>
+
+      <br>
+      <span class="line" style="min-width:60mm;"></span><br>
+      Gramsevak / Village Development Officer
+    </div>
+  </div>
+
+  <div class="btnbar">
+    <button type="button" class="secondary" onclick="history.back()">Back</button>
+    <button type="button" class="secondary" onclick="saveBplToMongo()">Save</button>
+    <button type="button" onclick="window.print()">Print</button>
+  </div>
+
+  <div id="saveMsg" class="small" style="margin-top:8px;"></div>
+
+</div>
+
+<!-- ✅ keep ONLY one api.js -->
+<script src="api.js"></script>
+
+<script>
+function setSaveMsg(text, ok){
+  const el = document.getElementById("saveMsg");
+  el.style.color = ok ? "green" : "red";
+  el.textContent = text;
+}
+
+function onlyDigits(str){ return (str || "").replace(/\D/g, ""); }
+
+// ✅ Prefill + load stamp
+(function fill(){
+  const raw = localStorage.getItem("GP_APPLICANT");
+  if(raw){
+    const d = JSON.parse(raw);
+
+    document.getElementById("name").value = d.name || "";
+    document.getElementById("aadhaar").value = d.aadhaar || "";
+    document.getElementById("mobile").value = d.mobile || "";
+    document.getElementById("village").value = d.village || "";
+    document.getElementById("taluka").value = d.taluka || "";
+    document.getElementById("district").value = d.district || "";
+  }
+
+  // optional default place
+  if(!document.getElementById("place").value){
+    document.getElementById("place").value = "Nimgoan Ketki";
+  }
+
+  // load fixed stamp image
+  const stamp = localStorage.getItem("GP_STAMP_IMAGE");
+  if(stamp){
+    const img = document.getElementById("stampPreview");
+    img.src = stamp;
+    img.style.display = "inline-block";
+  }
+})();
+
+// ✅ Upload stamp once and keep fixed
+document.getElementById("stampUpload").addEventListener("change", function(e){
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(){
+    const dataUrl = reader.result;
+    localStorage.setItem("GP_STAMP_IMAGE", dataUrl);
+
+    const img = document.getElementById("stampPreview");
+    img.src = dataUrl;
+    img.style.display = "inline-block";
+  };
+  reader.readAsDataURL(file);
+});
+
+async function saveBplToMongo(){
+  try{
+    const data = {
+      dispatchNo: document.getElementById("dispatchNo").value.trim(),
+      dispatchDate: document.getElementById("dispatchDate").value || "",
+
+      issuingAuthority: document.getElementById("issuingAuthority").value.trim(),
+      applicantName: document.getElementById("name").value.trim(),
+      aadhaar: onlyDigits(document.getElementById("aadhaar").value.trim()),
+      mobile: onlyDigits(document.getElementById("mobile").value.trim()),
+      village: document.getElementById("village").value.trim(),
+      taluka: document.getElementById("taluka").value.trim(),
+      district: document.getElementById("district").value.trim(),
+      state: document.getElementById("state").value.trim(),
+      bplListYear: document.getElementById("bplYear").value.trim(),
+      bplListNo: document.getElementById("bplNo").value.trim(),
+
+      place: document.getElementById("place").value.trim(),
+      certificateDate: document.getElementById("certDate").value || "",
+
+      stampImage: localStorage.getItem("GP_STAMP_IMAGE") || "",
+
+      // link with application (optional)
+      application: JSON.parse(localStorage.getItem("GP_APPLICANT") || "{}"),
+      receiptNo: localStorage.getItem("GP_RECEIPT_NO") || ""
+    };
+
+    // ✅ validation
+    if(!data.applicantName){
+      setSaveMsg("❌ Please enter Applicant Name", false);
+      return;
+    }
+    if(data.aadhaar.length !== 12){
+      setSaveMsg("❌ Please enter valid Aadhaar (12 digits)", false);
+      return;
+    }
+    if(data.mobile && data.mobile.length !== 10){
+      setSaveMsg("❌ Mobile must be 10 digits (or keep empty)", false);
+      return;
+    }
+    if(!data.stampImage){
+      setSaveMsg("❌ Please upload Signature/Stamp image (one time).", false);
+      return;
+    }
+
+    // prevent double save (optional)
+    const key = "GP_BPL_SAVED_" + (data.dispatchNo || data.aadhaar || "X");
+    if(localStorage.getItem(key) === "YES"){
+      setSaveMsg("✅ Already saved in database.", true);
+      return;
+    }
+
+    const result = await submitToMongo("bpl", data);
+
+    if(result && result.success){
+      localStorage.setItem(key, "YES");
+      setSaveMsg("✅ BPL form saved to MongoDB! ID: " + (result.id || ""), true);
+    }else{
+      setSaveMsg("❌ Error: " + (result.message || result.error || "Unknown error"), false);
+    }
+
+  }catch(err){
+    console.log("BPL save error:", err);
+    setSaveMsg("❌ Server error. Check Node server + MongoDB running.", false);
+  }
+}
+</script>
+
+</body>
+</html>

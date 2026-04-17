@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Banks - Nimgoan Ketki</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /* ===== Global ===== */
+    body{
+      font-family: Arial, sans-serif;
+      background-color:#FFFFF0;
+      margin:0; padding:0; color:#333;
+      background:linear-gradient(180deg,#f9f9f9 0%, #FFFFFF 100%);
+    }
+
+    /* ===== Header ===== */
+    .header{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      padding:30px;
+      text-align:center;
+      box-shadow:0 4px 6px rgba(0,0,0,0.1);
+      position:relative;
+    }
+    .header h1{ margin:0; font-size:36px; }
+    .header p{ margin:8px 0 0; opacity:0.95; }
+    .header .right-logo{
+      position:absolute;
+      left:20px; top:5px;
+      width:130px; height:auto;
+    }
+
+    /* ===== Navigation ===== */
+    nav{ background:#333; color:#fff; text-align:center; padding:10px 0; }
+    nav ul{ list-style:none; margin:0; padding:0; }
+    nav ul li{ display:inline; margin-right:20px; }
+    nav ul li a{
+      color:white; text-decoration:none; padding:10px 20px;
+      font-weight:bold; transition:background-color 0.3s;
+      border-radius:8px; display:inline-block;
+    }
+    nav ul li a:hover{ background:#DAA520; }
+
+    /* ===== Container ===== */
+    .container{ padding:40px 20px; max-width:1200px; margin:auto; }
+
+    /* ===== Cards ===== */
+    .card{
+      background:#fff;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      border-radius:15px;
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+    .card-head{
+      padding:18px 22px;
+      border-bottom:1px solid #f0f0f0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .card-head h2{
+      color:#2e7d32;
+      font-size:22px;
+      margin:0;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#faf7e8;
+      border:1px solid #f3e7b9;
+      font-weight:800;
+      color:#7a5a00;
+      font-size:13px;
+    }
+    .card-body{ padding:22px; }
+    .muted{ color:#666; line-height:1.7; }
+
+    .hero-img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* ===== Info grid ===== */
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .info-item{
+      border:1px solid #f0f0f0;
+      border-radius:12px;
+      padding:12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:linear-gradient(180deg,#fff 0%, #fbfbfb 100%);
+    }
+    .info-item i{
+      font-size:18px;
+      color:#DAA520;
+      margin-top:2px;
+      min-width:20px;
+    }
+    .info-item b{ display:block; margin-bottom:3px; }
+
+    /* ===== Two column sections ===== */
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .list{
+      margin:10px 0 0;
+      padding-left:18px;
+      line-height:1.85;
+    }
+    .list li{ margin-bottom:6px; }
+
+    /* ===== Actions ===== */
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .action-link, .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      font-weight:900;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid #eee;
+      background:#fff;
+      color:#333;
+      box-shadow:0 6px 14px rgba(0,0,0,0.06);
+      transition:0.2s;
+      cursor:pointer;
+    }
+    .action-link:hover, .btn:hover{ transform:translateY(-1px); }
+    .action-link i{ color:#2e7d32; }
+
+    /* ===== Mini table ===== */
+    .mini-table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid #f0f0f0;
+      margin-top:12px;
+    }
+    .mini-table th, .mini-table td{
+      padding:12px 12px;
+      border-bottom:1px solid #f0f0f0;
+      text-align:left;
+      vertical-align:top;
+    }
+    .mini-table th{
+      background:#faf7e8;
+      color:#2e7d32;
+      font-weight:900;
+    }
+    .mini-table tr:last-child td{ border-bottom:none; }
+
+    /* ===== Notes / Alerts ===== */
+    .note{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:12px;
+      background:#f9f9f9;
+      border:1px dashed #ddd;
+      line-height:1.7;
+    }
+
+    /* ===== FAQ ===== */
+    .faq details{
+      border:1px solid #f0f0f0;
+      border-radius:12px;
+      padding:12px 14px;
+      margin-bottom:12px;
+      background:#fff;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:900;
+      color:#2e7d32;
+      outline:none;
+    }
+    .faq p{ margin:10px 0 0; line-height:1.7; color:#444; }
+
+    /* ===== Map ===== */
+    .map-wrap{
+      border-radius:15px;
+      overflow:hidden;
+      border:1px solid #eee;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+    .map-iframe{
+      width:100%;
+      height:360px;
+      border:0;
+      display:block;
+    }
+
+    /* ===== Footer ===== */
+    .footer{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      text-align:center;
+      padding:12px;
+      margin-top:30px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px){
+      .two-col{ grid-template-columns:1fr; }
+      .info-grid{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 768px){
+      .header h1{ font-size:28px; }
+      .header .right-logo{ width:100px; top:10px; }
+      nav ul li{ display:inline-block; margin:6px 6px; }
+      .map-iframe{ height:320px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="logo1.1.png" alt="Gram Panchayat Logo" class="right-logo">
+    <h1 data-en="Banks in Nimgoan Ketki" data-mr="निमगाव केतकीतील बँक सेवा">
+      Banks in Nimgoan Ketki
+    </h1>
+    <p data-en="Savings, loans, DBT, pension payments, ATM/CSP and digital banking support"
+       data-mr="बचत, कर्ज, DBT, पेन्शन पेमेंट, ATM/CSP आणि डिजिटल बँकिंग मदत">
+      Savings, loans, DBT, pension payments, ATM/CSP and digital banking support
+    </p>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="Home.html" data-en="Home" data-mr="मुख्यपृष्ठ">Home</a></li>
+      <li><a href="about.html" data-en="About Us" data-mr="आमच्याबद्दल">About Us</a></li>
+      <li><a href="Executive Board.html" data-en="Executive Board" data-mr="कार्यकारी मंडळ">Executive Board</a></li>
+      <li><a href="services.html" data-en="Services" data-mr="सेवा">Services</a></li>
+      <li><a href="schemes.html" data-en="Schemes" data-mr="योजना">Schemes</a></li>
+      <li><a href="news.html" data-en="News" data-mr="बातम्या">News</a></li>
+      <li><a href="NimgoanKetki.html" data-en="About Nimgoan Ketki" data-mr="निमगाव केतकी माहिती">About Nimgoan Ketki</a></li>
+      <li><a href="gallery.html" data-en="Gallery" data-mr="गॅलरी">Gallery</a></li>
+      <li><a href="contact.html" data-en="Contact Us" data-mr="संपर्क">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- INTRO (USER FRIENDLY) -->
+    <div class="card">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-building-columns"></i>
+          <span data-en="Banking Facilities in the Village" data-mr="गावातील बँक सुविधा">
+            Banking Facilities in the Village
+          </span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-shield-heart"></i>
+          <span data-en="Safe & Helpful" data-mr="सुरक्षित व उपयुक्त">Safe & Helpful</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="Banking services help villagers with savings, loans, government schemes, DBT, pensions and digital payments. Below are the banking facilities available for Nimgoan Ketki."
+           data-mr="बँकिंग सेवांमुळे गावकऱ्यांना बचत, कर्ज, शासकीय योजना, DBT, पेन्शन आणि डिजिटल पेमेंट यामध्ये मदत मिळते. खाली निमगाव केतकीसाठी उपलब्ध बँक सुविधा दिल्या आहेत.">
+          Banking services help villagers with savings, loans, government schemes, DBT, pensions and digital payments. Below are the banking facilities available for Nimgoan Ketki.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <i class="fa-solid fa-id-card"></i>
+            <div>
+              <b data-en="Common Documents" data-mr="सामान्य कागदपत्रे">Common Documents</b>
+              <span data-en="Aadhaar, PAN (if available), Photo, Mobile number"
+                    data-mr="आधार, पॅन (उपलब्ध असल्यास), फोटो, मोबाईल क्रमांक">
+                Aadhaar, PAN (if available), Photo, Mobile number
+              </span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-file-invoice"></i>
+            <div>
+              <b data-en="For Government Benefits (DBT)" data-mr="शासकीय लाभ (DBT) साठी">For Government Benefits (DBT)</b>
+              <span data-en="Bank account + Aadhaar seeding + active mobile"
+                    data-mr="बँक खाते + आधार लिंक + सक्रिय मोबाईल">
+                Bank account + Aadhaar seeding + active mobile
+              </span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-lock"></i>
+            <div>
+              <b data-en="Safety Tip" data-mr="सुरक्षिततेची टीप">Safety Tip</b>
+              <span data-en="Never share OTP / PIN / CVV with anyone"
+                    data-mr="OTP / PIN / CVV कोणालाही सांगू नका">
+                Never share OTP / PIN / CVV with anyone
+              </span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <div>
+              <b data-en="Digital Payments" data-mr="डिजिटल पेमेंट">Digital Payments</b>
+              <span data-en="UPI, QR payment, SMS alerts, passbook updates"
+                    data-mr="UPI, QR पेमेंट, SMS अलर्ट, पासबुक अपडेट">
+                UPI, QR payment, SMS alerts, passbook updates
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <b data-en="For Gram Panchayat:" data-mr="ग्रामपंचायतीसाठी:">For Gram Panchayat:</b>
+          <span data-en="If you share the exact bank name(s), branch address, IFSC and timings, I will update this page with perfect official details."
+                data-mr="अचूक बँक नाव(े), शाखेचा पत्ता, IFSC आणि वेळ दिल्यास मी ही माहिती पूर्णपणे अपडेट करून देतो.">
+            If you share the exact bank name(s), branch address, IFSC and timings, I will update this page with perfect official details.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANK BRANCH 1 (DETAILED, USER FRIENDLY) -->
+    <div class="card">
+      <img src="bank1.jpg" alt="Bank Branch" class="hero-img">
+
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-landmark"></i>
+          <span data-en="Bank Branch (Update Name)" data-mr="बँक शाखा (नाव अपडेट करा)">
+            Bank Branch (Update Name)
+          </span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-circle-check"></i>
+          <span data-en="Main Services" data-mr="मुख्य सेवा">Main Services</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="This branch provides account services, cash deposit/withdrawal, loans, and support for government schemes."
+           data-mr="या शाखेमध्ये खाते सेवा, रोख जमा/काढणे, कर्ज तसेच शासकीय योजनांसाठी मदत मिळते.">
+          This branch provides account services, cash deposit/withdrawal, loans, and support for government schemes.
+        </p>
+
+        <table class="mini-table" aria-label="Bank Branch Details">
+          <tr>
+            <th data-en="Detail" data-mr="तपशील">Detail</th>
+            <th data-en="Information" data-mr="माहिती">Information</th>
+          </tr>
+          <tr>
+            <td><b data-en="Bank Name" data-mr="बँकेचे नाव">Bank Name</b></td>
+            <td data-en="(Add Bank Name - Example: SBI/BOB/Co-op Bank)"
+                data-mr="(बँक नाव लिहा - उदा: SBI/BOB/को-ऑप बँक)">
+              (Add Bank Name - Example: SBI/BOB/Co-op Bank)
+            </td>
+          </tr>
+          <tr>
+            <td><b data-en="Branch Address" data-mr="शाखेचा पत्ता">Branch Address</b></td>
+            <td data-en="Nimgoan Ketki, Tal. Indapur, Dist. Pune (Update exact address)"
+                data-mr="निमगाव केतकी, ता. इंदापूर, जि. पुणे (अचूक पत्ता अपडेट करा)">
+              Nimgoan Ketki, Tal. Indapur, Dist. Pune (Update exact address)
+            </td>
+          </tr>
+          <tr>
+            <td><b data-en="IFSC / MICR" data-mr="IFSC / MICR">IFSC / MICR</b></td>
+            <td data-en="(Add IFSC & MICR if available)"
+                data-mr="(IFSC व MICR उपलब्ध असल्यास लिहा)">
+              (Add IFSC & MICR if available)
+            </td>
+          </tr>
+          <tr>
+            <td><b data-en="Working Hours" data-mr="कामकाज वेळ">Working Hours</b></td>
+            <td data-en="(Add branch timings)"
+                data-mr="(शाखेची वेळ लिहा)">
+              (Add branch timings)
+            </td>
+          </tr>
+          <tr>
+            <td><b data-en="Contact" data-mr="संपर्क">Contact</b></td>
+            <td data-en="+91-XXXXXXXXXX (Update)"
+                data-mr="+91-XXXXXXXXXX (अपडेट करा)">
+              +91-XXXXXXXXXX (Update)
+            </td>
+          </tr>
+        </table>
+
+        <div class="two-col" style="margin-top:16px;">
+          <div>
+            <h3 style="margin:0; color:#2e7d32;"
+                data-en="Services Available" data-mr="उपलब्ध सेवा">Services Available</h3>
+            <ul class="list">
+              <li data-en="Account opening / KYC updates" data-mr="खाते उघडणे / KYC अपडेट">Account opening / KYC updates</li>
+              <li data-en="Cash deposit & withdrawal" data-mr="रोख जमा व काढणे">Cash deposit & withdrawal</li>
+              <li data-en="Loans / EMI / interest info" data-mr="कर्ज / EMI / व्याज माहिती">Loans / EMI / interest info</li>
+              <li data-en="Passbook update & SMS alerts" data-mr="पासबुक अपडेट व SMS अलर्ट">Passbook update & SMS alerts</li>
+              <li data-en="DBT, pension, scholarship support" data-mr="DBT, पेन्शन, शिष्यवृत्ती मदत">DBT, pension, scholarship support</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style="margin:0; color:#2e7d32;"
+                data-en="What to Carry" data-mr="काय सोबत ठेवावे">What to Carry</h3>
+            <ul class="list">
+              <li data-en="Aadhaar, PAN (if available) and photo" data-mr="आधार, पॅन (उपलब्ध असल्यास) व फोटो">Aadhaar, PAN (if available) and photo</li>
+              <li data-en="Mobile number linked to Aadhaar" data-mr="आधारशी लिंक केलेला मोबाईल क्रमांक">Mobile number linked to Aadhaar</li>
+              <li data-en="7/12 & 8A (for agriculture loans, if required)" data-mr="७/१२ व ८अ (कृषी कर्जासाठी, लागल्यास)">7/12 & 8A (for agriculture loans, if required)</li>
+              <li data-en="Previous loan / EMI details (if any)" data-mr="पूर्वीचे कर्ज / EMI तपशील (असल्यास)">Previous loan / EMI details (if any)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="action-link" href="tel:+910000000000">
+            <i class="fa-solid fa-phone"></i>
+            <span data-en="Call Branch" data-mr="शाखेला कॉल">Call Branch</span>
+          </a>
+
+          <a class="action-link" id="openMapsBranchBtn" href="#" target="_blank" rel="noopener">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <span data-en="Open Branch in Maps" data-mr="शाखा नकाशावर उघडा">Open Branch in Maps</span>
+          </a>
+        </div>
+
+        <div class="note">
+          <b data-en="Important:" data-mr="महत्त्वाचे:">Important:</b>
+          <span data-en="Bank staff will never ask for OTP or PIN. If someone asks, it may be fraud."
+                data-mr="बँक कर्मचारी कधीही OTP किंवा PIN विचारत नाहीत. कोणी विचारल्यास फसवणूक असू शकते.">
+            Bank staff will never ask for OTP or PIN. If someone asks, it may be fraud.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATM / CSP (DETAILED) -->
+    <div class="card">
+      <img src="bank2.jpg" alt="ATM / Banking Services" class="hero-img">
+
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-money-check-dollar"></i>
+          <span data-en="ATM / Customer Service Point (CSP)" data-mr="ATM / ग्राहक सेवा केंद्र (CSP)">
+            ATM / Customer Service Point (CSP)
+          </span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-bolt"></i>
+          <span data-en="Quick Banking" data-mr="त्वरित बँकिंग">Quick Banking</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="ATM/CSP helps villagers for quick banking and government payments without going far."
+           data-mr="ATM/CSP मुळे गावकऱ्यांना दूर न जाता त्वरित बँकिंग आणि शासकीय पेमेंट मिळते.">
+          ATM/CSP helps villagers for quick banking and government payments without going far.
+        </p>
+
+        <div class="two-col">
+          <div>
+            <h3 style="margin:0; color:#2e7d32;" data-en="Available Services" data-mr="उपलब्ध सेवा">Available Services</h3>
+            <ul class="list">
+              <li data-en="Cash withdrawal facility" data-mr="रोख रक्कम काढणे">Cash withdrawal facility</li>
+              <li data-en="Balance enquiry & mini statement" data-mr="बॅलन्स चौकशी व मिनी स्टेटमेंट">Balance enquiry & mini statement</li>
+              <li data-en="DBT / pension withdrawals" data-mr="DBT / पेन्शन रक्कम काढणे">DBT / pension withdrawals</li>
+              <li data-en="Basic digital payment help (UPI/QR)" data-mr="डिजिटल पेमेंट मदत (UPI/QR)">Basic digital payment help (UPI/QR)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style="margin:0; color:#2e7d32;" data-en="ATM Safety Rules" data-mr="ATM सुरक्षितता नियम">ATM Safety Rules</h3>
+            <ul class="list">
+              <li data-en="Cover keypad while entering PIN" data-mr="PIN टाकताना कीपॅड झाका">Cover keypad while entering PIN</li>
+              <li data-en="Do not accept help from strangers" data-mr="अनोळखी व्यक्तीकडून मदत घेऊ नका">Do not accept help from strangers</li>
+              <li data-en="Avoid sharing OTP / PIN / card details" data-mr="OTP / PIN / कार्ड तपशील शेअर करू नका">Avoid sharing OTP / PIN / card details</li>
+              <li data-en="Report suspicious activity immediately" data-mr="संशयास्पद घटना त्वरित कळवा">Report suspicious activity immediately</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          <b data-en="If ATM fails:" data-mr="ATM अयशस्वी झाल्यास:">If ATM fails:</b>
+          <span data-en="Keep the receipt (if any) and contact your bank branch/call center for complaint."
+                data-mr="पावती (असल्यास) ठेवा आणि तक्रारीसाठी शाखा/कॉल सेंटरशी संपर्क करा.">
+            Keep the receipt (if any) and contact your bank branch/call center for complaint.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIGITAL BANKING + OFFICIAL LINKS -->
+    <div class="card">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-qrcode"></i>
+          <span data-en="Digital Banking & Useful Links" data-mr="डिजिटल बँकिंग व उपयुक्त लिंक्स">
+            Digital Banking & Useful Links
+          </span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span data-en="Open Official Sites" data-mr="अधिकृत वेबसाइट्स">Open Official Sites</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="These official websites help for banking awareness, UPI usage and scheme information."
+           data-mr="बँकिंग जागरूकता, UPI वापर आणि योजनांची माहिती यासाठी या अधिकृत वेबसाइट्स उपयोगी आहेत.">
+          These official websites help for banking awareness, UPI usage and scheme information.
+        </p>
+
+        <div class="actions">
+          <a class="action-link" href="https://rbi.org.in/" target="_blank" rel="noopener">
+            <i class="fa-solid fa-building-columns"></i>
+            <span data-en="RBI (Reserve Bank of India)" data-mr="RBI (रिझर्व्ह बँक ऑफ इंडिया)">RBI (Reserve Bank of India)</span>
+          </a>
+
+          <a class="action-link" href="https://www.npci.org.in/" target="_blank" rel="noopener">
+            <i class="fa-solid fa-wave-square"></i>
+            <span data-en="NPCI (UPI/RuPay)" data-mr="NPCI (UPI/RuPay)">NPCI (UPI/RuPay)</span>
+          </a>
+
+          <a class="action-link" href="https://www.pmjdy.gov.in/" target="_blank" rel="noopener">
+            <i class="fa-solid fa-piggy-bank"></i>
+            <span data-en="PMJDY (Jan Dhan Yojana)" data-mr="PMJDY (जनधन योजना)">PMJDY (Jan Dhan Yojana)</span>
+          </a>
+
+          <a class="action-link" href="https://www.uidai.gov.in/" target="_blank" rel="noopener">
+            <i class="fa-solid fa-fingerprint"></i>
+            <span data-en="UIDAI (Aadhaar)" data-mr="UIDAI (आधार)">UIDAI (Aadhaar)</span>
+          </a>
+        </div>
+
+        <div class="note">
+          <b data-en="UPI Tip:" data-mr="UPI टीप:">UPI Tip:</b>
+          <span data-en="Check the payee name before sending money. Avoid clicking unknown links/messages."
+                data-mr="पैसे पाठवण्यापूर्वी प्राप्तकर्त्याचे नाव तपासा. अनोळखी लिंक/मेसेजवर क्लिक करू नका.">
+            Check the payee name before sending money. Avoid clicking unknown links/messages.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP (LIVE SEARCH LOCATION) -->
+    <div class="card">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-map"></i>
+          <span data-en="Bank Location (Map)" data-mr="बँक लोकेशन (नकाशा)">
+            Bank Location (Map)
+          </span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-location-dot"></i>
+          <span data-en="Nimgoan Ketki" data-mr="निमगाव केतकी">Nimgoan Ketki</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="Map below shows a search-based location. For exact pin location, share the exact Google Maps link of the branch/ATM."
+           data-mr="खालील नकाशा शोध-आधारित लोकेशन दाखवतो. अचूक पिन लोकेशनसाठी शाखा/ATM ची Google Maps लिंक द्या.">
+          Map below shows a search-based location. For exact pin location, share the exact Google Maps link of the branch/ATM.
+        </p>
+
+        <div class="map-wrap">
+          <iframe id="mapFrame" class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe>
+        </div>
+
+        <div class="actions" style="margin-top:14px;">
+          <a class="action-link" id="directionsBtn" href="#" target="_blank" rel="noopener">
+            <i class="fa-solid fa-route"></i>
+            <span data-en="Get Directions" data-mr="दिशा मिळवा">Get Directions</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card faq">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-circle-question"></i>
+          <span data-en="Frequently Asked Questions (FAQ)" data-mr="वारंवार विचारले जाणारे प्रश्न (FAQ)">
+            Frequently Asked Questions (FAQ)
+          </span>
+        </h2>
+      </div>
+
+      <div class="card-body">
+        <details>
+          <summary data-en="How to open a bank account?"
+                   data-mr="बँक खाते कसे उघडावे?">
+            How to open a bank account?
+          </summary>
+          <p data-en="Carry Aadhaar, PAN (if available), photo and mobile number. Visit the branch/CSP and complete KYC."
+             data-mr="आधार, पॅन (उपलब्ध असल्यास), फोटो आणि मोबाईल क्रमांक घेऊन शाखा/CSP ला जा व KYC पूर्ण करा.">
+            Carry Aadhaar, PAN (if available), photo and mobile number. Visit the branch/CSP and complete KYC.
+          </p>
+        </details>
+
+        <details>
+          <summary data-en="What is DBT and why is it important?"
+                   data-mr="DBT म्हणजे काय आणि ते महत्त्वाचे का?">
+            What is DBT and why is it important?
+          </summary>
+          <p data-en="DBT means Direct Benefit Transfer. Government benefits come directly into your bank account."
+             data-mr="DBT म्हणजे Direct Benefit Transfer. शासकीय लाभ थेट तुमच्या बँक खात्यात येतात.">
+            DBT means Direct Benefit Transfer. Government benefits come directly into your bank account.
+          </p>
+        </details>
+
+        <details>
+          <summary data-en="What to do if I receive a fraud call?"
+                   data-mr="फसवणुकीचा कॉल आल्यास काय करावे?">
+            What to do if I receive a fraud call?
+          </summary>
+          <p data-en="Do not share OTP/PIN. End the call and contact your bank branch/call center immediately."
+             data-mr="OTP/PIN शेअर करू नका. कॉल बंद करा आणि त्वरित बँक शाखा/कॉल सेंटरशी संपर्क करा.">
+            Do not share OTP/PIN. End the call and contact your bank branch/call center immediately.
+          </p>
+        </details>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span data-en="© Nimgoan Ketki Gram Panchayat | Banking Information Page"
+          data-mr="© निमगाव केतकी ग्रामपंचायत | बँकिंग माहिती पृष्ठ">
+      © Nimgoan Ketki Gram Panchayat | Banking Information Page
+    </span>
+  </div>
+
+  <script>
+    // -------- AUTO LANGUAGE (NO BUTTON) --------
+    function autoLanguage(){
+      const userLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+      const isMarathi = userLang.startsWith("mr");
+
+      document.querySelectorAll("[data-en][data-mr]").forEach(el => {
+        el.textContent = isMarathi ? el.getAttribute("data-mr") : el.getAttribute("data-en");
+      });
+
+      document.documentElement.lang = isMarathi ? "mr" : "en";
+    }
+    autoLanguage();
+
+    // -------- GOOGLE MAPS (SEARCH-BASED) --------
+    // If you know exact bank name, change this query.
+    const mapQuery = "Bank Nimgoan Ketki 413120";
+    const q = encodeURIComponent(mapQuery);
+
+    const mapFrame = document.getElementById("mapFrame");
+    if (mapFrame) mapFrame.src = "https://www.google.com/maps?q=" + q + "&output=embed";
+
+    const directionsBtn = document.getElementById("directionsBtn");
+    if (directionsBtn) directionsBtn.href = "https://www.google.com/maps/dir/?api=1&destination=" + q;
+
+    const openMapsBranchBtn = document.getElementById("openMapsBranchBtn");
+    if (openMapsBranchBtn) openMapsBranchBtn.href = "https://www.google.com/maps/search/?api=1&query=" + q;
+  </script>
+</body>
+</html>

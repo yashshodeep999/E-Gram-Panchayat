@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of the Temple - Nimgoan Ketki Gram Panchayat</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFFFF0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: linear-gradient(180deg, #f9f9f9 0%, #FFFFFF 100%);
+        }
+
+        .header {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .header .right-logo {
+            position: absolute;
+            left: 20px;
+            top: 1px;
+            width: 150px;
+            height: auto;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #DAA520;
+        }
+
+        /* ===== Content ===== */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #FFF5E1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        section h2 {
+            color: #3E7C17;
+            font-size: 28px;
+        }
+
+        section p {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ✅ NEW: Beautiful Interactive Image Grid */
+        .image-grid{
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 15px;
+        }
+
+        .img-card{
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            background: #fff;
+        }
+
+        .img-card img{
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transform: scale(1);
+            transition: transform 0.35s ease;
+        }
+
+        .img-card:hover{
+            transform: translateY(-6px);
+            box-shadow: 0 16px 30px rgba(0,0,0,0.18);
+        }
+
+        .img-card:hover img{
+            transform: scale(1.08);
+        }
+
+        .img-cap{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 10px 12px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%);
+        }
+
+        .img-badge{
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            color: #1b4332;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px){
+            .image-grid{ grid-template-columns: repeat(2, 1fr); }
+            .img-card img{ height: 200px; }
+        }
+
+        @media (max-width: 560px){
+            .image-grid{ grid-template-columns: 1fr; }
+            .img-card img{ height: 210px; }
+        }
+
+        /* ===== Lightbox ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .lightbox-content {
+            text-align: center;
+            position: relative;
+        }
+
+        /* ✅ Better lightbox image */
+        .lightbox img {
+            max-width: min(900px, 90%);
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+            animation: fadeIn 0.5s ease;
+        }
+
+        .close, .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            padding: 0 20px;
+            user-select: none;
+        }
+
+        .close {
+            top: 15px;
+            right: 15px;
+            font-size: 45px;
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            nav ul li { display: block; margin: 10px 0; }
+        }
+    </style>
+
+    <!-- ✅ Village Facilities Bar CSS (same structure) -->
+    <style>
+        .facilities-nav {
+            margin: 40px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #c3f0ca, #f0fff4);
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .facilities-nav h2 {
+            font-size: 32px;
+            color: #2d6a4f;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .facility-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .facility-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 130px;
+            height: 130px;
+            background: #d0f0c0;
+            border-radius: 15px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #1b4332;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .facility-item:hover {
+            background-color: #95d5b2;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            color: #081c15;
+        }
+
+        @media (max-width: 768px) {
+            .facility-item { width: 110px; height: 110px; font-size: 22px; }
+            .facilities-nav h2 { font-size: 24px; }
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="header">
+        <h1>Nimgoan Ketki</h1>
+        <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo">
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="Executive Board.html">Executive Board</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="schemes.html">Schemes</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="NimgoanKetki.html">About Nimgoan Ketki</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="facilities-nav">
+        <h2>Village Facilities</h2>
+        <div class="facility-links">
+            <a href="schools.html" class="facility-item">🏫<br>Schools</a>
+            <a href="hospitals.html" class="facility-item">🏥<br>Hospitals</a>
+            <a href="market.html" class="facility-item">🛒<br>Market</a>
+            <a href="temples.html" class="facility-item">⛪<br>Temples</a>
+            <a href="banks.html" class="facility-item">🏦<br>Banks</a>
+            <a href="krushi-vibhag.html" class="facility-item">🌾<br>Krushi Vibhag</a>
+            <a href="post-office.html" class="facility-item">📮<br>Post Office</a>
+            <a href="mscb.html" class="facility-item">🏛️<br>MSCB</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <section>
+            <h2>Information About the Village</h2>
+
+            <div class="image-grid">
+                <div class="img-card" onclick="openLightbox(0)">
+                    <span class="img-badge">Click</span>
+                    <img src="image2.jpg" alt="">
+                    <div class="img-cap">Scenic view of Nimgoan Ketki village</div>
+                </div>
+
+                <div class="img-card" onclick="openLightbox(1)">
+                    <span class="img-badge">Click</span>
+                    <img src="ketkeshvar4.JPG" alt="">
+                    <div class="img-cap">Traditional homes showcasing local architecture</div>
+                </div>
+
+                <div class="img-card" onclick="openLightbox(2)">
+                    <span class="img-badge">Click</span>
+                    <img src="community2.jpg" alt="">
+                    <div class="img-cap">Cultural festival celebration in the village</div>
+                </div>
+            </div>
+
+            <p>
+Nimgaon Ketki is a historically rich and culturally vibrant village located in Indapur Taluka of Pune District.
+The village is situated approximately 12 kilometers from Indapur city and lies on the Indapur–Pune National Highway
+as well as the Indapur–Baramati road, making it an important regional center.
+</p>
+
+<p>
+The village consists of 12 wadis and serves as a hub for nearly 36 surrounding villages.
+Historically, Nimgaon Ketki was granted to Naik Nimbalkar as “Mukas” for military expenses during earlier regimes.
+Today, the population of the village is around 20,000, reflecting steady growth and development.
+</p>
+
+<p>
+The village derives its name from the abundance of Ketaki (Ketkad / Ghaypat) bushes that once grew in the area.
+According to local belief, while working in these bushes, villagers discovered a sacred Shivalinga,
+which gave Nimgaon Ketki its spiritual identity.
+The village deity is Shri Ketakeshwar Mahadev, who continues to be the central figure of devotion.
+</p>
+
+<p>
+Nimgaon Ketki is well equipped with essential facilities such as a Gram Panchayat office,
+Primary Health Center, schools, post office, markets, and banking services.
+The village is known for unity among communities and the celebration of festivals with great enthusiasm.
+</p>
+
+        </section>
+
+        <section>
+            <h2>Temple History</h2>
+
+            <div class="image-grid">
+                <div class="img-card" onclick="openLightbox(3)">
+                    <span class="img-badge">Click</span>
+                    <img src="image1.1.jpg" alt="">
+                    <div class="img-cap">View of the temple during sunrise</div>
+                </div>
+
+                <div class="img-card" onclick="openLightbox(4)">
+                    <span class="img-badge">Click</span>
+                    <img src="ketkeshvar3.JPG" alt="">
+                    <div class="img-cap">Temple festival in full bloom</div>
+                </div>
+
+                <div class="img-card" onclick="openLightbox(5)">
+                    <span class="img-badge">Click</span>
+                    <img src="ketkeshvar1.JPG" alt="">
+                    <div class="img-cap">Evening rituals at the temple</div>
+                </div>
+            </div>
+
+            <p>
+The history of the Shri Ketakeshwar Mahadev Temple is deeply connected with the origin of Nimgaon Ketki village.
+It is believed that the Shivalinga was discovered naturally while villagers were working in the Ketaki bushes.
+This divine discovery led to the establishment of the temple and shaped the religious identity of the village.
+</p>
+
+<p>
+The temple structure follows Hemadpanthi architectural style and underwent renovation between the years 1859 and 1862.
+The responsibility of preserving and maintaining the sacred Shivalinga traditionally lies with the Chikhle family,
+while the Matang community holds the honor of pulling the chariot during the annual Yatra.
+</p>
+
+<p>
+The annual Yatra of Shri Ketakeshwar Maharaj is celebrated on Chaitra Shuddha Ekadashi
+and is renowned across the Panchkroshi region.
+A grand procession is taken out from a four-storied, nearly thirty-foot-high chariot,
+attracting thousands of devotees every year.
+</p>
+
+<p>
+On the second day of the Yatra, the palkhi and chhabina processions take place,
+followed by the famous Jangi Nikali wrestling competition on the third day.
+Renowned wrestlers such as Hind Kesari and Maharashtra Kesari participate in this event,
+making it a major cultural attraction.
+</p>
+
+<p>
+In addition to this, the Suvarnayug Trust organizes a two-day Ganesh Yatra on 25th and 26th December,
+adding to the spiritual and cultural richness of the village.
+</p>
+
+        </section>
+
+        <section>
+            <h2>Economic Activities</h2>
+
+            <div class="image-grid">
+                <div class="img-card" onclick="openLightbox(6)">
+                    <span class="img-badge">Click</span>
+                    <img src="sonai.jpg" alt="">
+                    <div class="img-cap">Agricultural activities in Nimgoan Ketki</div>
+                </div>
+
+                <div class="img-card" onclick="openLightbox(7)">
+                    <span class="img-badge">Click</span>
+                    <img src="market.jpg" alt="">
+                    <div class="img-cap">Market day in the village</div>
+                </div>
+
+                <div class="img-card" onclick="openLightbox(8)">
+                    <span class="img-badge">Click</span>
+                    <img src="business.jpg" alt="">
+                    <div class="img-cap">Local businesses flourishing with temple tourism</div>
+                </div>
+            </div>
+
+            <p>
+The economy of Nimgaon Ketki is primarily based on agriculture,
+with Nagveli (betel leaf) cultivation being one of the major agricultural activities.
+Farmers also grow seasonal crops and depend on modern as well as traditional farming practices.
+</p>
+
+<p>
+The village hosts an Agricultural Produce Market, along with sheep and goat markets,
+which play an important role in supporting farmers and traders from nearby villages.
+Due to its strategic location on the state highway,
+Nimgaon Ketki has developed into a significant trading center in the region.
+</p>
+
+<p>
+In addition to agriculture, various small-scale businesses, retail shops,
+construction activities, and dairy farming contribute to the local economy.
+Many villagers are employed in nearby sugar factories and industrial areas,
+providing additional sources of income.
+</p>
+
+<p>
+Cooperative societies, banking facilities, and efficient transportation systems
+have further strengthened economic growth.
+With increasing infrastructure and government support,
+the economic condition of Nimgaon Ketki continues to improve steadily.
+</p>
+
+        </section>
+
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+            <span class="next" onclick="changeImage(1)">&#10095;</span>
+        </div>
+    </div>
+
+    <div class="footer"></div>
+
+    <script>
+        let currentImageIndex = 0;
+
+        const images = [
+            "image2.jpg",
+            "ketkeshvar4.JPG",
+            "community2.jpg",
+            "image1.1.jpg",
+            "ketkeshvar3.JPG",
+            "ketkeshvar1.JPG",
+            "sonai.jpg",
+            "market.jpg",
+            "business.jpg"
+        ];
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox').style.display = 'block';
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex < 0) currentImageIndex = images.length - 1;
+            if (currentImageIndex >= images.length) currentImageIndex = 0;
+
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        document.getElementById('lightbox').addEventListener('click', function(event) {
+            if (event.target === this) closeLightbox();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") closeLightbox();
+        });
+    </script>
+
+</body>
+</html>

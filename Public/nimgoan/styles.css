@@ -1,0 +1,92 @@
+body {
+        font-family: Arial, sans-serif;
+        background-color: #FFFFF0;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background: linear-gradient(180deg, #f9f9f9 0%, #FFFFFF 100%);
+    }
+    
+    .header {
+        background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+        color: white;
+        padding: 30px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+    
+    .header h1 {
+        margin: 0;
+        font-size: 36px;
+    }
+    
+    .header .right-logo {
+        position: absolute;
+        left: 20px;
+        top: 1px;
+        width: 150px;
+        height: auto;
+    }
+    
+    nav {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+    
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    
+    nav ul li a:hover {
+        background-color: #DAA520;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+    
+    section {
+        margin: 40px 0;
+        padding: 20px;
+        background-color: #FFF5E1;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    
+    section h2 {
+        color: #3E7C17;
+        font-size: 28px;
+    }
+    
+    section p {
+        font-size: 16px;
+        color: #666;
+    }
+    
+    .footer {
+        background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
+    

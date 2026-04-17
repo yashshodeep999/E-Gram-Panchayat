@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birth Certificate (Form 5)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="paper">
+
+  <div class="gov-header">
+    <div class="topline">महाराष्ट्र शासन / Government of Maharashtra</div>
+    <div class="subline">ग्रामपंचायत कार्यालय / Grampanchayat Office</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="row" style="justify-content:space-between; align-items:center;">
+    <div class="small">
+      प्रमाणपत्र क्र./Certificate no.:
+      <input class="input" id="certNo" style="min-width:65mm; display:inline-block;" placeholder="Enter Certificate No.">
+    </div>
+    <div class="small"><b>नमुना 5 / form 5</b></div>
+  </div>
+
+  <div class="center" style="margin-top:6mm;">
+    <div class="bold">महाराष्ट्र शासन <span class="small">Government of Maharashtra</span></div>
+    <div class="bold">आरोग्य विभाग <span class="small">Health Department</span></div>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="header-title">जन्म प्रमाणपत्र / BIRTH CERTIFICATE</div>
+
+  <div class="small" style="line-height:1.7;">
+    (Issued under section 12/17 of the Registration of Births & Deaths Act, 1969 and rule 8/13 of the Maharashtra Registration of Births and Death Rules 2000)
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="row" style="margin-bottom:8px;">
+    <div class="col">
+      <div class="label">Name of the local body issuing Certificate</div>
+      <input class="input" id="localBody" placeholder="Grampanchayat / Nagar Parishad etc.">
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="label">Aadhar Card Number</div>
+      <input class="input" id="aadhaar">
+    </div>
+
+    <div>
+      <div class="label">Sex</div>
+      <select class="input" id="sex">
+        <option value="">Select</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div>
+      <div class="label">Name of Child</div>
+      <input class="input" id="childName" placeholder="Child Name">
+    </div>
+
+    <div>
+      <div class="label">Place of Birth</div>
+      <input class="input" id="placeBirth" placeholder="Hospital / Home / Village">
+    </div>
+
+    <div>
+      <div class="label">Date of Birth</div>
+      <input class="input" id="dob" type="date">
+    </div>
+
+    <div>
+      <div class="label">Date of Registration</div>
+      <input class="input" id="regDate" type="date">
+    </div>
+
+    <div>
+      <div class="label">Full Name of Mother</div>
+      <input class="input" id="mother" placeholder="Mother Name">
+    </div>
+
+    <div>
+      <div class="label">Full Name of Father</div>
+      <input class="input" id="father" placeholder="Father Name">
+    </div>
+
+    <div>
+      <div class="label">Address of parents at the time of birth</div>
+      <input class="input" id="addr1">
+    </div>
+
+    <div>
+      <div class="label">Permanent Address of the parents</div>
+      <input class="input" id="addr2">
+    </div>
+
+    <div>
+      <div class="label">Registration No.</div>
+      <input class="input" id="regNo" placeholder="Registration No.">
+    </div>
+
+    <div>
+      <div class="label">Remarks (if any)</div>
+      <input class="input" id="remarks" placeholder="Remarks">
+    </div>
+
+    <div>
+      <div class="label">Certificate Issue Date</div>
+      <input class="input" id="issueDate" type="date">
+    </div>
+
+    <div>
+      <div class="label">Seal / Signature</div>
+      <input class="input" id="sealSign" placeholder="Name / Seal">
+    </div>
+  </div>
+
+  <div class="gov-footer">
+    <div>
+      Place: <input class="input" id="place" style="min-width:45mm; display:inline-block;" placeholder="Place"><br>
+      Date: <input class="input" id="placeDate" style="min-width:45mm; display:inline-block;" type="date">
+    </div>
+
+    <div style="text-align:right;">
+      Signature with stamp<br>
+
+      <!-- ✅ FIXED STAMP IMAGE -->
+      <img src="stamp.png" alt="Stamp" style="height:60px; margin-top:6px; border:1px solid #000; padding:4px; background:#fff;"><br>
+
+      <span class="line" style="min-width:60mm;"></span>
+    </div>
+  </div>
+
+  <div class="btnbar">
+    <button type="button" class="secondary" onclick="history.back()">Back</button>
+    <button type="button" onclick="saveBirthCert()">Save</button>
+    <button type="button" onclick="window.print()">Print</button>
+  </div>
+
+  <div id="saveMsg" class="small" style="margin-top:8px;"></div>
+</div>
+
+<script src="api.js"></script>
+
+<script>
+function setSaveMsg(text, ok){
+  const el = document.getElementById("saveMsg");
+  el.style.color = ok ? "green" : "red";
+  el.textContent = text;
+}
+
+function getVal(id){
+  const el = document.getElementById(id);
+  return el ? (el.value || "").trim() : "";
+}
+
+// Prefill some fields from main form localStorage
+(function fill(){
+  const raw = localStorage.getItem("GP_APPLICANT");
+  if(!raw) return;
+  const d = JSON.parse(raw);
+
+  document.getElementById("aadhaar").value = d.aadhaar || "";
+  document.getElementById("addr1").value = d.address || "";
+  document.getElementById("addr2").value = d.address || "";
+
+  // If you want: auto place from address
+  if(!document.getElementById("place").value) {
+    document.getElementById("place").value = "Nimgoan Ketki";
+  }
+})();
+
+async function saveBirthCert(){
+  try{
+    const payload = {
+      certificateNo: getVal("certNo"),
+      localBody: getVal("localBody"),
+      aadhaar: getVal("aadhaar"),
+      sex: getVal("sex"),
+      childName: getVal("childName"),
+      placeOfBirth: getVal("placeBirth"),
+      dateOfBirth: getVal("dob"),
+      dateOfRegistration: getVal("regDate"),
+      motherName: getVal("mother"),
+      fatherName: getVal("father"),
+      addressAtBirth: getVal("addr1"),
+      permanentAddress: getVal("addr2"),
+      registrationNo: getVal("regNo"),
+      remarks: getVal("remarks"),
+      issueDate: getVal("issueDate"),
+      sealSignatureText: getVal("sealSign"),
+      place: getVal("place"),
+      placeDate: document.getElementById("placeDate").value || "",
+
+      // link with application
+      application: JSON.parse(localStorage.getItem("GP_APPLICANT") || "{}"),
+      receiptNo: localStorage.getItem("GP_RECEIPT_NO") || ""
+    };
+
+    // prevent double save
+    const key = "GP_BIRTH_SAVED_" + (payload.certificateNo || payload.receiptNo || "X");
+    if(localStorage.getItem(key) === "YES"){
+      setSaveMsg("Already saved in database.", true);
+      return;
+    }
+
+    const r = await submitToMongo("birthCertificate", payload);
+    localStorage.setItem(key, "YES");
+    setSaveMsg("Saved in database. ID: " + r.id, true);
+  }catch(err){
+    console.log("Birth save error:", err.message);
+    setSaveMsg("Database server error. Check: node server.js + mongod running.", false);
+  }
+}
+</script>
+<script src="api.js"></script>
+
+</body>
+</html>

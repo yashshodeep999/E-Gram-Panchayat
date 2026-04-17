@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Post Office - Nimgoan Ketki</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background-color:#FFFFF0;
+      margin:0; padding:0; color:#333;
+      background:linear-gradient(180deg,#f9f9f9 0%, #FFFFFF 100%);
+    }
+
+    .header{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      padding:30px;
+      text-align:center;
+      position:relative;
+      box-shadow:0 4px 6px rgba(0,0,0,0.1);
+    }
+    .header h1{ margin:0; font-size:34px; }
+    .header p{ margin:8px 0 0; opacity:0.95; }
+    .header .right-logo{
+      position:absolute;
+      left:20px;
+      top:5px;
+      width:130px;
+      height:auto;
+    }
+
+    nav{ background:#333; color:#fff; text-align:center; padding:10px 0; }
+    nav ul{ list-style:none; margin:0; padding:0; }
+    nav ul li{ display:inline; margin-right:18px; }
+    nav ul li a{
+      color:white; text-decoration:none; padding:10px 16px;
+      font-weight:bold; transition:0.3s;
+      border-radius:8px;
+      display:inline-block;
+    }
+    nav ul li a:hover{ background:#DAA520; }
+
+    .container{ padding:40px 20px; max-width:1200px; margin:auto; }
+
+    .card{
+      background:#fff;
+      border-radius:15px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+    .card-head{
+      padding:18px 22px;
+      border-bottom:1px solid #f0f0f0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .card-head h2{
+      margin:0;
+      font-size:22px;
+      color:#2e7d32;
+      display:flex; gap:10px; align-items:center;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#faf7e8;
+      border:1px solid #f3e7b9;
+      font-weight:800;
+      color:#7a5a00;
+      font-size:13px;
+    }
+    .card-body{ padding:22px; }
+    .muted{ color:#666; line-height:1.7; }
+
+    .hero-img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .info-item{
+      border:1px solid #f0f0f0;
+      border-radius:12px;
+      padding:12px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:linear-gradient(180deg,#fff 0%, #fbfbfb 100%);
+    }
+    .info-item i{
+      font-size:18px;
+      color:#DAA520;
+      margin-top:2px;
+      min-width:20px;
+    }
+    .info-item b{ display:block; margin-bottom:3px; }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .list{
+      margin:10px 0 0;
+      padding-left:18px;
+      line-height:1.85;
+    }
+    .list li{ margin-bottom:6px; }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .action-link, .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      font-weight:900;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid #eee;
+      background:#fff;
+      color:#333;
+      box-shadow:0 6px 14px rgba(0,0,0,0.06);
+      transition:0.2s;
+      cursor:pointer;
+    }
+    .action-link:hover, .btn:hover{ transform:translateY(-1px); }
+    .action-link i{ color:#2e7d32; }
+
+    .note{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:12px;
+      background:#f9f9f9;
+      border:1px dashed #ddd;
+      line-height:1.7;
+    }
+
+    .track-box{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .track-box input{
+      flex:1;
+      min-width:240px;
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid #e6e6e6;
+      outline:none;
+      font-weight:700;
+    }
+
+    .map-wrap{
+      border-radius:15px;
+      overflow:hidden;
+      border:1px solid #eee;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+    .map-iframe{
+      width:100%;
+      height:360px;
+      border:0;
+      display:block;
+    }
+
+    .footer{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      text-align:center;
+      padding:12px;
+      margin-top:30px;
+    }
+
+    @media (max-width: 900px){
+      .two-col{ grid-template-columns:1fr; }
+      .info-grid{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 768px){
+      .header h1{ font-size:26px; }
+      .header .right-logo{ width:100px; top:10px; }
+      nav ul li{ display:inline-block; margin:6px 6px; }
+      .map-iframe{ height:320px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="logo1.1.png" alt="Gram Panchayat Logo" class="right-logo">
+    <h1 data-en="Post Office - Nimgoan Ketki" data-mr="टपाल कार्यालय - निमगाव केतकी">Post Office - Nimgoan Ketki</h1>
+    <p data-en="Postal services, savings schemes, tracking and citizen support"
+       data-mr="टपाल सेवा, बचत योजना, ट्रॅकिंग आणि नागरिकांसाठी मदत">
+      Postal services, savings schemes, tracking and citizen support
+    </p>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="Home.html" data-en="Home" data-mr="मुख्यपृष्ठ">Home</a></li>
+      <li><a href="about.html" data-en="About Us" data-mr="आमच्याबद्दल">About Us</a></li>
+      <li><a href="Executive Board.html" data-en="Executive Board" data-mr="कार्यकारी मंडळ">Executive Board</a></li>
+      <li><a href="services.html" data-en="Services" data-mr="सेवा">Services</a></li>
+      <li><a href="schemes.html" data-en="Schemes" data-mr="योजना">Schemes</a></li>
+      <li><a href="news.html" data-en="News" data-mr="बातम्या">News</a></li>
+      <li><a href="NimgoanKetki.html" data-en="About Nimgoan Ketki" data-mr="निमगाव केतकी माहिती">About Nimgoan Ketki</a></li>
+      <li><a href="gallery.html" data-en="Gallery" data-mr="गॅलरी">Gallery</a></li>
+      <li><a href="contact.html" data-en="Contact Us" data-mr="संपर्क">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- MAIN POST OFFICE DETAILS -->
+    <div class="card">
+      <img src="postoffice1.jpg" alt="Post Office Building" class="hero-img">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-building-columns"></i>
+          <span data-en="Nimgoan Ketki Post Office" data-mr="निमगाव केतकी टपाल कार्यालय">Nimgoan Ketki Post Office</span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-clock"></i>
+          <span data-en="Timings: 10 AM to 5 PM" data-mr="वेळ: सकाळी १० ते संध्याकाळी ५">Timings: 10 AM to 5 PM</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="This post office supports villagers for letters, parcels, Speed Post, savings schemes and important document dispatch."
+           data-mr="हे टपाल कार्यालय गावकऱ्यांना पत्रे, पार्सल, स्पीड पोस्ट, बचत योजना तसेच महत्त्वाची कागदपत्रे पाठवण्यासाठी मदत करते.">
+          This post office supports villagers for letters, parcels, Speed Post, savings schemes and important document dispatch.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <i class="fa-solid fa-id-card"></i>
+            <div>
+              <b data-en="Post Office Name" data-mr="टपाल कार्यालयाचे नाव">Post Office Name</b>
+              <span>Nimgoan Ketki Post Office</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-hashtag"></i>
+            <div>
+              <b data-en="PIN Code" data-mr="पिन कोड">PIN Code</b>
+              <span>413120</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <b data-en="Address" data-mr="पत्ता">Address</b>
+              <span data-en="Nimgoan Ketki, Tal. Indapur, Dist. Pune, Maharashtra"
+                    data-mr="निमगाव केतकी, ता. इंदापूर, जि. पुणे, महाराष्ट्र">
+                Nimgoan Ketki, Tal. Indapur, Dist. Pune, Maharashtra
+              </span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <i class="fa-solid fa-business-time"></i>
+            <div>
+              <b data-en="Working Hours" data-mr="कार्यालय वेळ">Working Hours</b>
+              <span data-en="10:00 AM – 5:00 PM" data-mr="सकाळी १०:०० – संध्याकाळी ५:००">10:00 AM – 5:00 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tracking + Map Buttons -->
+        <div class="actions">
+          <a class="action-link" id="openMapsBtn" href="#" target="_blank" rel="noopener">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <span data-en="Open in Google Maps" data-mr="गुगल मॅप्समध्ये उघडा">Open in Google Maps</span>
+          </a>
+
+          <a class="action-link" id="openTrackingBtn"
+             href="https://indiapost.gov.in/_layouts/15/dop.portal.trackin/trackconsignment.aspx"
+             target="_blank" rel="noopener">
+            <i class="fa-solid fa-truck-fast"></i>
+            <span data-en="Open India Post Tracking" data-mr="इंडिया पोस्ट ट्रॅकिंग उघडा">Open India Post Tracking</span>
+          </a>
+        </div>
+
+        <!-- Tracking Input (opens official tracking page) -->
+        <div class="note">
+          <b data-en="Track your Consignment:" data-mr="कन्साइनमेंट ट्रॅक करा:">Track your Consignment:</b>
+          <div class="track-box">
+            <input id="consignmentNo" type="text" placeholder="e.g. XX123456789IN" aria-label="Consignment Number">
+            <button class="btn" id="trackNowBtn" type="button">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span data-en="Track Now" data-mr="आता ट्रॅक करा">Track Now</span>
+            </button>
+          </div>
+          <div style="margin-top:10px;" class="muted"
+               data-en="Note: India Post official tracking opens in a new tab. Enter your consignment number on that page to see status."
+               data-mr="नोंद: अधिकृत इंडिया पोस्ट ट्रॅकिंग नवीन टॅबमध्ये उघडेल. त्या पृष्ठावर कन्साइनमेंट क्रमांक टाकून स्टेटस पहा.">
+            Note: India Post official tracking opens in a new tab. Enter your consignment number on that page to see status.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="card">
+      <img src="postoffice2.jpg" alt="Postal Services" class="hero-img">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-list-check"></i>
+          <span data-en="Important Postal Services" data-mr="महत्त्वाच्या टपाल सेवा">Important Postal Services</span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-user-check"></i>
+          <span data-en="Citizen Friendly" data-mr="नागरिकांसाठी सोपे">Citizen Friendly</span>
+        </div>
+      </div>
+
+      <div class="card-body two-col">
+        <div>
+          <h3 style="margin:0; color:#2e7d32;" data-en="Postal Services" data-mr="टपाल सेवा">Postal Services</h3>
+          <ul class="list">
+            <li data-en="Speed Post / Registered Post" data-mr="स्पीड पोस्ट / रजिस्टर्ड पोस्ट">Speed Post / Registered Post</li>
+            <li data-en="Parcel Booking and Delivery" data-mr="पार्सल बुकिंग व वितरण">Parcel Booking and Delivery</li>
+            <li data-en="Letters, Inland, Cards" data-mr="पत्रे, इनलँड, कार्ड्स">Letters, Inland, Cards</li>
+            <li data-en="Forms and document dispatch" data-mr="फॉर्म्स व कागदपत्रे पाठवणे">Forms and document dispatch</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="margin:0; color:#2e7d32;" data-en="Savings & Support" data-mr="बचत व मदत">Savings & Support</h3>
+          <ul class="list">
+            <li data-en="Post Office savings schemes (RD/TD etc.)" data-mr="टपाल बचत योजना (आरडी/टीडी इ.)">Post Office savings schemes (RD/TD etc.)</li>
+            <li data-en="Money Order / Postal payments (if available)" data-mr="मनी ऑर्डर / पोस्टल पेमेंट (उपलब्ध असल्यास)">Money Order / Postal payments (if available)</li>
+            <li data-en="Support for rural citizen services" data-mr="ग्रामीण नागरिक सेवांसाठी मदत">Support for rural citizen services</li>
+            <li data-en="Basic banking services (if IPPB available)" data-mr="बेसिक बँकिंग सेवा (IPPB असल्यास)">Basic banking services (if IPPB available)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOOGLE MAPS LIVE LOCATION -->
+    <div class="card">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-map"></i>
+          <span data-en="Live Location (Google Maps)" data-mr="लाईव्ह लोकेशन (गुगल मॅप्स)">Live Location (Google Maps)</span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-location-crosshairs"></i>
+          <span data-en="Nimgoan Ketki - 413120" data-mr="निमगाव केतकी - ४१३१२०">Nimgoan Ketki - 413120</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="You can view the post office location on the map below. For navigation, click 'Open in Google Maps'."
+           data-mr="खाली दिलेल्या नकाशावर टपाल कार्यालयाचे लोकेशन पाहू शकता. नेव्हिगेशनसाठी 'गुगल मॅप्समध्ये उघडा' वर क्लिक करा.">
+          You can view the post office location on the map below. For navigation, click 'Open in Google Maps'.
+        </p>
+
+        <div class="map-wrap">
+          <iframe
+            id="mapFrame"
+            class="map-iframe"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src=""
+            aria-label="Google Map Location">
+          </iframe>
+        </div>
+
+        <div class="actions" style="margin-top:14px;">
+          <a class="action-link" id="directionsBtn" href="#" target="_blank" rel="noopener">
+            <i class="fa-solid fa-route"></i>
+            <span data-en="Get Directions" data-mr="दिशा मिळवा">Get Directions</span>
+          </a>
+        </div>
+
+        <div class="note">
+          <b data-en="Note:" data-mr="नोंद:">Note:</b>
+          <span data-en="If you want the exact pin-point location, share the Google Maps link of the post office and replace the query."
+                data-mr="अचूक पिन-पॉईंट लोकेशनसाठी टपाल कार्यालयाची गुगल मॅप्स लिंक द्या आणि मी इथे अचूक लोकेशन सेट करून देतो.">
+            If you want the exact pin-point location, share the Google Maps link of the post office and replace the query.
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span data-en="© Nimgoan Ketki Gram Panchayat | Post Office Information Page"
+          data-mr="© निमगाव केतकी ग्रामपंचायत | टपाल कार्यालय माहिती पृष्ठ">
+      © Nimgoan Ketki Gram Panchayat | Post Office Information Page
+    </span>
+  </div>
+
+  <script>
+    // -------- AUTO LANGUAGE (NO BUTTON) --------
+    function autoLanguage() {
+      const userLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+      const isMarathi = userLang.startsWith("mr");
+
+      document.querySelectorAll("[data-en][data-mr]").forEach(el => {
+        el.textContent = isMarathi ? el.getAttribute("data-mr") : el.getAttribute("data-en");
+      });
+
+      document.documentElement.lang = isMarathi ? "mr" : "en";
+    }
+    autoLanguage();
+
+    // -------- GOOGLE MAPS LIVE LOCATION --------
+    // Using a safe searchable query (works without coordinates)
+    const mapQuery = "Nimgoan Ketki Post Office 413120";
+    const mapQueryEncoded = encodeURIComponent(mapQuery);
+
+    // Embed map (simple embed)
+    document.getElementById("mapFrame").src =
+      "https://www.google.com/maps?q=" + mapQueryEncoded + "&output=embed";
+
+    // Open in Maps (Search)
+    document.getElementById("openMapsBtn").href =
+      "https://www.google.com/maps/search/?api=1&query=" + mapQueryEncoded;
+
+    // Directions (Destination)
+    document.getElementById("directionsBtn").href =
+      "https://www.google.com/maps/dir/?api=1&destination=" + mapQueryEncoded;
+
+    // -------- INDIA POST TRACKING (OFFICIAL) --------
+    const OFFICIAL_TRACK_URL = "https://indiapost.gov.in/_layouts/15/dop.portal.trackin/trackconsignment.aspx";
+
+    document.getElementById("trackNowBtn").addEventListener("click", () => {
+      const cn = (document.getElementById("consignmentNo").value || "").trim().toUpperCase();
+
+      // Open official tracking page in new tab
+      window.open(OFFICIAL_TRACK_URL, "_blank", "noopener");
+
+      // Helpful: copy consignment number (so user can paste quickly)
+      if (cn) {
+        navigator.clipboard?.writeText(cn).catch(() => {});
+        alert("Tracking page opened. Consignment number copied: " + cn + "\\nPaste it on the India Post tracking page.");
+      } else {
+        alert("Tracking page opened. Please enter your consignment number on the India Post tracking page.");
+      }
+    });
+  </script>
+
+</body>
+</html>

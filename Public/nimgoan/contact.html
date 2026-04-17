@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Nimgoan Ketki Gram Panchayat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4F4F4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+            padding: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            letter-spacing: 2px;
+        }
+
+        .header .right-logo {
+            position: absolute;
+            left: 20px;
+            top: 1px;
+            width: 150px;
+            height: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: block;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #DAA520;
+            color: #333;
+        }
+
+        .contact-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: #FFF;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-container h2 {
+            font-size: 28px;
+            color: #3E7C17;
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .contact-details div {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .contact-details div:last-child {
+            margin-right: 0;
+        }
+
+        .contact-details h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .contact-details p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .contact-form button {
+            background-color: #3E7C17;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #DAA520;
+        }
+
+        .map {
+            margin-top: 20px;
+            width: 100%;
+            height: 400px;
+        }
+
+        .social-media {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .social-button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 0 10px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .social-button i {
+            margin-right: 5px;
+        }
+
+        .social-button:hover {
+            transform: scale(1.05);
+        }
+
+        .social-button.facebook {
+            background: #3b5998;
+        }
+
+        .social-button.twitter {
+            background: #1da1f2;
+        }
+
+        .social-button.linkedin {
+            background: #0077b5;
+        }
+
+        .social-button.instagram {
+            background: #e4405f;
+        }
+
+        .faq {
+            margin-top: 40px;
+        }
+
+        .faq h2 {
+            color: #3E7C17;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-item h3 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .faq-item p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .thank-you-message {
+            display: none;
+            background: #e6ffe6;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Contact Us</h1>
+        <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo">
+    </div>
+    
+    <nav>
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="Executive Board.html">Executive Board</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="schemes.html">Schemes</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="NimgoanKetki.html" id="AboutNimgoanKetkiNav"> About Nimgoan Ketki</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="contact-container">
+        <h2>Get in Touch</h2>
+        
+        <div class="contact-details">
+            <div>
+                <h3>Address</h3>
+                <p>
+                    Nimgoan Ketki Gram Panchayat,<br>
+                    Village: Nimgoan Ketki,<br>
+                    Taluka: INDAPUR,<br>
+                    District: PUNE,<br>
+                    State: MAHARASHTRA,<br>
+                    PIN: 413120
+                </p>
+            </div>
+            <div>
+                <h3>Phone</h3>
+                <p>+91 9960068007</p>
+            </div>
+            <div>
+                <h3>Email</h3>
+                <p>info@nimgoanketki.gov.in</p>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2>Contact Form</h2>
+            <form id="contact-form" action="http://localhost:5000/contact" method="post">
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="thank-you-message" class="thank-you-message">
+                Thank you for contacting us! We will get back to you soon.
+            </div>
+        </div>
+
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100000.00000000001!2d85.00000000000001!3d24.000000000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f3a9d8a7a0f87d%3A0x43a0a8e8e1a0e7d1!2sNimgoan%20Ketki%2C%20India!5e0!3m2!1sen!2sus!4v1634586305000!5m2!1sen!2sus"
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank" class="social-button facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-button twitter">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-button instagram">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        
+    </div>
+
+    <script src="https://embed.tawk.to/your_tawk_to_id/default" async></script>
+    <script>
+        
+    </script>
+</body>
+</html>

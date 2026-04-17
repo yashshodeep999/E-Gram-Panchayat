@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Explore various government schemes available at the Nimgoan Ketki Gram Panchayat, including housing, employment, and rural development programs." />
+  <title>Schemes - Nimgoan Ketki Gram Panchayat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FFFFF0;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333333;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+      padding: 30px;
+      border-bottom: 2px solid #B87333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: white;
+      flex: 1;
+      font-size: 36px;
+      letter-spacing: 2px;
+    }
+
+    .right-logo {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      width: 100px;
+    }
+
+    .google-translate {
+      position: absolute;
+      right: 20px;
+      top: 30px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      background-color: #333;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 14px 16px;
+      display: block;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background-color: #DAA520;
+    }
+
+    .scheme-list {
+      margin: 40px auto;
+      width: 90%;
+      max-width: 1100px;
+      padding: 30px;
+      background-color: #FFF5E1;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .scheme-list h2 {
+      font-size: 34px;
+      color: #3E7C17;
+      margin-bottom: 10px;
+    }
+
+    .search-box {
+      margin-bottom: 20px;
+    }
+
+    .search-box input {
+      padding: 10px;
+      width: 60%;
+      max-width: 400px;
+      font-size: 16px;
+      border: 2px solid #8ce953;
+      border-radius: 8px;
+    }
+
+    .scheme-count {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .no-schemes {
+      display: none;
+      color: red;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .scheme-item {
+      background: white;
+      margin-bottom: 20px;
+      padding: 20px;
+      text-align: left;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .scheme-item:hover {
+      transform: scale(1.02);
+    }
+
+    .scheme-item h3 {
+      font-size: 22px;
+      color: #8B4513;
+      margin-bottom: 10px;
+    }
+
+    .scheme-item p {
+      line-height: 1.6;
+    }
+
+    .scheme-item a {
+      color: #3E7C17;
+      font-weight: bold;
+    }
+
+    .scheme-item a:hover {
+      color: #DAA520;
+    }
+
+    .category-heading {
+      font-size: 28px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      color: #006400;
+      border-bottom: 2px dashed #DAA520;
+      display: inline-block;
+    }
+
+    .footer {
+      background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+      padding: 30px;
+      font-size: 14px;
+      color: white;
+      border-top: 2px solid #B87333;
+    }
+
+    #backToTopBtn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #3E7C17;
+      color: white;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 50%;
+      font-size: 18px;
+      display: none;
+      cursor: pointer;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 26px;
+      }
+
+      .right-logo {
+        width: 80px;
+      }
+
+      .search-box input {
+        width: 90%;
+      }
+    }
+
+    .scheme-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .scheme-item img {
+        width: 100px;
+        height: auto;
+        border-radius: 10px;
+    }
+    
+    .scheme-item-content {
+        text-align: left;
+    }
+    
+  </style>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+
+    function filterSchemes() {
+      const input = document.getElementById("schemeSearch").value.toLowerCase();
+      const schemes = document.getElementsByClassName("scheme-item");
+      let count = 0;
+
+      for (let scheme of schemes) {
+        const text = scheme.innerText.toLowerCase();
+        if (text.includes(input)) {
+          scheme.style.display = "block";
+          count++;
+        } else {
+          scheme.style.display = "none";
+        }
+      }
+
+      document.getElementById("schemeCount").innerText = `Showing ${count} scheme(s)`;
+      document.getElementById("noSchemesMessage").style.display = count === 0 ? "block" : "none";
+    }
+
+    window.onscroll = function () {
+      const btn = document.getElementById("backToTopBtn");
+      btn.style.display = window.scrollY > 300 ? "block" : "none";
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+
+<body>
+  <div class="header">
+    <h1><i class="fas fa-hand-holding-usd"></i> Schemes</h1>
+    <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo" />
+    <div id="google_translate_element" class="google-translate"></div>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="Executive Board.html">Executive Board</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="NimgoanKetki.html">About Nimgoan Ketki</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="scheme-list">
+    <h2>Government Schemes</h2>
+
+    <div class="search-box">
+      <input type="text" id="schemeSearch" onkeyup="filterSchemes()" placeholder="Search for a scheme..." />
+    </div>
+
+    
+    <div class="no-schemes" id="noSchemesMessage">No schemes found!</div>
+
+    <!-- General Schemes -->
+
+    <div class="scheme-item">
+      <img src="sch1.jpg" alt="Crop insurance visual">
+      <div class="scheme-item-content">
+          <h3>Pradhan Mantri Fasal Bima Yojana (PMFBY)</h3>
+          <p>This crop insurance scheme provides financial support to farmers in the event of crop failure due to natural calamities, pests, or diseases.
+          <a href="https://pmfby.gov.in" target="_blank">Learn more</a></p>
+      </div>
+  </div>
+
+<div class="scheme-item">
+  <img src="sch2.jpg" alt="MGNREGA visual">
+  <div class="scheme-item-content">
+    <h3>MGNREGA</h3>
+    <p>Guarantees 100 days of wage employment... <a href="https://nrega.nic.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch3.jpg" alt="Swachh Bharat visual">
+  <div class="scheme-item-content">
+    <h3>Swachh Bharat Mission (Gramin)</h3>
+    <p>Promotes cleanliness and sanitation in rural areas... <a href="https://swachhbharatmission.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+
+<div class="scheme-item">
+  <img src="sch4.jpg" alt="Atal Pension Yojana">
+  <div class="scheme-item-content">
+    <h3>Atal Pension Yojana</h3>
+    <p>Monthly pension scheme for unorganized sector workers. <a href="https://npscra.nsdl.co.in/scheme-details.php" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch5.jpg" alt="Ujjwala Yojana">
+  <div class="scheme-item-content">
+    <h3>Ujjwala Yojana</h3>
+    <p>Free LPG connections for women in BPL households. <a href="https://pmuy.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch6.jpg" alt="Stand-Up India Scheme">
+  <div class="scheme-item-content">
+    <h3>Stand-Up India Scheme</h3>
+    <p>Provides bank loans to SC/ST and women entrepreneurs. <a href="https://www.standupmitra.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch7.jpg" alt="Digital India">
+  <div class="scheme-item-content">
+    <h3>Digital India</h3>
+    <p>Aims to digitally empower rural citizens. <a href="https://www.digitalindia.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch8.jpg" alt="Jan Dhan Yojana">
+  <div class="scheme-item-content">
+    <h3>Jan Dhan Yojana</h3>
+    <p>Free and zero-balance bank accounts for all citizens. <a href="https://pmjdy.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+
+<h3 class="category-heading">Schemes for Farmers</h3>
+
+
+<div class="scheme-item">
+  <img src="sch9.jpg" alt="Kisan Credit Card visual">
+  <div class="scheme-item-content">
+    <h3>Kisan Credit Card (KCC)</h3>
+    <p>Affordable credit for farmers... <a href="https://pmkisan.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch10.jpg" alt="PMKSY visual">
+  <div class="scheme-item-content">
+    <h3>Pradhan Mantri Krishi Sinchai Yojana (PMKSY)</h3>
+    <p>Encourages efficient water use... <a href="https://pmksy.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch11.jpg" alt="Soil Health Card visual">
+  <div class="scheme-item-content">
+    <h3>Soil Health Card Scheme</h3>
+    <p>Provides farmers with soil health reports... <a href="https://soilhealth.dac.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch12.jpg" alt="PKVY visual">
+  <div class="scheme-item-content">
+    <h3>Paramparagat Krishi Vikas Yojana (PKVY)</h3>
+    <p>Promotes organic farming... <a href="https://pgsindia-ncof.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch13.jpg" alt="e-NAM visual">
+  <div class="scheme-item-content">
+    <h3>e-NAM</h3>
+    <p>Online trading platform for farmers... <a href="https://enam.gov.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+<div class="scheme-item">
+  <img src="sch.14.jpg" alt="RKVY visual">
+  <div class="scheme-item-content">
+    <h3>Rashtriya Krishi Vikas Yojana (RKVY)</h3>
+    <p>State support for agricultural development... <a href="https://rkvy.nic.in" target="_blank">Learn more</a></p>
+  </div>
+</div>
+
+  <button onclick="scrollToTop()" id="backToTopBtn" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <div class="footer">
+    
+  </div>
+</body>
+
+</html>

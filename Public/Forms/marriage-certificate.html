@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certificate of Registration of Marriage (Form E)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="paper formE">
+
+  <!-- TOP 3 BOXES (PHOTO - EMBLEM - PHOTO) -->
+  <div class="topboxes">
+    <div class="box photoBox">
+      <div class="boxText">फोटो</div>
+      <input class="no-print" type="file" id="husbandPhoto" accept="image/*">
+      <img id="husbandPhotoPreview" alt="Husband Photo">
+    </div>
+
+    <div class="box emblemBox">
+      <!-- If you have emblem image, put it in your project and update src below -->
+      <img class="emblem" src="emblem.png" alt="Emblem" onerror="this.style.display='none'">
+      <div class="mh-title">महाराष्ट्र शासन</div>
+      <div class="mh-sub">(भाग चार-ब) महाराष्ट्र शासन राजपत्र से 20, 1999 / एप्रिल 30, इ.स. 1921</div>
+    </div>
+
+    <div class="box photoBox">
+      <div class="boxText">फोटो</div>
+      <input class="no-print" type="file" id="wifePhoto" accept="image/*">
+      <img id="wifePhotoPreview" alt="Wife Photo">
+    </div>
+  </div>
+
+  <!-- MAIN HEADING -->
+  <div class="centerBlock">
+    <div class="smallLine">नमुना “ई” <span class="en">form no. E</span></div>
+
+    <div class="titleLine">
+      विवाह नोंदणीचे प्रमाणपत्र
+      <span class="en">CERTIFICATE OF REGISTRATION OF MARRIAGE</span>
+    </div>
+
+    <div class="ruleText">
+      [पहा कलम 6(1) आणि नियम 5]
+      <span class="en">(see section 6[1][e] and rule 5)</span>
+    </div>
+  </div>
+
+  <!-- CERTIFIED LINE -->
+  <div class="para">
+    प्रमाणित करण्यात येते की,
+    <span class="en">Certified that the marriage between</span>
+  </div>
+
+  <!-- HUSBAND LINE -->
+  <div class="lineRow">
+    <span class="mrLabel">पतीचे नाव:</span>
+    <span class="dots"></span>
+    <span class="mrLabel">आधारकार्ड क्र.:</span>
+    <span class="dots short"></span>
+  </div>
+
+  <div class="lineRow">
+    <span class="enLabel">Husband Name:</span>
+    <input class="fillInput" id="husbandName" placeholder="">
+    <span class="enLabel">Adhar Card Number:</span>
+    <input class="fillInput shortInput" id="husbandAadhaar" maxlength="12" inputmode="numeric" placeholder="">
+  </div>
+
+  <div class="lineRow">
+    <span class="mrLabel">राहणार:</span>
+    <input class="fillInput longInput" id="husbandAddress" placeholder="">
+    <span class="mrLabel">आणि</span>
+  </div>
+
+  <!-- WIFE LINE -->
+  <div class="lineRow" style="margin-top:8px;">
+    <span class="mrLabel">पत्नीचे नाव:</span>
+    <span class="dots"></span>
+    <span class="mrLabel">आधारकार्ड क्र.:</span>
+    <span class="dots short"></span>
+  </div>
+
+  <div class="lineRow">
+    <span class="enLabel">Wife Name:</span>
+    <input class="fillInput" id="wifeName" placeholder="">
+    <span class="enLabel">Adhar Card Number:</span>
+    <input class="fillInput shortInput" id="wifeAadhaar" maxlength="12" inputmode="numeric" placeholder="">
+  </div>
+
+  <div class="lineRow">
+    <span class="mrLabel">राहणार:</span>
+    <input class="fillInput longInput" id="wifeAddress" placeholder="">
+  </div>
+
+  <!-- SOLEMNIZED LINE -->
+  <div class="lineRow" style="margin-top:10px;">
+    <span class="mrLabel">यांचा विवाह दिनांक:</span>
+    <input class="fillInput shortInput" id="marriageDate" type="date">
+    <span class="mrLabel">रोजी</span>
+    <input class="fillInput shortInput" id="marriageTime" placeholder="वेळ / time">
+    <span class="mrLabel">येथे(ठिकाणी)</span>
+    <input class="fillInput" id="marriagePlace" placeholder="">
+  </div>
+
+  <div class="para2">
+    विधी संपन्न झाला. त्यांची महाराष्ट्र विवाह मंडळाचे विनियमन आणि विवाह नोंदणी विधेयक, 1998
+    <div class="en">
+      Register of marriage maintained under the Maharashtra regulation of marriage bureaus and
+      registration of marriages Act 1998.
+    </div>
+  </div>
+
+  <!-- VOLUME + SERIAL -->
+  <div class="lineRow" style="margin-top:10px;">
+    <span class="mrLabel">अन्यत्र ठेवण्यात आलेल्या नोंदवहीच्या खंड क्रमांक</span>
+    <input class="fillInput shortInput" id="volumeNo" placeholder="">
+    <span class="mrLabel">च्या अनुक्रमांक</span>
+    <input class="fillInput shortInput" id="serialNo" placeholder="">
+    <span class="mrLabel">वर</span>
+  </div>
+
+  <div class="lineRow">
+    <span class="enLabel">of volume</span>
+    <span class="dots short"></span>
+    <span class="enLabel">serial No.</span>
+    <span class="dots short"></span>
+  </div>
+
+  <!-- REGISTERED BY ME -->
+  <div class="lineRow" style="margin-top:10px;">
+    <span class="mrLabel">दिनांक:</span>
+    <input class="fillInput shortInput" id="registeredOn" type="date">
+    <span class="mrLabel">रोजी माझ्याकडून नोंदणी करण्यात आली आहे.</span>
+  </div>
+
+  <div class="enLine">
+    On <span class="dots short"></span> registered by me.
+  </div>
+
+  <!-- PLACE + DATE + SIGNATURE/STAMP -->
+  <div class="bottomArea">
+    <div class="bottomLeft">
+      <div class="bRow">
+        <span class="mrLabel">ठिकाण/Place :</span>
+        <input class="fillInput" id="place" placeholder="">
+      </div>
+      <div class="bRow">
+        <span class="mrLabel">Date/दिनांक :</span>
+        <input class="fillInput shortInput" id="placeDate" type="date">
+      </div>
+    </div>
+
+    <div class="bottomRight">
+      <div class="mrLabel" style="margin-bottom:6px;">Registrar of Marriage (सही व शिक्का)</div>
+
+      <!-- ✅ Fixed Stamp Upload Once -->
+      <div class="stampWrap">
+        <img id="stampPreview" alt="Signature & Stamp" />
+        <div class="no-print" style="margin-top:6px;">
+          <input type="file" id="stampUpload" accept="image/*">
+        </div>
+      </div>
+
+      <div class="sigText">
+        निबंधक विवाह नोंदणी तथा Registrar of Marriage<br>
+        ग्रामसेवक/ग्रामविकास अधिकारी<br>
+        Gramsevak / Village Development Officer<br>
+        ग्रामपंचायत Grampanchayat
+      </div>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="btnbar no-print">
+    <button type="button" class="secondary" onclick="history.back()">Back</button>
+    <button type="button" class="secondary" onclick="saveMarriageToMongo()">Save</button>
+    <button type="button" onclick="window.print()">Print</button>
+  </div>
+
+  <div id="saveMsg" class="small no-print" style="margin-top:8px;"></div>
+
+</div>
+
+<!-- ✅ keep ONLY one api.js -->
+<script src="api.js"></script>
+
+<script>
+function setSaveMsg(text, ok){
+  const el = document.getElementById("saveMsg");
+  el.style.color = ok ? "green" : "red";
+  el.textContent = text;
+}
+function onlyDigits(str){ return (str || "").replace(/\\D/g, ""); }
+
+function loadImageFromStorage(key, imgEl){
+  const dataUrl = localStorage.getItem(key);
+  if(dataUrl){
+    imgEl.src = dataUrl;
+    imgEl.style.display = "block";
+  }
+}
+
+function bindUploadToStorage(inputId, storageKey, imgId){
+  const input = document.getElementById(inputId);
+  const img = document.getElementById(imgId);
+
+  input.addEventListener("change", function(e){
+    const file = e.target.files && e.target.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(){
+      const dataUrl = reader.result;
+      localStorage.setItem(storageKey, dataUrl);
+      img.src = dataUrl;
+      img.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ✅ init: load fixed stamp + photos + optional default place
+(function init(){
+  if(!document.getElementById("place").value) document.getElementById("place").value = "Nimgoan Ketki";
+
+  loadImageFromStorage("GP_STAMP_IMAGE", document.getElementById("stampPreview"));
+  loadImageFromStorage("GP_HUSBAND_PHOTO", document.getElementById("husbandPhotoPreview"));
+  loadImageFromStorage("GP_WIFE_PHOTO", document.getElementById("wifePhotoPreview"));
+
+  bindUploadToStorage("stampUpload", "GP_STAMP_IMAGE", "stampPreview");
+  bindUploadToStorage("husbandPhoto", "GP_HUSBAND_PHOTO", "husbandPhotoPreview");
+  bindUploadToStorage("wifePhoto", "GP_WIFE_PHOTO", "wifePhotoPreview");
+})();
+
+async function saveMarriageToMongo(){
+  try{
+    const data = {
+      husbandName: document.getElementById("husbandName").value.trim(),
+      husbandAadhaar: onlyDigits(document.getElementById("husbandAadhaar").value.trim()),
+      husbandAddress: document.getElementById("husbandAddress").value.trim(),
+
+      wifeName: document.getElementById("wifeName").value.trim(),
+      wifeAadhaar: onlyDigits(document.getElementById("wifeAadhaar").value.trim()),
+      wifeAddress: document.getElementById("wifeAddress").value.trim(),
+
+      marriageDate: document.getElementById("marriageDate").value,
+      marriageTime: document.getElementById("marriageTime").value.trim(),
+      marriagePlace: document.getElementById("marriagePlace").value.trim(),
+
+      volumeNo: document.getElementById("volumeNo").value.trim(),
+      serialNo: document.getElementById("serialNo").value.trim(),
+      registeredOn: document.getElementById("registeredOn").value,
+
+      place: document.getElementById("place").value.trim(),
+      placeDate: document.getElementById("placeDate").value || "",
+
+      stampImage: localStorage.getItem("GP_STAMP_IMAGE") || "",
+      husbandPhoto: localStorage.getItem("GP_HUSBAND_PHOTO") || "",
+      wifePhoto: localStorage.getItem("GP_WIFE_PHOTO") || "",
+
+      application: JSON.parse(localStorage.getItem("GP_APPLICANT") || "{}"),
+      receiptNo: localStorage.getItem("GP_RECEIPT_NO") || ""
+    };
+
+    // ✅ validation
+    if(!data.husbandName || !data.wifeName){
+      setSaveMsg("❌ Please enter Husband Name and Wife Name", false);
+      return;
+    }
+    if(data.husbandAadhaar && data.husbandAadhaar.length !== 12){
+      setSaveMsg("❌ Husband Aadhaar must be 12 digits (or empty)", false);
+      return;
+    }
+    if(data.wifeAadhaar && data.wifeAadhaar.length !== 12){
+      setSaveMsg("❌ Wife Aadhaar must be 12 digits (or empty)", false);
+      return;
+    }
+    if(!data.marriageDate){
+      setSaveMsg("❌ Please select Marriage Date", false);
+      return;
+    }
+    if(!data.stampImage){
+      setSaveMsg("❌ Please upload Signature/Stamp image (one time).", false);
+      return;
+    }
+
+    const result = await submitToMongo("marriage", data);
+
+    if(result && result.success){
+      setSaveMsg("✅ Saved in database. ID: " + (result.id || ""), true);
+    } else {
+      setSaveMsg("❌ Error: " + (result.message || result.error || "Unknown error"), false);
+    }
+  }catch(err){
+    console.log("Save error:", err);
+    setSaveMsg("❌ Server error. Check Node server + MongoDB running.", false);
+  }
+}
+</script>
+
+</body>
+</html>

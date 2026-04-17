@@ -1,0 +1,153 @@
+.gp-chat-btn {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3e7c17, #daa520);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  z-index: 99999;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 22px;
+}
+.gp-chat-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
+}
+
+.gp-chatbox {
+  position: fixed;
+  right: 18px;
+  bottom: 90px;
+  width: 380px;
+  height: 560px;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  z-index: 99999;
+  display: none;
+  border: 1px solid #eee;
+}
+
+.gp-chat-head {
+  background: linear-gradient(90deg, #8ce953, #daa520, #3e7c17);
+  color: #fff;
+  padding: 12px 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gp-title {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+}
+.gp-small {
+  font-size: 12px;
+  opacity: 0.95;
+  margin-top: 4px;
+}
+
+.gp-head-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.gp-icon-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.gp-icon-btn.active {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.gp-close {
+  cursor: pointer;
+  font-weight: 900;
+  opacity: 0.95;
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.gp-chat-body {
+  padding: 12px;
+  height: 430px;
+  overflow: auto;
+  background: #fafafa;
+}
+
+.gp-msg {
+  margin: 10px 0;
+  display: flex;
+  gap: 8px;
+}
+.gp-msg.user {
+  justify-content: flex-end;
+}
+
+.gp-bubble {
+  max-width: 85%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.25rem;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.gp-msg.user .gp-bubble {
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+}
+.gp-msg.bot .gp-bubble {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+}
+
+.gp-typing {
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.gp-chat-foot {
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid #eee;
+  background: #fff;
+}
+
+.gp-chat-foot input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+}
+
+.gp-chat-foot button {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #3e7c17;
+  color: #fff;
+}
+
+.gp-mic {
+  width: 46px;
+  background: #2f6a12 !important;
+  font-size: 16px;
+}

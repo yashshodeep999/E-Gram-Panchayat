@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Krushi Vibhag - Nimgoan Ketki</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#FFFFF0;
+      margin:0; padding:0; color:#333;
+      background:linear-gradient(180deg,#f9f9f9 0%,#FFFFFF 100%);
+    }
+
+    .header{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      padding:30px;
+      text-align:center;
+      box-shadow:0 4px 6px rgba(0,0,0,0.1);
+      position:relative;
+    }
+    .header h1{ margin:0; font-size:34px; }
+    .header p{ margin:8px 0 0; opacity:0.95; }
+    .header .right-logo{
+      position:absolute;
+      left:20px; top:5px;
+      width:130px; height:auto;
+    }
+
+    nav{ background:#333; color:#fff; text-align:center; padding:10px 0; }
+    nav ul{ list-style:none; margin:0; padding:0; }
+    nav ul li{ display:inline; margin-right:18px; }
+    nav ul li a{
+      color:#fff; text-decoration:none; padding:10px 16px;
+      font-weight:bold; transition:0.3s;
+      border-radius:8px; display:inline-block;
+    }
+    nav ul li a:hover{ background:#DAA520; }
+
+    .container{ padding:40px 20px; max-width:1200px; margin:auto; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap:22px;
+      margin-bottom:22px;
+    }
+
+    .card{
+      background:#fff;
+      border-radius:15px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+    .hero-img{
+      width:100%;
+      height:260px;
+      object-fit:cover;
+      display:block;
+    }
+    .card-head{
+      padding:18px 22px;
+      border-bottom:1px solid #f0f0f0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .card-head h2{
+      margin:0;
+      font-size:22px;
+      color:#2e7d32;
+      display:flex; gap:10px; align-items:center;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#faf7e8;
+      border:1px solid #f3e7b9;
+      font-weight:800;
+      color:#7a5a00;
+      font-size:13px;
+    }
+    .card-body{ padding:22px; }
+    .muted{ color:#666; line-height:1.7; }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .info-item{
+      border:1px solid #f0f0f0;
+      border-radius:12px;
+      padding:12px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:linear-gradient(180deg,#fff 0%, #fbfbfb 100%);
+    }
+    .info-item i{
+      font-size:18px;
+      color:#DAA520;
+      margin-top:2px;
+      min-width:20px;
+    }
+    .info-item b{ display:block; margin-bottom:3px; }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .list{
+      margin:10px 0 0;
+      padding-left:18px;
+      line-height:1.85;
+    }
+    .list li{ margin-bottom:6px; }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .action-link, .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      font-weight:900;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid #eee;
+      background:#fff;
+      color:#333;
+      box-shadow:0 6px 14px rgba(0,0,0,0.06);
+      transition:0.2s;
+      cursor:pointer;
+    }
+    .action-link:hover, .btn:hover{ transform:translateY(-1px); }
+    .action-link i{ color:#2e7d32; }
+
+    .note{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:12px;
+      background:#f9f9f9;
+      border:1px dashed #ddd;
+      line-height:1.7;
+    }
+
+    .forms-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+    .form-card{
+      border:1px solid #f0f0f0;
+      border-radius:12px;
+      padding:14px;
+      background:#fff;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+    .form-card .title{
+      font-weight:900;
+      color:#2e7d32;
+      margin-bottom:4px;
+    }
+    .form-card .desc{ color:#666; font-size:14px; line-height:1.5; }
+
+    .faq details{
+      border:1px solid #f0f0f0;
+      border-radius:12px;
+      padding:12px 14px;
+      margin-bottom:12px;
+      background:#fff;
+    }
+    .faq summary{
+      cursor:pointer;
+      font-weight:900;
+      color:#2e7d32;
+      outline:none;
+    }
+    .faq p{ margin:10px 0 0; line-height:1.7; color:#444; }
+
+    .map-wrap{
+      border-radius:15px;
+      overflow:hidden;
+      border:1px solid #eee;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+    .map-iframe{
+      width:100%;
+      height:360px;
+      border:0;
+      display:block;
+    }
+
+    .footer{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      text-align:center;
+      padding:12px;
+      margin-top:30px;
+    }
+
+    @media (max-width: 900px){
+      .grid{ grid-template-columns:1fr; }
+      .two-col{ grid-template-columns:1fr; }
+      .info-grid{ grid-template-columns:1fr; }
+      .forms-grid{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 768px){
+      .header h1{ font-size:26px; }
+      .header .right-logo{ width:100px; top:10px; }
+      nav ul li{ display:inline-block; margin:6px 6px; }
+      .map-iframe{ height:320px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="logo1.1.png" alt="Gram Panchayat Logo" class="right-logo">
+    <h1 data-en="Krushi Vibhag (Agriculture) - Nimgoan Ketki"
+        data-mr="कृषी विभाग - निमगाव केतकी">
+      Krushi Vibhag (Agriculture) - Nimgoan Ketki
+    </h1>
+    <p data-en="Guidance, schemes, soil testing info, crop protection and farmer support"
+       data-mr="मार्गदर्शन, योजना, माती तपासणी माहिती, कीड-रोग नियंत्रण व शेतकरी मदत">
+      Guidance, schemes, soil testing info, crop protection and farmer support
+    </p>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="Home.html" data-en="Home" data-mr="मुख्यपृष्ठ">Home</a></li>
+      <li><a href="about.html" data-en="About Us" data-mr="आमच्याबद्दल">About Us</a></li>
+      <li><a href="Executive Board.html" data-en="Executive Board" data-mr="कार्यकारी मंडळ">Executive Board</a></li>
+      <li><a href="services.html" data-en="Services" data-mr="सेवा">Services</a></li>
+      <li><a href="schemes.html" data-en="Schemes" data-mr="योजना">Schemes</a></li>
+      <li><a href="news.html" data-en="News" data-mr="बातम्या">News</a></li>
+      <li><a href="NimgoanKetki.html" data-en="About Nimgoan Ketki" data-mr="निमगाव केतकी माहिती">About Nimgoan Ketki</a></li>
+      <li><a href="gallery.html" data-en="Gallery" data-mr="गॅलरी">Gallery</a></li>
+      <li><a href="contact.html" data-en="Contact Us" data-mr="संपर्क">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- QUICK OVERVIEW + CONTACT -->
+    <div class="grid">
+
+      <div class="card">
+        <img src="farm1.1.jpg" alt="Krushi Guidance" class="hero-img">
+        <div class="card-head">
+          <h2>
+            <i class="fa-solid fa-seedling"></i>
+            <span data-en="Agriculture Support in Nimgoan Ketki"
+                  data-mr="निमगाव केतकीतील कृषी मदत">
+              Agriculture Support in Nimgoan Ketki
+            </span>
+          </h2>
+          <div class="badge">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <span data-en="Farmer Friendly Services"
+                  data-mr="शेतकरी-मैत्री सेवा">
+              Farmer Friendly Services
+            </span>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="muted"
+             data-en="Krushi Vibhag helps farmers with crop guidance, soil health information, seed/fertilizer advice, pest control guidance and access to government schemes."
+             data-mr="कृषी विभागामार्फत पीक मार्गदर्शन, माती आरोग्य माहिती, बियाणे/खत सल्ला, कीड-रोग नियंत्रण मार्गदर्शन आणि शासकीय योजनांमध्ये मदत मिळते.">
+            Krushi Vibhag helps farmers with crop guidance, soil health information, seed/fertilizer advice, pest control guidance and access to government schemes.
+          </p>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                <b data-en="Local Guidance Point" data-mr="स्थानिक मार्गदर्शन केंद्र">Local Guidance Point</b>
+                <span data-en="Krushi Seva Kendra / Taluka Agriculture Office (Indapur)"
+                      data-mr="कृषी सेवा केंद्र / तालुका कृषी कार्यालय (इंदापूर)">
+                  Krushi Seva Kendra / Taluka Agriculture Office (Indapur)
+                </span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <i class="fa-solid fa-clock"></i>
+              <div>
+                <b data-en="Best Visiting Time" data-mr="येण्यासाठी योग्य वेळ">Best Visiting Time</b>
+                <span data-en="Office hours (as per availability)"
+                      data-mr="कार्यालयीन वेळ (उपलब्धतेनुसार)">
+                  Office hours (as per availability)
+                </span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <i class="fa-solid fa-phone"></i>
+              <div>
+                <b data-en="Contact (Update)" data-mr="संपर्क (अपडेट करा)">Contact (Update)</b>
+                <span data-en="+91-XXXXXXXXXX (Add Agriculture Officer number)"
+                      data-mr="+91-XXXXXXXXXX (कृषी अधिकारी क्रमांक लिहा)">
+                  +91-XXXXXXXXXX (Add Agriculture Officer number)
+                </span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <i class="fa-solid fa-file-lines"></i>
+              <div>
+                <b data-en="Documents Farmers Often Need" data-mr="शेतकऱ्यांना लागणारी कागदपत्रे">Documents Farmers Often Need</b>
+                <span data-en="Aadhaar, Bank Passbook, 7/12, 8A, Mobile number"
+                      data-mr="आधार, बँक पासबुक, ७/१२, ८अ, मोबाईल क्रमांक">
+                  Aadhaar, Bank Passbook, 7/12, 8A, Mobile number
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <!-- Update tel: with real number -->
+            <a class="action-link" href="tel:+910000000000">
+              <i class="fa-solid fa-phone"></i>
+              <span data-en="Call Krushi Office" data-mr="कृषी कार्यालयाला कॉल">Call Krushi Office</span>
+            </a>
+
+            <a class="action-link" id="openMapsBtn" href="#" target="_blank" rel="noopener">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <span data-en="Open Location in Maps" data-mr="नकाशावर लोकेशन पहा">Open Location in Maps</span>
+            </a>
+
+            <a class="action-link" href="contact.html">
+              <i class="fa-solid fa-circle-info"></i>
+              <span data-en="Send Enquiry" data-mr="चौकशी पाठवा">Send Enquiry</span>
+            </a>
+          </div>
+
+          <div class="note">
+            <b data-en="Tip:" data-mr="टीप:">Tip:</b>
+            <span data-en="For faster help, carry crop photos (pest/disease), land details (7/12) and last fertilizer/pesticide bill."
+                  data-mr="जलद मदतीसाठी पीक फोटो (कीड/रोग), ७/१२ व शेवटचा खत/औषध बिल सोबत ठेवा.">
+              For faster help, carry crop photos (pest/disease), land details (7/12) and last fertilizer/pesticide bill.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS (OFFICIAL) -->
+      <div class="card">
+        <div class="card-head">
+          <h2>
+            <i class="fa-solid fa-link"></i>
+            <span data-en="Important Official Links" data-mr="महत्त्वाच्या अधिकृत लिंक्स">
+              Important Official Links
+            </span>
+          </h2>
+          <div class="badge">
+            <i class="fa-solid fa-bolt"></i>
+            <span data-en="Open in New Tab" data-mr="नवीन टॅबमध्ये उघडा">Open in New Tab</span>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="muted"
+             data-en="Use these official portals for schemes, application status, insurance and soil health services."
+             data-mr="योजना, अर्ज स्थिती, विमा आणि माती आरोग्य सेवांसाठी या अधिकृत पोर्टल्सचा वापर करा.">
+            Use these official portals for schemes, application status, insurance and soil health services.
+          </p>
+
+          <div class="actions">
+            <a class="action-link" href="https://krishi.maharashtra.gov.in/" target="_blank" rel="noopener">
+              <i class="fa-solid fa-leaf"></i>
+              <span data-en="Maharashtra Krushi Vibhag" data-mr="महाराष्ट्र कृषी विभाग">Maharashtra Krushi Vibhag</span>
+            </a>
+
+            <a class="action-link" href="https://mahadbt.maharashtra.gov.in/" target="_blank" rel="noopener">
+              <i class="fa-solid fa-indian-rupee-sign"></i>
+              <span data-en="MahaDBT Farmer Portal" data-mr="महाडीबीटी शेतकरी पोर्टल">MahaDBT Farmer Portal</span>
+            </a>
+
+            <a class="action-link" href="https://pmkisan.gov.in/" target="_blank" rel="noopener">
+              <i class="fa-solid fa-hand-holding-dollar"></i>
+              <span data-en="PM-KISAN Portal" data-mr="पीएम-किसान पोर्टल">PM-KISAN Portal</span>
+            </a>
+
+            <a class="action-link" href="https://pmkisan.gov.in/farmerstatus.aspx" target="_blank" rel="noopener">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span data-en="PM-KISAN Status" data-mr="पीएम-किसान स्टेटस">PM-KISAN Status</span>
+            </a>
+
+            <a class="action-link" href="https://pmfby.gov.in/" target="_blank" rel="noopener">
+              <i class="fa-solid fa-umbrella"></i>
+              <span data-en="PMFBY Crop Insurance" data-mr="पीएमएफबीवाय पीक विमा">PMFBY Crop Insurance</span>
+            </a>
+
+            <a class="action-link" href="https://www.soilhealth.dac.gov.in/" target="_blank" rel="noopener">
+              <i class="fa-solid fa-flask"></i>
+              <span data-en="Soil Health Card" data-mr="सॉईल हेल्थ कार्ड">Soil Health Card</span>
+            </a>
+
+            <a class="action-link" href="https://www.msamb.com/" target="_blank" rel="noopener">
+              <i class="fa-solid fa-store"></i>
+              <span data-en="Market (MSAMB)" data-mr="बाजार (MSAMB)">Market (MSAMB)</span>
+            </a>
+          </div>
+
+          <div class="note">
+            <b data-en="Note:" data-mr="नोंद:">Note:</b>
+            <span data-en="These links open official websites. If you want, I can add a separate 'Schemes' list specific to Indapur/Pune district."
+                  data-mr="ही लिंक्स अधिकृत वेबसाइट्स उघडतात. तुम्हाला हवे असल्यास मी इंदापूर/पुणे जिल्ह्यासाठी विशेष योजनांची यादी जोडू शकतो.">
+              These links open official websites. If you want, I can add a separate 'Schemes' list specific to Indapur/Pune district.
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SERVICES DETAILS -->
+    <div class="card">
+      <img src="farm0.jpg" alt="Soil Testing / Seeds" class="hero-img">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-tractor"></i>
+          <span data-en="Services Provided by Krushi Vibhag" data-mr="कृषी विभागाच्या सेवा">
+            Services Provided by Krushi Vibhag
+          </span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-user-check"></i>
+          <span data-en="User Friendly" data-mr="वापरण्यास सोपे">User Friendly</span>
+        </div>
+      </div>
+
+      <div class="card-body two-col">
+        <div>
+          <h3 style="margin:0; color:#2e7d32;"
+              data-en="Crop Guidance" data-mr="पीक मार्गदर्शन">Crop Guidance</h3>
+          <ul class="list">
+            <li data-en="Season-wise crop planning and advisory" data-mr="हंगामानुसार पीक नियोजन व सल्ला">Season-wise crop planning and advisory</li>
+            <li data-en="Pest & disease management guidance" data-mr="कीड व रोग नियंत्रण मार्गदर्शन">Pest & disease management guidance</li>
+            <li data-en="Fertilizer & pesticide dose recommendations" data-mr="खत/औषध मात्रा शिफारस">Fertilizer & pesticide dose recommendations</li>
+            <li data-en="Weather-based precaution suggestions" data-mr="हवामानानुसार खबरदारी सूचना">Weather-based precaution suggestions</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="margin:0; color:#2e7d32;"
+              data-en="Soil & Water Support" data-mr="माती व पाणी सहाय्य">Soil & Water Support</h3>
+          <ul class="list">
+            <li data-en="Soil testing guidance / Soil Health Card help" data-mr="माती तपासणी मार्गदर्शन / सॉईल हेल्थ कार्ड मदत">Soil testing guidance / Soil Health Card help</li>
+            <li data-en="Water management and irrigation advice" data-mr="पाणी व्यवस्थापन व सिंचन सल्ला">Water management and irrigation advice</li>
+            <li data-en="Support for drip & sprinkler schemes (as applicable)" data-mr="ठिबक व तुषार सिंचन योजनांसाठी मदत (लागू असल्यास)">Support for drip & sprinkler schemes (as applicable)</li>
+            <li data-en="Farm pond / water conservation awareness" data-mr="शेततळे / जलसंवर्धन जनजागृती">Farm pond / water conservation awareness</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="margin:0; color:#2e7d32;"
+              data-en="Schemes & Subsidies" data-mr="योजना व अनुदान">Schemes & Subsidies</h3>
+          <ul class="list">
+            <li data-en="Guidance for farmer applications and eligibility" data-mr="अर्ज प्रक्रिया व पात्रता मार्गदर्शन">Guidance for farmer applications and eligibility</li>
+            <li data-en="Support for government benefits & DBT" data-mr="शासकीय लाभ व DBT साठी मदत">Support for government benefits & DBT</li>
+            <li data-en="Crop insurance help (PMFBY) (as applicable)" data-mr="पीक विमा (PMFBY) मदत (लागू असल्यास)">Crop insurance help (PMFBY) (as applicable)</li>
+            <li data-en="Machinery / inputs subsidy info (as applicable)" data-mr="यंत्रसामग्री/इनपुट अनुदान माहिती (लागू असल्यास)">Machinery / inputs subsidy info (as applicable)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="margin:0; color:#2e7d32;"
+              data-en="Training & Awareness" data-mr="प्रशिक्षण व जनजागृती">Training & Awareness</h3>
+          <ul class="list">
+            <li data-en="Farmer training programs and demos" data-mr="शेतकरी प्रशिक्षण व प्रात्यक्षिके">Farmer training programs and demos</li>
+            <li data-en="New farming techniques and best practices" data-mr="नवीन तंत्रज्ञान व उत्तम पद्धती">New farming techniques and best practices</li>
+            <li data-en="Support for SHGs / FPO guidance (as applicable)" data-mr="SHG / FPO मार्गदर्शन (लागू असल्यास)">Support for SHGs / FPO guidance (as applicable)</li>
+            <li data-en="Information on market linkage (as applicable)" data-mr="बाजार जोडणी माहिती (लागू असल्यास)">Information on market linkage (as applicable)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMS / CHECKLIST (USER FRIENDLY) -->
+    <div class="card">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-file-circle-check"></i>
+          <span data-en="Farmer Checklist & Quick Help" data-mr="शेतकरी चेकलिस्ट व त्वरित मदत">
+            Farmer Checklist & Quick Help
+          </span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-check"></i>
+          <span data-en="Carry these" data-mr="सोबत ठेवा">Carry these</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="forms-grid">
+          <div class="form-card">
+            <div>
+              <div class="title" data-en="For Schemes / Subsidy" data-mr="योजना / अनुदानासाठी">For Schemes / Subsidy</div>
+              <div class="desc" data-en="Aadhaar, bank passbook, 7/12, mobile number"
+                   data-mr="आधार, बँक पासबुक, ७/१२, मोबाईल क्रमांक">Aadhaar, bank passbook, 7/12, mobile number</div>
+            </div>
+            <i class="fa-solid fa-folder-open" style="color:#DAA520;"></i>
+          </div>
+
+          <div class="form-card">
+            <div>
+              <div class="title" data-en="For Crop Disease Issue" data-mr="पीक रोग/कीड समस्येसाठी">For Crop Disease Issue</div>
+              <div class="desc" data-en="Crop photo, affected area details, last spray bill"
+                   data-mr="पीक फोटो, बाधित क्षेत्र माहिती, शेवटच्या फवारणीचे बिल">Crop photo, affected area details, last spray bill</div>
+            </div>
+            <i class="fa-solid fa-bug" style="color:#DAA520;"></i>
+          </div>
+
+          <div class="form-card">
+            <div>
+              <div class="title" data-en="For Soil Testing" data-mr="माती तपासणीसाठी">For Soil Testing</div>
+              <div class="desc" data-en="Field location, crop history, sample instructions"
+                   data-mr="शेताचे लोकेशन, पीक इतिहास, नमुना सूचना">Field location, crop history, sample instructions</div>
+            </div>
+            <i class="fa-solid fa-flask" style="color:#DAA520;"></i>
+          </div>
+
+          <div class="form-card">
+            <div>
+              <div class="title" data-en="For Crop Insurance (PMFBY)" data-mr="पीक विमा (PMFBY) साठी">For Crop Insurance (PMFBY)</div>
+              <div class="desc" data-en="Sowing details, land papers, bank account"
+                   data-mr="पेरणी तपशील, जमिनीची कागदपत्रे, बँक खाते">Sowing details, land papers, bank account</div>
+            </div>
+            <i class="fa-solid fa-umbrella" style="color:#DAA520;"></i>
+          </div>
+        </div>
+
+        <div class="note">
+          <b data-en="Village Help:" data-mr="गाव मदत:">Village Help:</b>
+          <span data-en="If you want, we can add a small 'Farmer Help Desk' section with local volunteer/phone numbers."
+                data-mr="तुम्हाला हवे असल्यास स्थानिक मदतनीस/फोन नंबरसह 'शेतकरी हेल्प डेस्क' सेक्शन जोडू शकतो.">
+            If you want, we can add a small 'Farmer Help Desk' section with local volunteer/phone numbers.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE LOCATION (MAP) -->
+    <div class="card">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-map"></i>
+          <span data-en="Krushi Office Location (Map)" data-mr="कृषी कार्यालय लोकेशन (नकाशा)">
+            Krushi Office Location (Map)
+          </span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-location-crosshairs"></i>
+          <span data-en="Indapur, Pune" data-mr="इंदापूर, पुणे">Indapur, Pune</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="Map below shows a helpful nearby search location. If you share the exact Google Maps link of your Krushi Seva Kendra, I will set the exact pinned location."
+           data-mr="खालील नकाशा जवळच्या ठिकाणाचा उपयोगी शोध दाखवतो. तुमच्या कृषी सेवा केंद्राची अचूक Google Maps लिंक दिल्यास मी अचूक पिन लोकेशन सेट करतो.">
+          Map below shows a helpful nearby search location. If you share the exact Google Maps link of your Krushi Seva Kendra, I will set the exact pinned location.
+        </p>
+
+        <div class="map-wrap">
+          <iframe id="mapFrame" class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe>
+        </div>
+
+        <div class="actions" style="margin-top:14px;">
+          <a class="action-link" id="directionsBtn" href="#" target="_blank" rel="noopener">
+            <i class="fa-solid fa-route"></i>
+            <span data-en="Get Directions" data-mr="दिशा मिळवा">Get Directions</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card faq">
+      <div class="card-head">
+        <h2>
+          <i class="fa-solid fa-circle-question"></i>
+          <span data-en="Frequently Asked Questions (FAQ)" data-mr="वारंवार विचारले जाणारे प्रश्न (FAQ)">
+            Frequently Asked Questions (FAQ)
+          </span>
+        </h2>
+      </div>
+
+      <div class="card-body">
+        <details>
+          <summary data-en="Where should I go for crop disease/pest guidance?"
+                   data-mr="पीक कीड/रोग मार्गदर्शनासाठी कुठे जावे?">
+            Where should I go for crop disease/pest guidance?
+          </summary>
+          <p data-en="Visit Krushi Seva Kendra / Taluka Agriculture Office with crop photos and details. They guide on medicine dose and precautions."
+             data-mr="पीक फोटो व माहिती घेऊन कृषी सेवा केंद्र/तालुका कृषी कार्यालयात जा. ते औषध मात्रा व खबरदारी सांगतात.">
+            Visit Krushi Seva Kendra / Taluka Agriculture Office with crop photos and details. They guide on medicine dose and precautions.
+          </p>
+        </details>
+
+        <details>
+          <summary data-en="How can I check PM-KISAN status?"
+                   data-mr="पीएम-किसान स्टेटस कसा पाहायचा?">
+            How can I check PM-KISAN status?
+          </summary>
+          <p data-en="Open the 'PM-KISAN Status' link above and check using Aadhaar/registration details."
+             data-mr="वर दिलेली 'पीएम-किसान स्टेटस' लिंक उघडा आणि आधार/नोंदणी तपशील वापरून तपासा.">
+            Open the 'PM-KISAN Status' link above and check using Aadhaar/registration details.
+          </p>
+        </details>
+
+        <details>
+          <summary data-en="What is Soil Health Card and why is it useful?"
+                   data-mr="सॉईल हेल्थ कार्ड काय आहे आणि ते उपयोगी का?">
+            What is Soil Health Card and why is it useful?
+          </summary>
+          <p data-en="It helps understand soil nutrients and recommends the right fertilizer, improving yield and reducing extra cost."
+             data-mr="मातीतील घटक समजतात व योग्य खत शिफारस मिळते, उत्पादन वाढते आणि अनावश्यक खर्च कमी होतो.">
+            It helps understand soil nutrients and recommends the right fertilizer, improving yield and reducing extra cost.
+          </p>
+        </details>
+
+        <details>
+          <summary data-en="How to apply for subsidies/schemes?"
+                   data-mr="अनुदान/योजनांसाठी अर्ज कसा करायचा?">
+            How to apply for subsidies/schemes?
+          </summary>
+          <p data-en="Usually through MahaDBT Farmer Portal and office guidance. Carry Aadhaar, bank passbook, 7/12 and mobile number."
+             data-mr="साधारणतः महाडीबीटी शेतकरी पोर्टल व कार्यालय मार्गदर्शनाद्वारे. आधार, पासबुक, ७/१२ व मोबाईल क्रमांक सोबत ठेवा.">
+            Usually through MahaDBT Farmer Portal and office guidance. Carry Aadhaar, bank passbook, 7/12 and mobile number.
+          </p>
+        </details>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span data-en="© Nimgoan Ketki Gram Panchayat | Krushi Vibhag Information Page"
+          data-mr="© निमगाव केतकी ग्रामपंचायत | कृषी विभाग माहिती पृष्ठ">
+      © Nimgoan Ketki Gram Panchayat | Krushi Vibhag Information Page
+    </span>
+  </div>
+
+  <script>
+    // -------- AUTO LANGUAGE (NO BUTTON) --------
+    function autoLanguage() {
+      const userLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+      const isMarathi = userLang.startsWith("mr");
+
+      document.querySelectorAll("[data-en][data-mr]").forEach(el => {
+        el.textContent = isMarathi ? el.getAttribute("data-mr") : el.getAttribute("data-en");
+      });
+
+      document.documentElement.lang = isMarathi ? "mr" : "en";
+    }
+    autoLanguage();
+
+    // -------- GOOGLE MAPS (LIVE SEARCH LOCATION) --------
+    // Update this query if you have exact office name/link
+    const mapQuery = "Taluka Agriculture Office Indapur Pune";
+    const q = encodeURIComponent(mapQuery);
+
+    document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + q + "&output=embed";
+    document.getElementById("openMapsBtn").href = "https://www.google.com/maps/search/?api=1&query=" + q;
+    document.getElementById("directionsBtn").href = "https://www.google.com/maps/dir/?api=1&destination=" + q;
+  </script>
+</body>
+</html>

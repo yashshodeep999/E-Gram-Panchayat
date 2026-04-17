@@ -1,0 +1,12 @@
+{
+  "en": [
+    { "match": ["who is sarpanch", "sarpanch", "सरपंच"], "answer": "Sarpanch: Mr. Pravin Dashrath Dongre." },
+    { "match": ["gram sevak", "ग्रामसेवक"], "answer": "Gram Sevak: Mr. L. K. Jagtap." },
+    { "match": ["police patil", "पोलीस पाटील"], "answer": "Police Patil: Mr. Atul Dongre." }
+  ],
+  "mr": [
+    { "match": ["who is sarpanch", "sarpanch", "सरपंच"], "answer": "सरपंच: श्री. प्रविण दशरथ डोंगरे." },
+    { "match": ["gram sevak", "ग्रामसेवक"], "answer": "ग्रामसेवक: श्री. एल. के. जगताप." },
+    { "match": ["police patil", "पोलीस पाटील"], "answer": "पोलीस पाटील: श्री. अतुल डोंगरे." }
+  ]
+}

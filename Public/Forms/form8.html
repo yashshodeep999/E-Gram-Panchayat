@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>नमुना नं. ८ (Form)</title>
+  <link rel="stylesheet" href="form8.css" />
+</head>
+<body>
+
+  <div class="toolbar no-print">
+    <button onclick="window.print()">Print / Save PDF</button>
+    <button id="btnClear">Clear</button>
+    <button id="btnSave">Save</button>
+    <button id="btnLoad">Load</button>
+    <input id="fileLoad" type="file" accept="application/json" hidden />
+  </div>
+
+  <main class="page">
+    <!-- top dark strip (as in photo) -->
+    <div class="top-strip"></div>
+
+    <!-- header line -->
+    <div class="header">
+      <div class="pill">नमुना नं. ८</div>
+
+      <div class="title">
+        सन <span class="dots">20___</span> ते <span class="dots">20___</span> ते <span class="dots">20___</span>
+        या तपशीलांची कर आकारणी नोंदवही
+      </div>
+
+      <div class="pill">H.T. नं. ___</div>
+    </div>
+
+    <div class="subhead">
+      <div>कार्यालय ग्रामपंचायत: <span class="line long"></span></div>
+      <div>ता. <span class="line"></span></div>
+      <div>जि. <span class="line"></span></div>
+    </div>
+
+    <!-- ===== TABLE 1 (TOP) ===== -->
+    <section class="block">
+      <table class="grid t1">
+        <colgroup>
+          <col style="width:40px">
+          <col style="width:110px">
+          <col style="width:70px">
+          <col style="width:65px">
+          <col style="width:140px">
+          <col style="width:130px">
+          <col style="width:120px">
+          <col style="width:85px">
+          <col style="width:85px">
+          <col style="width:auto">
+        </colgroup>
+
+        <thead>
+          <tr>
+            <th rowspan="2">अ.क्र</th>
+            <th rowspan="2">लाभार्थी नाव</th>
+            <th rowspan="2">वॉर्ड नं.</th>
+            <th rowspan="2">क्र.</th>
+            <th rowspan="2">मालकाचे नाव</th>
+            <th rowspan="2">मालमत्तेचे नाव</th>
+            <th rowspan="2">मालमत्तेचा क्रमांक</th>
+            <th rowspan="2">विषय / तपशील</th>
+            <th rowspan="2">रु./पै.</th>
+            <th>पावतीचा तपशील (रक्कम)</th>
+          </tr>
+          <tr>
+            <th class="subcols">
+              <div class="subcol">दाखला</div>
+              <div class="subcol">चलन</div>
+              <div class="subcol">एकूण</div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- 6 rows (you can add more in JS later) -->
+          <tr>
+            <td class="c"><input class="cell" data-k="t1_r1_c1" /></td>
+            <td><input class="cell" data-k="t1_r1_c2" /></td>
+            <td class="c"><input class="cell" data-k="t1_r1_c3" /></td>
+            <td class="c"><input class="cell" data-k="t1_r1_c4" /></td>
+            <td><input class="cell" data-k="t1_r1_c5" /></td>
+            <td><input class="cell" data-k="t1_r1_c6" /></td>
+            <td class="c"><input class="cell" data-k="t1_r1_c7" /></td>
+            <td><input class="cell" data-k="t1_r1_c8" /></td>
+            <td class="c"><input class="cell" data-k="t1_r1_c9" /></td>
+            <td class="subcells">
+              <input class="cell" data-k="t1_r1_c10a" />
+              <input class="cell" data-k="t1_r1_c10b" />
+              <input class="cell" data-k="t1_r1_c10c" />
+            </td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t1_r2_c1" /></td>
+            <td><input class="cell" data-k="t1_r2_c2" /></td>
+            <td class="c"><input class="cell" data-k="t1_r2_c3" /></td>
+            <td class="c"><input class="cell" data-k="t1_r2_c4" /></td>
+            <td><input class="cell" data-k="t1_r2_c5" /></td>
+            <td><input class="cell" data-k="t1_r2_c6" /></td>
+            <td class="c"><input class="cell" data-k="t1_r2_c7" /></td>
+            <td><input class="cell" data-k="t1_r2_c8" /></td>
+            <td class="c"><input class="cell" data-k="t1_r2_c9" /></td>
+            <td class="subcells">
+              <input class="cell" data-k="t1_r2_c10a" />
+              <input class="cell" data-k="t1_r2_c10b" />
+              <input class="cell" data-k="t1_r2_c10c" />
+            </td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t1_r3_c1" /></td>
+            <td><input class="cell" data-k="t1_r3_c2" /></td>
+            <td class="c"><input class="cell" data-k="t1_r3_c3" /></td>
+            <td class="c"><input class="cell" data-k="t1_r3_c4" /></td>
+            <td><input class="cell" data-k="t1_r3_c5" /></td>
+            <td><input class="cell" data-k="t1_r3_c6" /></td>
+            <td class="c"><input class="cell" data-k="t1_r3_c7" /></td>
+            <td><input class="cell" data-k="t1_r3_c8" /></td>
+            <td class="c"><input class="cell" data-k="t1_r3_c9" /></td>
+            <td class="subcells">
+              <input class="cell" data-k="t1_r3_c10a" />
+              <input class="cell" data-k="t1_r3_c10b" />
+              <input class="cell" data-k="t1_r3_c10c" />
+            </td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t1_r4_c1" /></td>
+            <td><input class="cell" data-k="t1_r4_c2" /></td>
+            <td class="c"><input class="cell" data-k="t1_r4_c3" /></td>
+            <td class="c"><input class="cell" data-k="t1_r4_c4" /></td>
+            <td><input class="cell" data-k="t1_r4_c5" /></td>
+            <td><input class="cell" data-k="t1_r4_c6" /></td>
+            <td class="c"><input class="cell" data-k="t1_r4_c7" /></td>
+            <td><input class="cell" data-k="t1_r4_c8" /></td>
+            <td class="c"><input class="cell" data-k="t1_r4_c9" /></td>
+            <td class="subcells">
+              <input class="cell" data-k="t1_r4_c10a" />
+              <input class="cell" data-k="t1_r4_c10b" />
+              <input class="cell" data-k="t1_r4_c10c" />
+            </td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t1_r5_c1" /></td>
+            <td><input class="cell" data-k="t1_r5_c2" /></td>
+            <td class="c"><input class="cell" data-k="t1_r5_c3" /></td>
+            <td class="c"><input class="cell" data-k="t1_r5_c4" /></td>
+            <td><input class="cell" data-k="t1_r5_c5" /></td>
+            <td><input class="cell" data-k="t1_r5_c6" /></td>
+            <td class="c"><input class="cell" data-k="t1_r5_c7" /></td>
+            <td><input class="cell" data-k="t1_r5_c8" /></td>
+            <td class="c"><input class="cell" data-k="t1_r5_c9" /></td>
+            <td class="subcells">
+              <input class="cell" data-k="t1_r5_c10a" />
+              <input class="cell" data-k="t1_r5_c10b" />
+              <input class="cell" data-k="t1_r5_c10c" />
+            </td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t1_r6_c1" /></td>
+            <td><input class="cell" data-k="t1_r6_c2" /></td>
+            <td class="c"><input class="cell" data-k="t1_r6_c3" /></td>
+            <td class="c"><input class="cell" data-k="t1_r6_c4" /></td>
+            <td><input class="cell" data-k="t1_r6_c5" /></td>
+            <td><input class="cell" data-k="t1_r6_c6" /></td>
+            <td class="c"><input class="cell" data-k="t1_r6_c7" /></td>
+            <td><input class="cell" data-k="t1_r6_c8" /></td>
+            <td class="c"><input class="cell" data-k="t1_r6_c9" /></td>
+            <td class="subcells">
+              <input class="cell" data-k="t1_r6_c10a" />
+              <input class="cell" data-k="t1_r6_c10b" />
+              <input class="cell" data-k="t1_r6_c10c" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== TABLE 2 (BOTTOM) ===== -->
+    <section class="block">
+      <table class="grid t2">
+        <colgroup>
+          <col style="width:55px">
+          <col style="width:150px">
+          <col style="width:110px">
+          <col style="width:95px">
+
+          <col style="width:70px">
+          <col style="width:70px">
+          <col style="width:70px">
+          <col style="width:70px">
+          <col style="width:70px">
+
+          <col style="width:70px">
+          <col style="width:70px">
+          <col style="width:70px">
+          <col style="width:70px">
+          <col style="width:70px">
+
+          <col style="width:auto">
+        </colgroup>
+
+        <thead>
+          <tr>
+            <th rowspan="2">प्रमाण<br>दर</th>
+            <th rowspan="2">सामानाचा<br>ग्रामपंचायत<br>प्राप्तांक</th>
+            <th rowspan="2">मालमत्तेचे<br>मूल्य (रु)</th>
+            <th rowspan="2">प्रकार<br>(येथे)</th>
+
+            <th colspan="5">करणारी रकम भरणे</th>
+            <th colspan="5">अधिकारी शिफारस / सरपंच सही</th>
+
+            <th rowspan="2">शेरा / नोंद</th>
+          </tr>
+          <tr>
+            <th>पावती<br>क्र</th>
+            <th>दिनांक</th>
+            <th>आकार</th>
+            <th>चलनाची</th>
+            <th>रक्कम</th>
+
+            <th>पावती<br>क्र</th>
+            <th>दिनांक</th>
+            <th>आकार</th>
+            <th>चलनाची</th>
+            <th>रक्कम</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- 6 rows -->
+          <tr>
+            <td class="c"><input class="cell" data-k="t2_r1_c1" /></td>
+            <td><input class="cell" data-k="t2_r1_c2" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c3" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c4" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r1_c5" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c6" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c7" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c8" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c9" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r1_c10" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c11" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c12" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c13" /></td>
+            <td class="c"><input class="cell" data-k="t2_r1_c14" /></td>
+
+            <td><input class="cell" data-k="t2_r1_c15" /></td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t2_r2_c1" /></td>
+            <td><input class="cell" data-k="t2_r2_c2" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c3" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c4" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r2_c5" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c6" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c7" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c8" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c9" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r2_c10" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c11" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c12" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c13" /></td>
+            <td class="c"><input class="cell" data-k="t2_r2_c14" /></td>
+
+            <td><input class="cell" data-k="t2_r2_c15" /></td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t2_r3_c1" /></td>
+            <td><input class="cell" data-k="t2_r3_c2" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c3" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c4" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r3_c5" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c6" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c7" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c8" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c9" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r3_c10" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c11" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c12" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c13" /></td>
+            <td class="c"><input class="cell" data-k="t2_r3_c14" /></td>
+
+            <td><input class="cell" data-k="t2_r3_c15" /></td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t2_r4_c1" /></td>
+            <td><input class="cell" data-k="t2_r4_c2" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c3" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c4" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r4_c5" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c6" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c7" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c8" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c9" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r4_c10" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c11" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c12" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c13" /></td>
+            <td class="c"><input class="cell" data-k="t2_r4_c14" /></td>
+
+            <td><input class="cell" data-k="t2_r4_c15" /></td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t2_r5_c1" /></td>
+            <td><input class="cell" data-k="t2_r5_c2" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c3" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c4" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r5_c5" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c6" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c7" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c8" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c9" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r5_c10" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c11" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c12" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c13" /></td>
+            <td class="c"><input class="cell" data-k="t2_r5_c14" /></td>
+
+            <td><input class="cell" data-k="t2_r5_c15" /></td>
+          </tr>
+
+          <tr>
+            <td class="c"><input class="cell" data-k="t2_r6_c1" /></td>
+            <td><input class="cell" data-k="t2_r6_c2" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c3" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c4" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r6_c5" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c6" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c7" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c8" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c9" /></td>
+
+            <td class="c"><input class="cell" data-k="t2_r6_c10" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c11" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c12" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c13" /></td>
+            <td class="c"><input class="cell" data-k="t2_r6_c14" /></td>
+
+            <td><input class="cell" data-k="t2_r6_c15" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- footer lines -->
+    <div class="footer">
+      <div>दिनांक: <span class="line"></span> / 20<span class="dots">__</span></div>
+      <div class="sign">
+        <div>सचिव</div>
+        <div class="line long"></div>
+      </div>
+    </div>
+
+  </main>
+
+    <!-- ✅ Mongo helper -->
+  <script src="api.js"></script>
+  <script src="form8.js"></script>
+</body>
+</html>

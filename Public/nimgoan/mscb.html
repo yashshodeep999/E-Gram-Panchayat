@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSCB (Mahavitaran / MSEDCL) - Nimgoan Ketki Gram Panchayat</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#FFFFF0;
+      margin:0; padding:0; color:#333;
+      background:linear-gradient(180deg,#f9f9f9 0%,#FFFFFF 100%);
+    }
+
+    .header{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      padding:30px;
+      text-align:center;
+      position:relative;
+      box-shadow:0 4px 6px rgba(0,0,0,0.1);
+    }
+    .header h1{ margin:0; font-size:34px; }
+    .header p{ margin-top:8px; }
+
+    .header .right-logo{
+      position:absolute;
+      left:20px; top:5px;
+      width:120px;
+      height:auto;
+    }
+
+    .translate-note{
+      background:#fff7e0;
+      border-bottom:1px solid #f1e2b6;
+      padding:10px 14px;
+      font-size:14px;
+      text-align:center;
+      line-height:1.6;
+    }
+    .translate-note b{ color:#1b5e20; }
+    .translate-note kbd{
+      background:#333;
+      color:#fff;
+      padding:2px 6px;
+      border-radius:6px;
+      font-size:12px;
+    }
+
+    nav{
+      background:#333;
+      padding:10px 0;
+      text-align:center;
+    }
+    nav ul{ list-style:none; margin:0; padding:0; }
+    nav ul li{ display:inline-block; margin:5px; }
+    nav ul li a{
+      color:#fff; text-decoration:none;
+      padding:10px 16px;
+      font-weight:bold;
+      border-radius:8px;
+      transition:0.2s;
+      display:inline-block;
+    }
+    nav ul li a:hover{ background:#DAA520; transform:translateY(-1px); }
+
+    .container{ max-width:1200px; margin:auto; padding:40px 20px; }
+
+    .card{
+      background:#fff;
+      border-radius:15px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      margin-bottom:28px;
+      overflow:hidden;
+    }
+
+    .card-head{
+      background:#f6fff2;
+      padding:18px 22px;
+      border-bottom:1px solid #e0e0e0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .card-head h2{
+      margin:0;
+      font-size:22px;
+      color:#2e7d32;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .badge{
+      background:#2e7d32;
+      color:white;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:12px;
+      font-weight:bold;
+      white-space:nowrap;
+    }
+
+    .card-body{ padding:22px; }
+    .card-body p{ line-height:1.8; margin:10px 0; }
+    .card-body ul{ padding-left:20px; margin:12px 0; }
+    .card-body ul li{ margin-bottom:10px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .info-box{
+      border:1px solid #eee;
+      padding:16px;
+      border-radius:12px;
+      background:#fff;
+    }
+
+    .info-box h3{
+      margin:0 0 10px;
+      color:#1f5f26;
+      font-size:16px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .info-row{
+      display:flex;
+      gap:10px;
+      margin:8px 0;
+      align-items:flex-start;
+    }
+    .info-row i{
+      width:18px;
+      margin-top:3px;
+      color:#2e7d32;
+    }
+    .info-row span{ flex:1; }
+
+    .btn-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:12px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:bold;
+      border:1px solid #dfe7df;
+      background:#f9fff6;
+      color:#1b5e20;
+      transition:0.2s;
+    }
+    .btn:hover{ transform:translateY(-1px); background:#ecffe1; }
+
+    .note{
+      background:#fff7e0;
+      border:1px solid #f1e2b6;
+      padding:14px;
+      border-radius:12px;
+      margin-top:12px;
+      line-height:1.7;
+    }
+
+    .footer{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      text-align:center;
+      padding:12px;
+    }
+
+    @media(max-width:768px){
+      .grid{ grid-template-columns:1fr; }
+      .header h1{ font-size:26px; }
+      .header .right-logo{ width:95px; top:10px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="logo1.1.png" class="right-logo" alt="Gram Panchayat Logo">
+    <h1>MSCB (Mahavitaran / MSEDCL)</h1>
+    <p>Electricity Office Information – Nimgoan Ketki Gram Panchayat</p>
+  </div>
+
+  
+
+  <!-- NAVIGATION -->
+  <nav>
+    <ul>
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="Executive Board.html">Executive Board</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="NimgoanKetki.html">About Nimgoan Ketki</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- ABOUT -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-bolt"></i> About Mahavitaran (MSEDCL)</h2>
+        <span class="badge">Electricity Dept</span>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Maharashtra State Electricity Distribution Company Limited (MSEDCL)</strong>,
+          commonly known as <strong>Mahavitaran</strong>, is responsible for electricity distribution across Maharashtra.
+          It provides power supply, maintenance, billing, and customer support services to domestic, agricultural,
+          and commercial consumers.
+        </p>
+        <p>
+          The Mahavitaran office supports <strong>power supply, maintenance of meters/transformers/lines,
+          billing, and complaint redressal</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- LOCAL OFFICE DETAILS -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-location-dot"></i> Local MSCB / Mahavitaran Office</h2>
+        <span class="badge">Address & Contact</span>
+      </div>
+      <div class="card-body">
+        <div class="grid">
+          <div class="info-box">
+            <h3><i class="fa-solid fa-building"></i> Office Information</h3>
+
+            <div class="info-row">
+              <i class="fa-solid fa-landmark"></i>
+              <span><strong>Office/Sub-division name:</strong> (Fill here) e.g., Mahavitaran Sub-Division Office</span>
+            </div>
+
+            <div class="info-row">
+              <i class="fa-solid fa-map"></i>
+              <span><strong>Address:</strong> (Fill here) Complete address, Nimgoan Ketki / Nearby city, Taluka, District, PIN</span>
+            </div>
+
+            <div class="info-row">
+              <i class="fa-solid fa-clock"></i>
+              <span><strong>Office hours:</strong> (Fill here) e.g., 10:00 AM to 5:00 PM</span>
+            </div>
+
+            <div class="info-row">
+              <i class="fa-solid fa-calendar-days"></i>
+              <span><strong>Working days:</strong> (Fill here) e.g., Mon–Sat (mention if 2nd/4th Saturday closed)</span>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <h3><i class="fa-solid fa-phone"></i> Contact</h3>
+
+            <div class="info-row">
+              <i class="fa-solid fa-phone"></i>
+              <span><strong>Office phone:</strong> (Fill here)</span>
+            </div>
+
+            <div class="info-row">
+              <i class="fa-solid fa-user"></i>
+              <span><strong>Local lineman/responsible officer:</strong> (Fill here) Name (optional)</span>
+            </div>
+
+            <div class="info-row">
+              <i class="fa-solid fa-circle-phone"></i>
+              <span><strong>24x7 Toll-free (Mahavitaran):</strong> 1800-233-3435 / 1800-212-3435</span>
+            </div>
+
+            <div class="info-row">
+              <i class="fa-solid fa-headset"></i>
+              <span><strong>National helpline:</strong> 1912 / 19120</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a class="btn" href="tel:+910000000000"><i class="fa-solid fa-phone"></i> Call Local Office</a>
+          <a class="btn" target="_blank" href="https://maps.google.com/?q=Mahavitaran+office+Nimgoan+Ketki">
+            <i class="fa-solid fa-map-location-dot"></i> View on Map
+          </a>
+        </div>
+
+        <div class="note">
+          <strong>Note:</strong> In emergencies such as power outage, broken wires, or sparking,
+          contact the nearest Mahavitaran office or the toll-free numbers immediately.
+        </div>
+      </div>
+    </div>
+
+    <!-- ROLES -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-circle-check"></i> Roles & Responsibilities</h2>
+        <span class="badge">Public Service</span>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li>Electricity distribution for homes, agriculture, and businesses</li>
+          <li>Maintenance of power lines, transformers, poles, and meters</li>
+          <li>Electricity bill generation and payment management</li>
+          <li>Resolution of power outage/low voltage/fault complaints</li>
+          <li>New connections and load increase/decrease (as per rules)</li>
+          <li>Ensuring safe and reliable power supply</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-plug"></i> Available Services</h2>
+        <span class="badge">Customer Service</span>
+      </div>
+      <div class="card-body">
+        <div class="grid">
+          <div class="info-box">
+            <h3><i class="fa-solid fa-house"></i> Electricity Supply</h3>
+            <ul>
+              <li>Domestic electricity connection</li>
+              <li>Agricultural power supply</li>
+              <li>Commercial/Industrial connection</li>
+              <li>Temporary connection for events – subject to availability</li>
+            </ul>
+          </div>
+
+          <div class="info-box">
+            <h3><i class="fa-solid fa-file-invoice"></i> Customer Support</h3>
+            <ul>
+              <li>Bill complaints/corrections</li>
+              <li>Meter inspection/replacement (as per rules)</li>
+              <li>Name change / Load change requests</li>
+              <li>Power outage complaint registration & tracking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ONLINE BILL PAYMENT -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-credit-card"></i> Online Electricity Bill Payment (Official Links)</h2>
+        <span class="badge">Online Services</span>
+      </div>
+      <div class="card-body">
+        <p>You can <strong>view</strong> and <strong>pay</strong> your electricity bill using the following official platforms:</p>
+
+        <div class="grid">
+          <div class="info-box">
+            <h3><i class="fa-solid fa-globe"></i> Web Portal (WSS)</h3>
+            <ul>
+              <li><strong>Web Self Service (WSS):</strong> View/pay bill, payment history, complaints, etc.</li>
+              <li><strong>Guest (No registration):</strong> You can use the View/Pay Bill option.</li>
+            </ul>
+            <div class="btn-row">
+              <a class="btn" target="_blank" href="https://wss.mahadiscom.in/wss/wss?Lang=English&uiActionName=getHome">
+                <i class="fa-solid fa-up-right-from-square"></i> Open WSS Portal
+              </a>
+              <a class="btn" target="_blank" href="https://wss.mahadiscom.in/wss/wss">
+                <i class="fa-solid fa-language"></i> WSS (Marathi)
+              </a>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <h3><i class="fa-solid fa-mobile-screen-button"></i> Mobile App</h3>
+            <ul>
+              <li><strong>Mahavitaran App</strong> (official): bill payment, complaint tracking, etc.</li>
+              <li>Marathi/English language is available in the app (as supported).</li>
+            </ul>
+            <div class="btn-row">
+              <a class="btn" target="_blank" href="https://play.google.com/store/apps/details?hl=en_IN&id=com.msedcl.app">
+                <i class="fa-brands fa-google-play"></i> Android (Play Store)
+              </a>
+              <a class="btn" target="_blank" href="https://apps.apple.com/in/app/mahavitaran-consumer-app/id1128838189">
+                <i class="fa-brands fa-apple"></i> iPhone (App Store)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Important:</strong> While paying online, enter your <strong>Consumer Number</strong> correctly.
+          Save the receipt/Transaction ID after payment.
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIDANCE -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-users"></i> Citizen Guidance</h2>
+        <span class="badge">User Friendly</span>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li>Carry your <strong>Consumer Number</strong> and bill/receipt when visiting the office</li>
+          <li>If power is off, first check the main switch/MCB; then register a complaint</li>
+          <li>Pay bills on time; delay may lead to late fee or disconnection</li>
+          <li>Report fallen wires, leaning poles, or sparking immediately</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SAFETY -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-triangle-exclamation"></i> Electrical Safety Instructions</h2>
+        <span class="badge">Very Important</span>
+      </div>
+      <div class="card-body">
+        <ul>
+          <li>Do <strong>NOT</strong> touch broken or fallen electric wires</li>
+          <li>Maintain a safe distance from transformers/substations</li>
+          <li>Do not operate switches/boards/plugs with wet hands</li>
+          <li>Use only ISI-certified electrical equipment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-shield-halved"></i> Disclaimer</h2>
+        <span class="badge">Notice</span>
+      </div>
+      <div class="card-body">
+        <p>
+          This information is provided on the Gram Panchayat website for public awareness.
+          For official services, complaints, or updates, please use the official Mahavitaran website/app
+          or contact the nearest Mahavitaran office.
+        </p>
+        <div class="btn-row">
+          <a class="btn" target="_blank" href="https://www.mahadiscom.in/en/home/">
+            <i class="fa-solid fa-up-right-from-square"></i> Official Mahavitaran Website
+          </a>
+          <a class="btn" target="_blank" href="https://www.mahadiscom.in/centralized-customer-care/">
+            <i class="fa-solid fa-headset"></i> Customer Care Info
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © 2026 Nimgoan Ketki Gram Panchayat | MSCB (Mahavitaran) Information Page
+  </div>
+
+</body>
+</html>

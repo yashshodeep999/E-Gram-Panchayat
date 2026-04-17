@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Death Certificate (Form 5)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="paper">
+
+  <!-- ✅ GOVERNMENT HEADER -->
+  <div class="gov-header">
+    <div class="topline">महाराष्ट्र शासन / Government of Maharashtra</div>
+    <div class="subline">ग्रामपंचायत कार्यालय / Grampanchayat Office</div>
+    <div class="rule"></div>
+  </div>
+
+  <!-- ✅ TOP INFO (Editable Certificate No) -->
+  <div class="row" style="justify-content:space-between; align-items:center;">
+    <div class="small">
+      प्रमाणपत्र क्र./Certificate no.:
+      <input class="input" id="certNo" style="min-width:65mm; display:inline-block;" placeholder="Enter Certificate No.">
+    </div>
+    <div class="small"><b>नमुना 5 / form 5</b></div>
+  </div>
+
+  <!-- DEPARTMENT -->
+  <div class="center" style="margin-top:6mm;">
+    <div class="bold">महाराष्ट्र शासन <span class="small">Government of Maharashtra</span></div>
+    <div class="bold">आरोग्य विभाग <span class="small">Health Department</span></div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- TITLE -->
+  <div class="header-title">मृत्यू प्रमाणपत्र / DEATH CERTIFICATE</div>
+
+  <div class="small" style="line-height:1.7;">
+    (Issued under section 12/17 of the Registration of Births & Deaths Act, 1969
+    and rule 8/13 of the Maharashtra Registration of Births and Death Rules 2000)
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- LOCAL BODY -->
+  <div class="row" style="margin-bottom:8px;">
+    <div class="col">
+      <div class="label">Name of the local body issuing Certificate</div>
+      <input class="input" id="localBody" placeholder="Grampanchayat / Nagar Parishad etc.">
+    </div>
+  </div>
+
+  <!-- DETAILS GRID -->
+  <div class="grid-2">
+
+    <div>
+      <div class="label">Aadhaar Card Number</div>
+      <input class="input" id="aadhaar" maxlength="12" inputmode="numeric" placeholder="000000000000">
+    </div>
+
+    <div>
+      <div class="label">Sex</div>
+      <select class="input" id="sex">
+        <option value="">Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div>
+      <div class="label">Name of Deceased</div>
+      <input class="input" id="deceasedName" placeholder="Full Name">
+    </div>
+
+    <div>
+      <div class="label">Place of Death</div>
+      <input class="input" id="deathPlace" placeholder="Hospital / Home / Village">
+    </div>
+
+    <div>
+      <div class="label">Date of Death</div>
+      <input class="input" id="dod" type="date">
+    </div>
+
+    <div>
+      <div class="label">Date of Registration</div>
+      <input class="input" id="regDate" type="date">
+    </div>
+
+    <div>
+      <div class="label">Full Name of Mother</div>
+      <input class="input" id="motherName" placeholder="Mother Name">
+    </div>
+
+    <div>
+      <div class="label">Name of Father / Husband</div>
+      <input class="input" id="fatherOrHusband" placeholder="Father / Husband Name">
+    </div>
+
+    <div>
+      <div class="label">Address of deceased at the time of death</div>
+      <input class="input" id="addr1" placeholder="Address at death">
+    </div>
+
+    <div>
+      <div class="label">Permanent Address of deceased</div>
+      <input class="input" id="addr2" placeholder="Permanent address">
+    </div>
+
+    <div>
+      <div class="label">Registration No.</div>
+      <input class="input" id="registrationNo" placeholder="Registration No.">
+    </div>
+
+    <div>
+      <div class="label">Remarks (if any)</div>
+      <input class="input" id="remarks" placeholder="Remarks">
+    </div>
+
+    <div>
+      <div class="label">Certificate Issue Date</div>
+      <input class="input" id="issueDate" type="date">
+    </div>
+
+    <div>
+      <div class="label">Seal / Signature (Text)</div>
+      <input class="input" id="sealSignature" placeholder="Signature / Seal (optional text)">
+    </div>
+
+  </div>
+
+  <!-- ✅ GOVERNMENT FOOTER (Editable Place + Date + Fixed Stamp Upload) -->
+  <div class="gov-footer">
+    <div>
+      Place:
+      <input class="input" id="place" style="min-width:45mm; display:inline-block;" placeholder="Place"><br>
+      Date:
+      <input class="input" id="placeDate" style="min-width:45mm; display:inline-block;" type="date">
+    </div>
+
+    <div style="text-align:right;">
+      Signature with stamp<br>
+
+      <!-- ✅ Upload once and keep fixed using localStorage -->
+      <div style="display:inline-block; text-align:center;">
+        <img id="stampPreview" alt="Stamp" style="height:60px; margin-top:6px; border:1px solid #000; padding:4px; background:#fff; display:none;">
+        <div class="no-print" style="margin-top:6px;">
+          <input type="file" id="stampUpload" accept="image/*">
+        </div>
+      </div>
+
+      <br>
+      <span class="line" style="min-width:60mm;"></span>
+    </div>
+  </div>
+
+  <!-- Buttons hidden on print -->
+  <div class="btnbar">
+    <button type="button" class="secondary" onclick="history.back()">Back</button>
+    <button type="button" class="secondary" onclick="saveDeathToMongo()">Save</button>
+    <button type="button" onclick="window.print()">Print</button>
+  </div>
+
+  <div id="saveMsg" class="small" style="margin-top:8px;"></div>
+
+</div>
+
+<!-- ✅ keep ONLY one api.js -->
+<script src="api.js"></script>
+
+<script>
+function setSaveMsg(text, ok){
+  const el = document.getElementById("saveMsg");
+  el.style.color = ok ? "green" : "red";
+  el.textContent = text;
+}
+
+function onlyDigits(str){ return (str || "").replace(/\D/g, ""); }
+
+// ✅ Prefill + load fixed stamp
+(function fill(){
+  const raw = localStorage.getItem("GP_APPLICANT");
+  if(raw){
+    const d = JSON.parse(raw);
+
+    document.getElementById("aadhaar").value = d.aadhaar || "";
+    document.getElementById("addr1").value = d.address || "";
+    document.getElementById("addr2").value = d.address || "";
+  }
+
+  if(!document.getElementById("place").value){
+    document.getElementById("place").value = "Nimgoan Ketki";
+  }
+
+  const stamp = localStorage.getItem("GP_STAMP_IMAGE");
+  if(stamp){
+    const img = document.getElementById("stampPreview");
+    img.src = stamp;
+    img.style.display = "inline-block";
+  }
+})();
+
+// ✅ Upload stamp once and reuse always
+document.getElementById("stampUpload").addEventListener("change", function(e){
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(){
+    const dataUrl = reader.result;
+    localStorage.setItem("GP_STAMP_IMAGE", dataUrl);
+
+    const img = document.getElementById("stampPreview");
+    img.src = dataUrl;
+    img.style.display = "inline-block";
+  };
+  reader.readAsDataURL(file);
+});
+
+async function saveDeathToMongo(){
+  try{
+    const data = {
+      certificateNo: document.getElementById("certNo").value.trim(),
+      localBody: document.getElementById("localBody").value.trim(),
+      aadhaar: onlyDigits(document.getElementById("aadhaar").value.trim()),
+      sex: document.getElementById("sex").value,
+      deceasedName: document.getElementById("deceasedName").value.trim(),
+      deathPlace: document.getElementById("deathPlace").value.trim(),
+      dateOfDeath: document.getElementById("dod").value,
+      regDate: document.getElementById("regDate").value,
+      motherName: document.getElementById("motherName").value.trim(),
+      fatherOrHusband: document.getElementById("fatherOrHusband").value.trim(),
+      addrAtDeath: document.getElementById("addr1").value.trim(),
+      permanentAddr: document.getElementById("addr2").value.trim(),
+      registrationNo: document.getElementById("registrationNo").value.trim(),
+      remarks: document.getElementById("remarks").value.trim(),
+      issueDate: document.getElementById("issueDate").value,
+      sealSignature: document.getElementById("sealSignature").value.trim(),
+
+      place: document.getElementById("place").value.trim(),
+      placeDate: document.getElementById("placeDate").value || "",
+
+      stampImage: localStorage.getItem("GP_STAMP_IMAGE") || "",
+
+      // optional link with main application
+      application: JSON.parse(localStorage.getItem("GP_APPLICANT") || "{}"),
+      receiptNo: localStorage.getItem("GP_RECEIPT_NO") || ""
+    };
+
+    // ✅ validation
+    if(!data.certificateNo){
+      setSaveMsg("❌ Please enter Certificate No.", false);
+      return;
+    }
+    if(data.aadhaar.length !== 12){
+      setSaveMsg("❌ Please enter valid Aadhaar (12 digits)", false);
+      return;
+    }
+    if(!data.deceasedName){
+      setSaveMsg("❌ Please enter Name of Deceased", false);
+      return;
+    }
+    if(!data.dateOfDeath){
+      setSaveMsg("❌ Please select Date of Death", false);
+      return;
+    }
+    if(!data.sex){
+      setSaveMsg("❌ Please select Sex", false);
+      return;
+    }
+    if(!data.stampImage){
+      setSaveMsg("❌ Please upload Signature/Stamp image (one time).", false);
+      return;
+    }
+
+    // prevent double save (optional)
+    const key = "GP_DEATH_SAVED_" + (data.certificateNo || data.receiptNo || "X");
+    if(localStorage.getItem(key) === "YES"){
+      setSaveMsg("✅ Already saved in database.", true);
+      return;
+    }
+
+    const result = await submitToMongo("death", data);
+
+    if(result && result.success){
+      localStorage.setItem(key, "YES");
+      setSaveMsg("✅ Death form saved to MongoDB! ID: " + (result.id || ""), true);
+    } else {
+      setSaveMsg("❌ Error: " + (result.message || result.error || "Unknown error"), false);
+    }
+
+  }catch(err){
+    console.log("Death save error:", err);
+    setSaveMsg("❌ Server error. Check Node server + MongoDB running.", false);
+  }
+}
+</script>
+
+</body>
+</html>

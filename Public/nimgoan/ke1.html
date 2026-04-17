@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIMGOAN KETKI GRAM PANCHAYAT</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header {
+            background-color: #fa3a0f;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+        }
+        .header button {
+            background-color: #8bc34a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            float: right;
+            margin-top: 10px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-right: 15px;
+        }
+        nav ul li a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+        .images {
+            display: flex;
+            justify-content: center;
+            margin: 45px;
+        }
+        .images img {
+            width: 350px;
+            height: 250px;
+            margin: 0 10px;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            border-bottom: 20px solid #e29237;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .buttons button {
+            background-color: #8bc34a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .section {
+            display: none;
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .footer {
+            background-color: #eebdbd;
+            padding: 30px;
+            border-top: 1px solid #ccc;
+            font-size: 14px;
+        }
+        .footer .person {
+            text-align: center;
+            display: inline-block;
+            margin: 20px;
+        }
+        .footer img {
+            width: 300px;
+            height: 250px;
+            cursor: pointer;
+        }
+        .footer .name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .left-logo {
+            position: absolute;
+            top: 5px;
+            left: 7px;
+            width: 200px;
+            height: auto;
+        }
+        .language-select {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 102;
+        }
+        .welcome-message {
+            background-color: #ffffff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="left-logo">
+        <h1>Nimgoan Ketki Gram Panchayat</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Schemes</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- Language Selection Dropdown -->
+    <div class="language-select">
+        <select id="languageSelector" onchange="toggleLanguage()">
+            <option value="en">English</option>
+            <option value="mr">Marathi</option>
+        </select>
+    </div>
+
+    <div class="images">
+        <img alt="Gram Panchayat" src="image1.jpg" />
+        <img alt="Temple" src="image2.jpg" />
+        <img alt="Nimgoan ketki" src="image1.2.jpg" />
+    </div>
+
+    <div class="title" id="title">
+        NIMGOAN KETKI GRAM PANCHAYAT
+    </div>
+
+    <div class="buttons">
+        <button id="btnDevelopment" onclick="toggleSection('developmentPrograms')">Development Programs</button>
+        <button id="btnMeetings" onclick="toggleSection('publicMeetings')">Public Meetings</button>
+        <button id="btnCultural" onclick="toggleSection('culturalActivities')">Cultural Activities</button>
+        <button id="btnAgriculture" onclick="toggleSection('agriculturalInitiatives')">Agricultural Initiatives</button>
+        <button id="btnHealth" onclick="toggleSection('healthAndSanitation')">Health and Sanitation</button>
+    </div>
+
+    <div class="section" id="developmentPrograms">
+        <h2 id="developmentTitle">Development Programs</h2>
+        <ul id="developmentList">
+            <li>Improvement of rural infrastructure</li>
+            <li>Water conservation projects</li>
+            <li>Housing schemes</li>
+            <li>Construction of village roads</li>
+            <li>Solar energy projects</li>
+        </ul>
+    </div>
+
+    <div class="section" id="publicMeetings">
+        <h2>Public Meetings</h2>
+        <ul>
+            <li>Gram Sabha Meeting</li>
+            <li>Development Plan Discussions</li>
+            <li>Budget Distribution Meeting</li>
+            <li>Resolution of Village Issues</li>
+            <li>Youth Empowerment Discussions</li>
+        </ul>
+    </div>
+
+    <div class="section" id="culturalActivities">
+        <h2>Cultural Activities</h2>
+        <ul>
+            <li>Village Festivals</li>
+            <li>Traditional Dance and Music Programs</li>
+            <li>Folk Art Exhibitions</li>
+            <li>Community Gatherings</li>
+            <li>Religious Festivals</li>
+        </ul>
+    </div>
+
+    <div class="section" id="agriculturalInitiatives">
+        <h2>Agricultural Initiatives</h2>
+        <ul>
+            <li>Diversification of Crops Programs</li>
+            <li>Organic Farming Workshops</li>
+            <li>Irrigation Management</li>
+            <li>Agricultural Fairs</li>
+            <li>Seed Distribution Programs</li>
+        </ul>
+    </div>
+
+    <div class="section" id="healthAndSanitation">
+        <h2>Health and Sanitation</h2>
+        <ul>
+            <li>Village Health Camps</li>
+            <li>Cleanliness Drives</li>
+            <li>Drinking Water Schemes</li>
+            <li>Health Awareness Programs</li>
+            <li>Waste Management Initiatives</li>
+        </ul>
+    </div>
+
+    <div class="welcome-message" id="welcomeMessage">
+        <h1>Welcome Message</h1>
+        <p>Dear villagers,</p>
+        <p>We warmly welcome you to the official website of your Gram Panchayat!</p>
+        <p>We are proud to present this website to provide you with easy access to the services, schemes, and latest updates provided by our Panchayat. Through this platform, you can learn about the various initiatives being undertaken in the development of your village, as well as easily submit your complaints, suggestions, and feedback.</p>
+        <p>Our goal is to create an ideal Panchayat that promotes transparency, accountability, and development. This will not be possible without your cooperation and participation.</p>
+        <p>We believe that this website will be useful for the overall development of your village.</p>
+        <p>Thank You.</p>
+        <div class="signature" id="sarpanchName">Mr. Pravin Dashrath Dongre<br>Sarpanch, Nimgaon Ketki Gram Panchayat.</div>
+    </div>
+
+    <div class="footer">
+        <div class="person">
+            <img alt="Gram Sevak Photo" src="Gram Sevak.jpg" />
+            <div class="name" id="gramSevakName">Gram Sevak</div>
+        </div>
+        <div class="person">
+            <img alt="Sarpanch Photo" src="Sarpanch.jpg" />
+            <div class="name" id="sarpanchFooterName">Sarpanch</div>
+        </div>
+        <div class="person"> 
+            <img alt="Police Patil Photo" src="Police Patail.jpg" />
+            <div class="name" id="policePatilName">Police Patil</div>
+        </div>
+    </div>
+
+    <button id="nextButton" onclick="openNextPage()" style="position: absolute; right: 20px; bottom: 20px; background-color: #34a; color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer;">Next</button>
+
+    <script>
+        function openNextPage() {
+            window.location.href = "ke2.html";
+        }
+
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none" || section.style.display === "") {
+                var sections = document.getElementsByClassName('section');
+                for (var i = 0; i < sections.length; i++) {
+                    sections[i].style.display = 'none';
+                }
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+
+        function toggleLanguage() {
+            var lang = document.getElementById('languageSelector').value;
+            var isEnglish = (lang === "en");
+
+            if (isEnglish) {
+                document.documentElement.lang = "en";
+                document.getElementById("title").innerHTML = "NIMGOAN KETKI GRAM PANCHAYAT";
+                document.getElementById("welcomeMessage").innerHTML = `
+                    <h1>Welcome Message</h1>
+                    <p>Dear villagers,</p>
+                    <p>We warmly welcome you to the official website of your Gram Panchayat!</p>
+                    <p>We are proud to present this website to provide you with easy access to the services, schemes, and latest updates provided by our Panchayat. Through this platform, you can learn about the various initiatives being undertaken in the development of your village, as well as easily submit your complaints, suggestions, and feedback.</p>
+                    <p>Our goal is to create an ideal Panchayat that promotes transparency, accountability, and development. This will not be possible without your cooperation and participation.</p>
+                    <p>We believe that this website will be useful for the overall development of your village.</p>
+                    <p>Thank You.</p>
+                    <div class="signature" id="sarpanchName">Mr. Pravin Dashrath Dongre<br>Sarpanch, Nimgaon Ketki Gram Panchayat.</div>
+                `;
+                document.getElementById("btnDevelopment").innerHTML = "Development Programs";
+                document.getElementById("btnMeetings").innerHTML = "Public Meetings";
+                document.getElementById("btnCultural").innerHTML = "Cultural Activities";
+                document.getElementById("btnAgriculture").innerHTML = "Agricultural Initiatives";
+                document.getElementById("btnHealth").innerHTML = "Health and Sanitation";
+                document.getElementById("nextButton").innerHTML = "Next";
+                document.getElementById("gramSevakName").innerHTML = "Gram Sevak";
+                document.getElementById("sarpanchFooterName").innerHTML = "Sarpanch";
+                document.getElementById("policePatilName").innerHTML = "Police Patil";
+
+                // Update section content
+                document.getElementById("developmentTitle").innerHTML = "Development Programs";
+                document.getElementById("developmentList").innerHTML = `
+                    <li>Improvement of rural infrastructure</li>
+                    <li>Water conservation projects</li>
+                    <li>Housing schemes</li>
+                    <li>Construction of village roads</li>
+                    <li>Solar energy projects</li>
+                `;
+                document.getElementById("publicMeetings").innerHTML = `
+                    <h2>Public Meetings</h2>
+                    <ul>
+                        <li>Gram Sabha Meeting</li>
+                        <li>Development Plan Discussions</li>
+                        <li>Budget Distribution Meeting</li>
+                        <li>Resolution of Village Issues</li>
+                        <li>Youth Empowerment Discussions</li>
+                    </ul>
+                `;
+                document.getElementById("culturalActivities").innerHTML = `
+                    <h2>Cultural Activities</h2>
+                    <ul>
+                        <li>Village Festivals</li>
+                        <li>Traditional Dance and Music Programs</li>
+                        <li>Folk Art Exhibitions</li>
+                        <li>Community Gatherings</li>
+                        <li>Religious Festivals</li>
+                    </ul>
+                `;
+                document.getElementById("agriculturalInitiatives").innerHTML = `
+                    <h2>Agricultural Initiatives</h2>
+                    <ul>
+                        <li>Diversification of Crops Programs</li>
+                        <li>Organic Farming Workshops</li>
+                        <li>Irrigation Management</li>
+                        <li>Agricultural Fairs</li>
+                        <li>Seed Distribution Programs</li>
+                    </ul>
+                `;
+                document.getElementById("healthAndSanitation").innerHTML = `
+                    <h2>Health and Sanitation</h2>
+                    <ul>
+                        <li>Village Health Camps</li>
+                        <li>Cleanliness Drives</li>
+                        <li>Drinking Water Schemes</li>
+                        <li>Health Awareness Programs</li>
+                        <li>Waste Management Initiatives</li>
+                    </ul>
+                `;
+            } else {
+                document.documentElement.lang = "mr";
+                document.getElementById("title").innerHTML = "निमगाव केतकी ग्राम पंचायत";
+                document.getElementById("welcomeMessage").innerHTML = `
+                    <h1>स्वागत संदेश</h1>
+                    <p>प्रिय ग्रामस्थांनो,</p>
+                    <p>आपल्या ग्राम पंचायतच्या अधिकृत वेबसाइटवर आपले मन:पूर्वक स्वागत आहे!</p>
+                    <p>आम्हाला अभिमान आहे की, आपणास आमच्या पंचायतद्वारे पुरवल्या जाणाऱ्या सेवा, योजनांची माहिती आणि ताज्या अपडेट्स सहज उपलब्ध करून देण्यासाठी आम्ही ही वेबसाइट सादर करत आहोत. या व्यासपीठाद्वारे आपण आपल्या गावाच्या विकासातील विविध उपक्रमांची माहिती घेऊ शकता, तसेच आपल्या तक्रारी, सूचना आणि अभिप्राय सहज सादर करू शकता.</p>
+                    <p>आमचे ध्येय आहे की, पारदर्शकता, उत्तरदायित्व आणि विकासाला प्रोत्साहन देणारी एक आदर्श पंचायत बनवणे. आपले सहकार्य आणि सहभागाशिवाय हे साध्य होणार नाही.</p>
+                    <p>आपल्या गावाच्या सर्वांगीण विकासासाठी ही वेबसाइट उपयुक्त ठरेल, असा विश्वास आहे.</p>
+                    <div class="signature" id="sarpanchName">श्री. प्रविण दशरथ डोंगरे<br>सरपंच, निमगाव केतकी ग्राम पंचायत.</div>
+                `;
+                document.getElementById("btnDevelopment").innerHTML = "विकास कार्यक्रम";
+                document.getElementById("btnMeetings").innerHTML = "सार्वजनिक सभा";
+                document.getElementById("btnCultural").innerHTML = "सांस्कृतिक कार्यक्रम";
+                document.getElementById("btnAgriculture").innerHTML = "कृषी उपक्रम";
+                document.getElementById("btnHealth").innerHTML = "आरोग्य आणि स्वच्छता";
+                document.getElementById("nextButton").innerHTML = "पुढे";
+                document.getElementById("gramSevakName").innerHTML = "ग्राम सेवक";
+                document.getElementById("sarpanchFooterName").innerHTML = "सरपंच";
+                document.getElementById("policePatilName").innerHTML = "पोलीस पाटील";
+
+                // Update section content
+                document.getElementById("developmentTitle").innerHTML = "विकास कार्यक्रम";
+                document.getElementById("developmentList").innerHTML = `
+                    <li>ग्रामीण पायाभूत सुविधा सुधारणे</li>
+                    <li>पाणी संधारण प्रकल्प</li>
+                    <li>गृह योजणा</li>
+                    <li>गावाच्या रस्त्यांची बांधणी</li>
+                    <li>सौर ऊर्जा प्रकल्प</li>
+                `;
+                document.getElementById("publicMeetings").innerHTML = `
+                    <h2>सार्वजनिक सभा</h2>
+                    <ul>
+                        <li>ग्राम सभा बैठक</li>
+                        <li>विकास योजना चर्चासत्रे</li>
+                        <li>आर्थिक वितरण बैठक</li>
+                        <li>गावाच्या समस्यांचे निवारण</li>
+                        <li>युवक सशक्तीकरण चर्चा</li>
+                    </ul>
+                `;
+                document.getElementById("culturalActivities").innerHTML = `
+                    <h2>सांस्कृतिक कार्यक्रम</h2>
+                    <ul>
+                        <li>गावगंज महोत्सव</li>
+                        <li>परंपरागत नृत्य आणि संगीत कार्यक्रम</li>
+                        <li>लोककला प्रदर्शन</li>
+                        <li>समुदाय जमाव</li>
+                        <li>धार्मिक महोत्सव</li>
+                    </ul>
+                `;
+                document.getElementById("agriculturalInitiatives").innerHTML = `
+                    <h2>कृषी उपक्रम</h2>
+                    <ul>
+                        <li>पीक विविधीकरण कार्यक्रम</li>
+                        <li>सेंद्रिय शेती कार्यशाळा</li>
+                        <li>सिंचन व्यवस्थापन</li>
+                        <li>कृषी मेळे</li>
+                        <li>बीज वितरण कार्यक्रम</li>
+                    </ul>
+                `;
+                document.getElementById("healthAndSanitation").innerHTML = `
+                    <h2>आरोग्य आणि स्वच्छता</h2>
+                    <ul>
+                        <li>गावातील आरोग्य शिबिरे</li>
+                        <li>स्वच्छता मोहीम</li>
+                        <li>पिण्याच्या पाण्याच्या योजना</li>
+                        <li>आरोग्य जागरूकता कार्यक्रम</li>
+                        <li>कचरा व्यवस्थापन उपक्रम</li>
+                    </ul>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

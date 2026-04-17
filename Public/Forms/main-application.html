@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>मुख्य अर्ज फॉर्म</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="paper">
+
+  <div class="gov-header">
+    <div class="topline">महाराष्ट्र शासन / Government of Maharashtra</div>
+    <div class="subline">ग्रामपंचायत कार्यालय / Grampanchayat Office</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="header-title">
+    ग्रामपंचायत निमगाव केतकीचा दाखला / प्रमाणपत्र मिळणे करिता अर्ज
+  </div>
+
+  <!-- ✅ AUTO REG NO + DATE -->
+  <div class="two-col">
+    <div class="field">
+      <div class="cap">कार्यालयीन अर्ज नोंदणी क्रमांक:</div>
+      <div class="u-line"><span id="regNoText"></span></div>
+    </div>
+
+    <div class="field right">
+      <div class="cap">दिनांक:</div>
+      <div class="u-line"><span id="dateText"></span></div>
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- APPLICANT DETAILS -->
+  <div class="row">
+    <div class="col">
+      <div class="label">अर्जदाराचे नाव</div>
+      <input class="input" id="appName" placeholder="पूर्ण नाव" required>
+    </div>
+    <div class="col">
+      <div class="label">पत्ता</div>
+      <input class="input" id="appAddress" placeholder="पूर्ण पत्ता" required>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top:12px;">
+    <div class="col">
+      <div class="label">दूरध्वनी क्रमांक</div>
+      <input class="input" id="appMobile" placeholder="मोबाईल नंबर" required>
+    </div>
+    <div class="col">
+      <div class="label">आधार कार्ड क्रमांक (असल्यास)</div>
+      <input class="input" id="appAadhaar" placeholder="उदा. 1234 5678 9012">
+    </div>
+    <div class="col">
+      <div class="label">ई-मेल आयडी (असल्यास)</div>
+      <input class="input" id="appEmail" placeholder="example@gmail.com">
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- LETTER BODY -->
+  <div style="font-size:14px; line-height:1.8;">
+    <b>प्रति,</b><br>
+    सरपंच / ग्रामसेवक / निवेदक<br>
+    ग्रामपंचायत निमगाव केतकी<br>
+    ता. इंदापूर, जि. पुणे.<br>
+
+    <!-- ✅ SUBJECT INPUT -->
+    <div class="subject-row">
+      <div class="subject-left">विषय :</div>
+      <div class="subject-mid">
+        <input class="subject-input" id="subjectInput"
+               placeholder="उदा. थकबाकी नसल्याचे प्रमाणपत्र / जन्म दाखला">
+      </div>
+      <div class="subject-right">यांचा दाखला / प्रमाणपत्र मिळणे बाबत.</div>
+    </div>
+
+    <div style="margin-top:10px;">
+      महोदय,<br>
+      मी खाली स्वाक्षरी करणारा/करणारी वरील पत्त्यावर राहत असून मला खालील दाखल्याची आवश्यकता आहे.
+      तरी आपल्या कार्यालयाकडील आवश्यक कार्यवाही करून संपूर्ण भरपाईने तयार आहे.
+      तरी खालीलप्रमाणे दाखला मिळावा.
+    </div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- CERTIFICATE SELECTION -->
+  <div class="box">
+    <div class="chkline"><input type="checkbox" name="cert" value="birth"> जन्म नोंद दाखला</div>
+    <div class="chkline"><input type="checkbox" name="cert" value="death"> मृत्यू नोंद दाखला</div>
+    <div class="chkline"><input type="checkbox" name="cert" value="marriage"> विवाह नोंदणी दाखला</div>
+    <div class="chkline"><input type="checkbox" name="cert" value="nodues"> थकबाकी नसल्याचे प्रमाणपत्र</div>
+    <div class="chkline"><input type="checkbox" name="cert" value="houseTax"> नमुना नं. ८ उतारा (मालमत्ता कर)</div>
+    <div class="chkline"><input type="checkbox" name="cert" value="niradhar"> निराधार दाखला</div>
+    <div class="chkline"><input type="checkbox" name="cert" value="bpl"> दारिद्र्य रेषेखालील दाखला</div>
+  </div>
+
+  <!-- ✅ Fee line -->
+  <div class="fee-row">
+    <div class="fee-left">
+      आवश्यक शुल्क रुपये
+      <input type="text" id="feeAmount" class="fee-input" placeholder="उदा. 50 / 100">
+    </div>
+    <div class="fee-right">
+      भरण्यास तयार आहे.
+    </div>
+  </div>
+
+  <!-- ✅ SIGNATURE UPLOAD -->
+  <div class="row" style="margin-top:20px; align-items:flex-end;">
+    <div class="col">
+      <div class="label">अर्जदाराची सही :</div>
+
+      <div class="sign-area">
+        <img id="signPreview" alt="">
+        <div class="sign-line"></div>
+      </div>
+
+      <div style="margin-top:8px;">
+        <input type="file" id="signUpload" accept="image/*" class="input">
+        <div class="small">* सहीचा फोटो (jpg/png) upload करा. Print मध्ये सही येईल.</div>
+      </div>
+    </div>
+
+    <div class="col" style="text-align:right;">
+      <div class="bold" style="font-size:16px;">आपला विश्वास</div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="btnbar">
+    <button type="button" onclick="payAndNext()">Pay & Next</button>
+    <button type="button" class="secondary" onclick="window.print()">Print</button>
+  </div>
+
+</div>
+
+<!-- ✅ Mongo helper -->
+<script src="api.js"></script>
+
+<script>
+/* ✅ Single checkbox selection */
+document.querySelectorAll('input[name="cert"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    if(cb.checked){
+      document.querySelectorAll('input[name="cert"]').forEach(x => {
+        if(x !== cb) x.checked = false;
+      });
+    }
+  });
+});
+
+/* Helpers */
+function pad(n){ return String(n).padStart(2,'0'); }
+function todayDDMMYYYY(){
+  const d = new Date();
+  return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
+}
+function generateRegNo(){
+  const d = new Date();
+  const y = d.getFullYear();
+  const mm = pad(d.getMonth()+1);
+  const dd = pad(d.getDate());
+  const rand = Math.floor(1000 + Math.random()*9000);
+  return `NK-${y}-${mm}${dd}-${rand}`;
+}
+
+/* Init Reg + Date */
+function initRegAndDate(){
+  const key = "GP_REGNO_TODAY";
+  const dateKey = "GP_REGNO_DATE";
+  const todayKey = new Date().toDateString();
+
+  let reg = localStorage.getItem(key);
+  let savedDay = localStorage.getItem(dateKey);
+
+  if(!reg || savedDay !== todayKey){
+    reg = generateRegNo();
+    localStorage.setItem(key, reg);
+    localStorage.setItem(dateKey, todayKey);
+  }
+
+  document.getElementById("regNoText").textContent = reg;
+  document.getElementById("dateText").textContent = todayDDMMYYYY();
+}
+
+/* Subject save */
+const subjectInput = document.getElementById("subjectInput");
+subjectInput.value = localStorage.getItem("GP_SUBJECT") || "";
+subjectInput.addEventListener("input", () => {
+  localStorage.setItem("GP_SUBJECT", subjectInput.value.trim());
+});
+
+/* Signature upload */
+const signUpload = document.getElementById("signUpload");
+const signPreview = document.getElementById("signPreview");
+
+function loadSignature(){
+  const dataUrl = localStorage.getItem("GP_SIGNATURE");
+  if(!dataUrl) return;
+  signPreview.src = dataUrl;
+  signPreview.style.display = "block";
+}
+signUpload.addEventListener("change", (e)=>{
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    localStorage.setItem("GP_SIGNATURE", reader.result);
+    loadSignature();
+  };
+  reader.readAsDataURL(file);
+});
+
+function onlyDigits(str){ return (str || "").replace(/\D/g, ""); }
+
+/* Save applicant to localStorage + return object */
+function buildApplicantObject(){
+  return {
+    name: document.getElementById("appName").value.trim(),
+    address: document.getElementById("appAddress").value.trim(),
+    mobile: onlyDigits(document.getElementById("appMobile").value.trim()),
+    aadhaar: onlyDigits(document.getElementById("appAadhaar").value.trim()),
+    email: document.getElementById("appEmail").value.trim(),
+    regNo: document.getElementById("regNoText").textContent.trim(),
+    date: document.getElementById("dateText").textContent.trim(),
+    subject: subjectInput.value.trim(),
+    signature: localStorage.getItem("GP_SIGNATURE") || ""
+  };
+}
+
+function saveApplicantLocal(applicant){
+  localStorage.setItem("GP_APPLICANT", JSON.stringify(applicant));
+}
+
+/* ✅ Save application to MongoDB only once per regNo */
+async function saveApplicationOnceToMongo(applicant, certValue, finalFee){
+  const key = "GP_APP_SAVED_" + applicant.regNo;
+  if (localStorage.getItem(key) === "YES") return;
+
+  const payload = {
+    ...applicant,
+    selectedCert: certValue,
+    fee: Number(finalFee || 0),
+    createdAtISO: new Date().toISOString()
+  };
+
+  try {
+    const r = await submitToMongo("application", payload);
+    if (r.success) {
+      localStorage.setItem(key, "YES");
+      localStorage.setItem("GP_APP_DB_ID", r.id);
+    } else {
+      console.log("❌ Application Mongo save failed:", r);
+    }
+  } catch (e) {
+    console.log("❌ Application Mongo save error:", e.message);
+  }
+}
+
+/* ✅ Payment first → then payment page */
+async function payAndNext(){
+  const cert = document.querySelector('input[name="cert"]:checked');
+  if(!cert){
+    alert("कृपया एक प्रमाणपत्र निवडा.");
+    return;
+  }
+
+  const name = document.getElementById("appName").value.trim();
+  const address = document.getElementById("appAddress").value.trim();
+  const mobile = document.getElementById("appMobile").value.trim();
+  if(!name || !address || !mobile){
+    alert("कृपया नाव, पत्ता, मोबाईल नंबर भरा.");
+    return;
+  }
+
+  const aadhaar = onlyDigits(document.getElementById("appAadhaar").value.trim());
+  if (aadhaar && aadhaar.length !== 12){
+    alert("कृपया वैध आधार क्रमांक (12 अंक) भरा किंवा रिकामे ठेवा.");
+    return;
+  }
+
+  // ✅ Fee mapping (edit as you want)
+  const feeMap = { birth: 20, death: 20, marriage: 50, nodues: 0, houseTax: 0, niradhar: 0, bpl: 0 };
+  const fee = feeMap[cert.value] ?? 0;
+
+  // prefer typed fee if valid
+  const typed = document.getElementById("feeAmount").value.trim();
+  const typedNum = Number(typed);
+  const finalFee = typed && !isNaN(typedNum) ? typedNum : fee;
+
+  localStorage.setItem("GP_SELECTED_CERT", cert.value);
+  localStorage.setItem("GP_FEE", String(finalFee));
+
+  const applicant = buildApplicantObject();
+  saveApplicantLocal(applicant);
+
+  // ✅ Save application in MongoDB (once)
+  await saveApplicationOnceToMongo(applicant, cert.value, finalFee);
+
+  // reset payment status before new payment
+  localStorage.removeItem("GP_PAYMENT_STATUS");
+  localStorage.removeItem("GP_PAYMENT_MODE");
+
+  location.href = "payment.html";
+}
+
+/* Run init */
+
+initRegAndDate();
+loadSignature();
+</script>
+<script src="api.js"></script>
+
+
+</body>
+</html>
+

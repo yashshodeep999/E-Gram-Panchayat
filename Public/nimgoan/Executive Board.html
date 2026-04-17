@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Board - Nimgoan Ketki Gram Panchayat</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #FFFFF0;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333333;
+    }
+
+    .header {
+      background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+      padding: 30px;
+      border-bottom: 2px solid #B87333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: white;
+      font-size: 28px;
+    }
+
+    .header .right-logo {
+      position: absolute;
+      left: 20px;
+      top: 1px;
+      width: 150px;
+      height: auto;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      background-color: #333333;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin-right: 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      display: block;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background-color: #DAA520;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    /* Member layout (same style as your old) */
+    .member {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      text-align: left;
+      gap: 20px;
+    }
+
+    .member img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      cursor: pointer;
+      border: 4px solid #3E7C17;
+      background: #fff;
+    }
+
+    .member-info {
+      max-width: 600px;
+    }
+
+    .member-info h2 {
+      margin-top: 0;
+      color: #3E7C17;
+    }
+
+    .achievement-images {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .achievement-img {
+      width: 300px;
+      height: 350px;
+      border-radius: 10px;
+      cursor: pointer;
+      object-fit: cover;
+    }
+
+    .footer {
+      background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+      padding: 20px;
+      border-top: 2px solid #DAA520;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 30px;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .lightbox-content {
+      margin: auto;
+      display: block;
+      width: 80%;
+      max-width: 700px;
+      animation: zoom 0.6s;
+      border-radius: 10px;
+    }
+
+    @keyframes zoom {
+      from { transform: scale(0.1); }
+      to { transform: scale(1); }
+    }
+
+    /* Admin button */
+    #adminBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: black;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 14px;
+      z-index: 999;
+    }
+
+    /* Loading message */
+    #membersLoading {
+      color: #555;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>Executive Board</h1>
+    <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo">
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="Executive Board.html">Executive Board</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="schemes.html">Schemes</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="NimgoanKetki.html" id="AboutNimgoanKetkiNav">About Nimgoan Ketki</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- Floating Admin Button -->
+  <a href="../admin/admin-login.html" id="adminBtn">Admin Login</a>
+
+  <div class="content">
+    <h2>Introduction</h2>
+    <p>
+      The Executive Board of Nimgoan Ketki Gram Panchayat plays a crucial role in the governance and development of the village.
+      This board is responsible for overseeing various initiatives, making important decisions, and ensuring the implementation of policies.
+    </p>
+
+    <h2>Members</h2>
+
+    <!-- ✅ Dynamic Members will load here -->
+    <p id="membersLoading">Loading members...</p>
+    <div id="dynamic-members"></div>
+
+    <div class="content">
+      <h2>Achievements</h2>
+      <h3>आर. आर. पाटील सुंदर गाव पुरस्कार</h3>
+
+      <div class="achievement-images">
+        <img src="achive1.jpg" alt="Achievement 1" class="achievement-img">
+        <img src="achive2.jpg" alt="Achievement 2" class="achievement-img">
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+  </div>
+
+  <div class="footer"></div>
+
+  <script>
+    const BACKEND = "http://localhost:5000";
+
+    // ✅ Load members from DB
+    async function loadMembersFromDB() {
+      const container = document.getElementById("dynamic-members");
+      const loading = document.getElementById("membersLoading");
+
+      try {
+        const res = await fetch(`${BACKEND}/members`);
+        const members = await res.json();
+
+        container.innerHTML = "";
+
+        if (!Array.isArray(members) || members.length === 0) {
+          loading.textContent = "No members found.";
+          return;
+        }
+
+        loading.style.display = "none";
+
+        members.forEach(member => {
+          const imgUrl = member.image ? `${BACKEND}/uploads/${member.image}` : "";
+
+          container.innerHTML += `
+            <div class="member">
+              ${imgUrl ? `<img class="member-img" src="${imgUrl}" alt="${escapeHtml(member.name)}">` : ""}
+              <div class="member-info">
+                <h2>${escapeHtml(member.name || "")}</h2>
+                <p><strong>Position:</strong> ${escapeHtml(member.position || "")}</p>
+                <p><strong>Bio:</strong> ${escapeHtml(member.bio || "")}</p>
+              </div>
+            </div>
+          `;
+        });
+
+        // ✅ Attach lightbox click to newly created images
+        attachLightbox();
+
+      } catch (err) {
+        loading.textContent = "Backend not reachable. Start backend first.";
+        loading.style.color = "red";
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    // ✅ Lightbox logic works for dynamic + achievement images
+    function attachLightbox() {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const closeBtn = document.querySelector(".lightbox .close");
+
+      // remove old listeners by re-assigning onclick
+      document.querySelectorAll(".member-img, .achievement-img").forEach(img => {
+        img.onclick = function () {
+          lightbox.style.display = "block";
+          lightboxImg.src = this.src;
+        };
+      });
+
+      closeBtn.onclick = function () {
+        lightbox.style.display = "none";
+      };
+
+      lightbox.onclick = function (event) {
+        if (event.target !== lightboxImg) {
+          lightbox.style.display = "none";
+        }
+      };
+    }
+
+    // ✅ Admin button auto redirect
+    (function () {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    const adminBtn = document.getElementById("adminBtn");
+
+    if (!adminBtn) return;
+
+    if (token && role === "ADMIN") {
+      adminBtn.href = "../admin/admin-dashboard.html";
+      adminBtn.textContent = "Admin Panel";
+    } else {
+      adminBtn.href = "../admin/admin-login.html";
+      adminBtn.textContent = "Admin Login";
+    }
+    })();
+
+    // ✅ Load members on page open
+    loadMembersFromDB();
+  </script>
+
+</body>
+</html>

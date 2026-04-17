@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Schools - Nimgoan Ketki Gram Panchayat</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      background:#FFFFF0;
+      margin:0; padding:0; color:#333;
+      background:linear-gradient(180deg,#f9f9f9 0%, #FFFFFF 100%);
+    }
+
+    .header{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      padding:30px;
+      text-align:center;
+      box-shadow:0 4px 6px rgba(0,0,0,0.1);
+      position:relative;
+    }
+    .header h1{ margin:0; font-size:36px; }
+    .header p{ margin:8px 0 0; opacity:0.95; }
+    .header .right-logo{
+      position:absolute;
+      left:20px; top:1px;
+      width:150px; height:auto;
+    }
+
+    nav{
+      background:#333;
+      color:white;
+      text-align:center;
+      padding:10px 0;
+    }
+    nav ul{ list-style:none; margin:0; padding:0; }
+    nav ul li{ display:inline; margin-right:20px; }
+    nav ul li a{
+      color:white; text-decoration:none;
+      padding:10px 20px;
+      font-weight:bold;
+      transition:0.3s;
+      border-radius:8px;
+      display:inline-block;
+    }
+    nav ul li a:hover{ background:#DAA520; }
+
+    .container{
+      padding:40px 20px;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    /* ===== USER FRIENDLY TOP BAR ===== */
+    .top-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .search-wrap{
+      flex:1;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .search-wrap input, .search-wrap select{
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid #e6e6e6;
+      outline:none;
+      font-weight:700;
+      min-width:220px;
+      background:#fff;
+    }
+
+    .btn{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      font-weight:900;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid #eee;
+      background:#fff;
+      color:#333;
+      box-shadow:0 6px 14px rgba(0,0,0,0.06);
+      cursor:pointer;
+      transition:0.2s;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .btn i{ color:#2e7d32; }
+
+    /* ===== Cards ===== */
+    .card{
+      background:#fff;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 10px 25px rgba(0,0,0,0.1);
+      margin-bottom:22px;
+    }
+    .card-head{
+      padding:18px 22px;
+      border-bottom:1px solid #f0f0f0;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .card-head h2{
+      margin:0;
+      color:#2e7d32;
+      font-size:22px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#faf7e8;
+      border:1px solid #f3e7b9;
+      font-weight:800;
+      color:#7a5a00;
+      font-size:13px;
+    }
+    .card-body{ padding:22px; }
+    .muted{ color:#666; line-height:1.7; }
+
+    /* ===== Center Head ===== */
+    .center-head{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .center-head img{
+      border-radius:50%;
+      height:110px;
+      width:110px;
+      object-fit:cover;
+      border:3px solid #f3e7b9;
+    }
+    .center-head h3{ margin:0; }
+    .center-head .meta{ margin:6px 0 0; color:#555; line-height:1.7; }
+
+    /* ===== School Grid ===== */
+    .school-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+      margin-top:14px;
+    }
+
+    .school-card{
+      background:#fff;
+      border:1px solid #f0f0f0;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 8px 18px rgba(0,0,0,0.07);
+      display:flex;
+      flex-direction:column;
+      transition:0.2s;
+    }
+    .school-card:hover{ transform:translateY(-2px); }
+    .school-card img{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+      display:block;
+    }
+    .school-card .content{
+      padding:14px;
+      flex:1;
+    }
+    .school-card h4{
+      margin:0 0 6px;
+      color:#2e7d32;
+      font-size:18px;
+    }
+    .school-card p{
+      margin:6px 0;
+      color:#444;
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .pill-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+    .pill{
+      font-size:12px;
+      font-weight:900;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid #f0f0f0;
+      background:#fbfbfb;
+      color:#333;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+    .pill i{ color:#DAA520; }
+
+    .actions-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:0 14px 14px;
+      margin-top:auto;
+    }
+
+    .note{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:12px;
+      background:#f9f9f9;
+      border:1px dashed #ddd;
+      line-height:1.7;
+    }
+
+    /* ===== Footer ===== */
+    .footer{
+      background:linear-gradient(90deg,#8ce953,#DAA520,#3E7C17);
+      color:white;
+      text-align:center;
+      padding:12px;
+      margin-top:30px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1000px){
+      .school-grid{ grid-template-columns:repeat(2, 1fr); }
+    }
+    @media (max-width: 768px){
+      .header h1{ font-size:28px; }
+      .header .right-logo{ width:110px; top:10px; }
+      nav ul li{ display:inline-block; margin:6px 6px; }
+      .school-grid{ grid-template-columns:1fr; }
+      .search-wrap input, .search-wrap select{ min-width:100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1 data-en="Schools in Nimgoan Ketki" data-mr="निमगाव केतकीतील शाळा">Schools in Nimgoan Ketki</h1>
+    <p data-en="Anganwadi, Primary & High School information for citizens"
+       data-mr="अंगणवाडी, प्राथमिक व हायस्कूलची नागरिकांसाठी माहिती">
+      Anganwadi, Primary & High School information for citizens
+    </p>
+    <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo">
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="Home.html" data-en="Home" data-mr="मुख्यपृष्ठ">Home</a></li>
+      <li><a href="about.html" data-en="About Us" data-mr="आमच्याबद्दल">About Us</a></li>
+      <li><a href="Executive Board.html" data-en="Executive Board" data-mr="कार्यकारी मंडळ">Executive Board</a></li>
+      <li><a href="services.html" data-en="Services" data-mr="सेवा">Services</a></li>
+      <li><a href="schemes.html" data-en="Schemes" data-mr="योजना">Schemes</a></li>
+      <li><a href="news.html" data-en="News" data-mr="बातम्या">News</a></li>
+      <li><a href="NimgoanKetki.html" data-en="About Nimgoan Ketki" data-mr="निमगाव केतकी माहिती">About Nimgoan Ketki</a></li>
+      <li><a href="gallery.html" data-en="Gallery" data-mr="गॅलरी">Gallery</a></li>
+      <li><a href="contact.html" data-en="Contact Us" data-mr="संपर्क">Contact Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+
+    <!-- TOP ACTIONS (SEARCH + FILTER) -->
+    <div class="top-actions">
+      <div class="search-wrap">
+        <input id="searchInput" type="text" placeholder="Search school name / head / type..." aria-label="Search schools">
+        <select id="typeFilter" aria-label="Filter by type">
+          <option value="all">All Types</option>
+          <option value="anganwadi">Anganwadi</option>
+          <option value="primary">Primary</option>
+          <option value="high">High School</option>
+        </select>
+      </div>
+
+      <button class="btn" onclick="window.print()">
+        <i class="fa-solid fa-print"></i>
+        <span data-en="Print" data-mr="प्रिंट">Print</span>
+      </button>
+    </div>
+
+    <!-- CENTER HEAD CARD -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-user-tie"></i>
+          <span data-en="School Center Head" data-mr="शाळा केंद्र प्रमुख">School Center Head</span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-circle-info"></i>
+          <span data-en="Update Contact" data-mr="संपर्क अपडेट करा">Update Contact</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="center-head">
+          <img src="centerhead.jpg" alt="Center Head">
+          <div>
+            <h3 data-en="Mr. [Center Head Name]" data-mr="श्री. [केंद्र प्रमुख नाव]">Mr. [Center Head Name]</h3>
+            <div class="meta">
+              <div data-en="Center Head of Schools, Nimgoan Ketki" data-mr="शाळा केंद्र प्रमुख, निमगाव केतकी">Center Head of Schools, Nimgoan Ketki</div>
+              <div data-en="Phone: +91-XXXXXXXXXX (update)" data-mr="फोन: +91-XXXXXXXXXX (अपडेट करा)">Phone: +91-XXXXXXXXXX (update)</div>
+              <div data-en="Email: example@email.com (optional)" data-mr="ईमेल: example@email.com (पर्यायी)">Email: example@email.com (optional)</div>
+            </div>
+
+            <div class="note">
+              <b data-en="For parents:" data-mr="पालकांसाठी:">For parents:</b>
+              <span data-en="For admissions and certificates, carry Aadhaar/Child birth certificate, photo and previous school TC (if applicable)."
+                    data-mr="प्रवेश व प्रमाणपत्रासाठी आधार/जन्म प्रमाणपत्र, फोटो आणि मागील शाळेचे TC (लागू असल्यास) सोबत ठेवा.">
+                For admissions and certificates, carry Aadhaar/Child birth certificate, photo and previous school TC (if applicable).
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANGANWADI -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-baby"></i>
+          <span data-en="Anganwadi Schools (17)" data-mr="अंगणवाडी केंद्रे (१७)">Anganwadi Schools (17)</span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-utensils"></i>
+          <span data-en="Nutrition & Early Learning" data-mr="पोषण व पूर्वशिक्षण">Nutrition & Early Learning</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="Anganwadi centers support children with early education, nutrition and health awareness."
+           data-mr="अंगणवाडी केंद्रांमुळे मुलांना पूर्वशिक्षण, पोषण आणि आरोग्यविषयक मार्गदर्शन मिळते.">
+          Anganwadi centers support children with early education, nutrition and health awareness.
+        </p>
+
+        <div class="school-grid" id="anganwadiGrid">
+          <!-- Example cards (duplicate and edit as needed) -->
+          <div class="school-card" data-type="anganwadi">
+            <img src="anganwadi1.jpg" alt="Anganwadi Center">
+            <div class="content">
+              <h4>Anganwadi Center A</h4>
+              <p><b>Head:</b> Ms. C. D. Shinde</p>
+              <p><b>Location:</b> Nimgoan Ketki (Update area/ward)</p>
+              <div class="pill-row">
+                <span class="pill"><i class="fa-solid fa-children"></i> Early Learning</span>
+                <span class="pill"><i class="fa-solid fa-heart-pulse"></i> Health</span>
+              </div>
+            </div>
+            <div class="actions-row">
+              <a class="btn" href="tel:+910000000000"><i class="fa-solid fa-phone"></i>Call</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Anganwadi%20Center%20Nimgoan%20Ketki"><i class="fa-solid fa-map"></i>Map</a>
+            </div>
+          </div>
+
+          <div class="school-card" data-type="anganwadi">
+            <img src="education.jpg" alt="Anganwadi Center">
+            <div class="content">
+              <h4>Anganwadi Center B</h4>
+              <p><b>Head:</b> Ms. (Update)</p>
+              <p><b>Location:</b> Nimgoan Ketki (Update area/ward)</p>
+              <div class="pill-row">
+                <span class="pill"><i class="fa-solid fa-utensils"></i> Nutrition</span>
+                <span class="pill"><i class="fa-solid fa-stethoscope"></i> Checkups</span>
+              </div>
+            </div>
+            <div class="actions-row">
+              <a class="btn" href="tel:+910000000000"><i class="fa-solid fa-phone"></i>Call</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Anganwadi%20Center%20Nimgoan%20Ketki"><i class="fa-solid fa-map"></i>Map</a>
+            </div>
+          </div>
+
+          <!-- Add remaining Anganwadi centers similarly -->
+        </div>
+
+        <div class="note">
+          <b>Tip:</b> Update each Anganwadi name, head, phone and exact photo. You can also add ward/area name.
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIMARY -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-school"></i>
+          <span data-en="Primary Schools (17)" data-mr="प्राथमिक शाळा (१७)">Primary Schools (17)</span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-book"></i>
+          <span data-en="Education & Activities" data-mr="शिक्षण व उपक्रम">Education & Activities</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="Primary schools provide foundational education, mid-day meal and student activities."
+           data-mr="प्राथमिक शाळांमध्ये मूलभूत शिक्षण, मध्यान्ह भोजन आणि विद्यार्थी उपक्रम असतात.">
+          Primary schools provide foundational education, mid-day meal and student activities.
+        </p>
+
+        <div class="school-grid" id="primaryGrid">
+          <div class="school-card" data-type="primary">
+            <img src="school1.jpg" alt="Primary School">
+            <div class="content">
+              <h4>ZP Primary School No. 1</h4>
+              <p><b>Headmaster:</b> Mr. A. B. Patil</p>
+              <p><b>Classes:</b> 1 to 7 (Update)</p>
+              <div class="pill-row">
+                <span class="pill"><i class="fa-solid fa-bowl-food"></i> Mid-day Meal</span>
+                <span class="pill"><i class="fa-solid fa-graduation-cap"></i> Learning</span>
+              </div>
+            </div>
+            <div class="actions-row">
+              <a class="btn" href="tel:+910000000000"><i class="fa-solid fa-phone"></i>Call</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=ZP%20Primary%20School%20Nimgoan%20Ketki"><i class="fa-solid fa-map"></i>Map</a>
+            </div>
+          </div>
+
+          <div class="school-card" data-type="primary">
+            <img src="education.jpg" alt="Primary School">
+            <div class="content">
+              <h4>ZP Primary School No. 2</h4>
+              <p><b>Headmaster:</b> (Update)</p>
+              <p><b>Classes:</b> (Update)</p>
+              <div class="pill-row">
+                <span class="pill"><i class="fa-solid fa-book-open"></i> Academics</span>
+                <span class="pill"><i class="fa-solid fa-futbol"></i> Sports</span>
+              </div>
+            </div>
+            <div class="actions-row">
+              <a class="btn" href="tel:+910000000000"><i class="fa-solid fa-phone"></i>Call</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Primary%20School%20Nimgoan%20Ketki"><i class="fa-solid fa-map"></i>Map</a>
+            </div>
+          </div>
+
+          <!-- Add remaining Primary schools similarly -->
+        </div>
+
+        <div class="note">
+          <b>Tip:</b> Add school UDISE code, exact address and timings if you have them.
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGH SCHOOLS -->
+    <div class="card">
+      <div class="card-head">
+        <h2><i class="fa-solid fa-graduation-cap"></i>
+          <span data-en="High Schools (2)" data-mr="हायस्कूल (२)">High Schools (2)</span>
+        </h2>
+        <div class="badge">
+          <i class="fa-solid fa-user-graduate"></i>
+          <span data-en="Secondary Education" data-mr="माध्यमिक शिक्षण">Secondary Education</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <p class="muted"
+           data-en="High schools provide education for higher classes and support for scholarships and examinations."
+           data-mr="हायस्कूलमध्ये उच्च वर्गांचे शिक्षण तसेच शिष्यवृत्ती व परीक्षा मार्गदर्शन मिळते.">
+          High schools provide education for higher classes and support for scholarships and examinations.
+        </p>
+
+        <div class="school-grid" id="highGrid">
+          <div class="school-card" data-type="high">
+            <img src="education.jpg" alt="High School">
+            <div class="content">
+              <h4>Nimgoan Ketki High School</h4>
+              <p><b>Headmaster:</b> Mr. E. F. Kale</p>
+              <p><b>Classes:</b> 8 to 10 / 12 (Update)</p>
+              <div class="pill-row">
+                <span class="pill"><i class="fa-solid fa-flask"></i> Science</span>
+                <span class="pill"><i class="fa-solid fa-medal"></i> Activities</span>
+              </div>
+            </div>
+            <div class="actions-row">
+              <a class="btn" href="tel:+910000000000"><i class="fa-solid fa-phone"></i>Call</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Nimgoan%20Ketki%20High%20School"><i class="fa-solid fa-map"></i>Map</a>
+            </div>
+          </div>
+
+          <div class="school-card" data-type="high">
+            <img src="highschool2.jpg" alt="High School">
+            <div class="content">
+              <h4>Shivaji Vidyalaya</h4>
+              <p><b>Headmaster:</b> Ms. G. H. Pawar</p>
+              <p><b>Classes:</b> (Update)</p>
+              <div class="pill-row">
+                <span class="pill"><i class="fa-solid fa-chalkboard-user"></i> Teaching</span>
+                <span class="pill"><i class="fa-solid fa-trophy"></i> Sports</span>
+              </div>
+            </div>
+            <div class="actions-row">
+              <a class="btn" href="tel:+910000000000"><i class="fa-solid fa-phone"></i>Call</a>
+              <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Shivaji%20Vidyalaya%20Nimgoan%20Ketki"><i class="fa-solid fa-map"></i>Map</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <b data-en="Helpline:" data-mr="मदत:">Helpline:</b>
+          <span data-en="For scholarship / exam enquiries, contact the school office during working hours."
+                data-mr="शिष्यवृत्ती / परीक्षा चौकशीसाठी कार्यालयीन वेळेत शाळेशी संपर्क करा.">
+            For scholarship / exam enquiries, contact the school office during working hours.
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p data-en="© 2024 Nimgoan Ketki Gram Panchayat. All Rights Reserved."
+       data-mr="© 2024 निमगाव केतकी ग्रामपंचायत. सर्व हक्क राखीव.">
+      © 2024 Nimgoan Ketki Gram Panchayat. All Rights Reserved.
+    </p>
+    <p>Created by Yashodeep, Yash, Praful, Aniket</p>
+  </div>
+
+  <script>
+    // -------- AUTO LANGUAGE (NO BUTTON) --------
+    function autoLanguage() {
+      const userLang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+      const isMarathi = userLang.startsWith("mr");
+
+      document.querySelectorAll("[data-en][data-mr]").forEach(el => {
+        el.textContent = isMarathi ? el.getAttribute("data-mr") : el.getAttribute("data-en");
+      });
+
+      document.documentElement.lang = isMarathi ? "mr" : "en";
+    }
+    autoLanguage();
+
+    // -------- SEARCH + FILTER (USER FRIENDLY) --------
+    const searchInput = document.getElementById("searchInput");
+    const typeFilter = document.getElementById("typeFilter");
+
+    function applyFilters(){
+      const q = (searchInput.value || "").toLowerCase().trim();
+      const type = typeFilter.value;
+
+      document.querySelectorAll(".school-card").forEach(card => {
+        const text = card.innerText.toLowerCase();
+        const cardType = card.getAttribute("data-type") || "all";
+
+        const matchesText = !q || text.includes(q);
+        const matchesType = (type === "all") || (cardType === type);
+
+        card.style.display = (matchesText && matchesType) ? "flex" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", applyFilters);
+    typeFilter.addEventListener("change", applyFilters);
+  </script>
+
+</body>
+</html>

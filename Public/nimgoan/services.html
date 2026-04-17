@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Nimgoan Ketki Gram Panchayat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFFFF0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333333;
+        }
+        .header {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+            padding: 30px;
+            border-bottom: 2px solid #B87333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+            color: white;
+            font-size: 28px;
+        }
+
+        .header .right-logo {
+            position: absolute;
+            left: 20px;
+            top: 1px;
+            width: 150px;
+            height: auto;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #333333;
+        }
+        nav ul li {
+            margin-right: 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #DAA520;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h2 {
+            color: #3E7C17;
+            margin-bottom: 15px;
+        }
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555555;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .service-item {
+            background-color: #F0E68C;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .service-item h3 {
+            margin-bottom: 10px;
+            color: #3E7C17;
+        }
+        .service-item i {
+            font-size: 50px;
+            margin-bottom: 10px;
+            color: #3E7C17;
+        }
+        .cta-button {
+            background-color: #3E7C17;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #8ce953;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            justify-content: center;
+        }
+        .gallery img {
+            width: 100%;
+            max-width: 300px;
+            height: 200px; /* Set a fixed height */
+            object-fit: cover; /* Ensures images are cropped to fit the dimensions */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+         /* Lightbox Styles */
+    .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+    .lightbox:target {
+        display: flex;
+    }
+
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+    }
+
+        .news, .faq, .feedback {
+            background-color: #FFF5E1;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+        .footer {
+            background: linear-gradient(90deg, #8ce953, #DAA520, #3E7C17);
+            padding: 20px;
+            border-top: 2px solid #DAA520;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+        }
+        .form-container {
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: #FFF5E1;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h3 {
+            color: #3E7C17;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-container label {
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .form-container input, .form-container textarea, .form-container select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-container button {
+            background-color: #3E7C17;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .form-container button:hover {
+            background-color: #8ce953;
+        }
+
+        /* ✅ Big Professional Apply Button */
+.apply-wrap{
+  display:flex;
+  justify-content:center;
+  margin: 30px 0 10px;
+}
+
+.apply-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding: 16px 28px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  border-radius: 14px;
+  text-decoration:none;
+
+  color:#fff;
+  background: linear-gradient(90deg, #3E7C17, #DAA520);
+  border: 2px solid rgba(255,255,255,0.25);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  transform: translateY(0);
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+
+/* Big Apply Button */
+.apply-wrap{
+  text-align:center;
+  margin:40px 0 20px;
+}
+
+.apply-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:18px 35px;
+  font-size:20px;
+  font-weight:bold;
+  border-radius:12px;
+  text-decoration:none;
+  color:white;
+  background: linear-gradient(90deg,#3E7C17,#DAA520);
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+  transition:all 0.3s ease;
+}
+
+.apply-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 25px rgba(0,0,0,0.3);
+}
+
+/* Service List */
+.service-list{
+  max-width:600px;
+  margin:20px auto;
+  padding:25px;
+  background:#f3f3f3;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+  text-align:left;
+}
+
+.service-list label{
+  display:block;
+  margin:12px 0;
+  font-size:16px;
+  cursor:pointer;
+}
+/* Service Selection Box */
+.service-list{
+  max-width:700px;
+  margin:30px auto;
+  padding:25px;
+  background:#FFF5E1;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Individual Service Item */
+.service-option{
+  padding:15px 20px;
+  margin:10px 0;
+  border-radius:10px;
+  background:white;
+  cursor:pointer;
+  font-size:17px;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  transition:all 0.3s ease;
+  border:2px solid transparent;
+}
+
+/* Hover Effect */
+.service-option:hover{
+  background:linear-gradient(90deg,#8ce953,#DAA520);
+  color:white;
+  transform:translateX(5px);
+}
+
+/* Selected Effect */
+.service-option.active{
+  background:#3E7C17;
+  color:white;
+  border:2px solid #DAA520;
+}
+
+/* Icon Style */
+.service-option i{
+  font-size:18px;
+}
+
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Services</h1>
+        <img src="logo1.1.png" alt="Nimgoan Ketki Gram Panchayat Logo" class="right-logo">
+    </div>
+    
+        <nav>
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="Executive Board.html">Executive Board</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="schemes.html">Schemes</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="NimgoanKetki.html" id="AboutNimgoanKetkiNav"> About Nimgoan Ketki</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+    
+    <div class="content">
+        <h2>Our Services</h2>
+        <p>The Nimgoan Ketki Gram Panchayat offers a variety of services to enhance the quality of life in our village. Below are some of the key services provided:</p>
+
+        <div class="services-grid">
+            <!-- Service 1: Healthcare -->
+            <div class="service-item">
+                <i class="fas fa-stethoscope"></i>
+                <h3>Healthcare</h3>
+                <p>Providing access to quality healthcare services including free health check-ups, vaccination drives, and health awareness programs.</p>
+            </div>
+
+            <!-- Service 2: Water Conservation -->
+            <div class="service-item">
+                <i class="fas fa-water"></i>
+                <h3>Water Conservation</h3>
+                <p>Initiatives to save water through efficient irrigation methods and community-led water management projects.</p>
+            </div>
+
+            <!-- Service 3: Education -->
+            <div class="service-item">
+                <i class="fas fa-book"></i>
+                <h3>Education</h3>
+                <p>Supporting educational development by improving local schools, providing scholarships, and offering skill development programs.</p>
+            </div>
+
+            <!-- Service 4: Agriculture Support -->
+             <div class="service-item">
+                <i class="fas fa-tractor"></i>
+                <h3>Agriculture Support</h3>
+                <p>Promoting sustainable agricultural practices by providing training, financial aid, and access to modern farming tools.</p>
+            </div>
+
+            <!-- Service 5: Sanitation -->
+            <div class="service-item">
+                <i class="fas fa-toilet"></i>
+                <h3>Sanitation</h3>
+                <p>Improving sanitation facilities in the village to ensure a clean and healthy environment for all residents.</p>
+            </div>
+
+            <!-- Service 6: Rural Infrastructure -->
+            <div class="service-item">
+                <i class="fas fa-road"></i>
+                <h3>Rural Infrastructure</h3>
+                <p>Developing and maintaining roads, bridges, and public buildings to improve connectivity and the overall infrastructure of the village.</p>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <!-- Gallery images for services -->
+            <a href="#img1"><img src="healthcare.jpg" alt="Healthcare"></a>
+            <a href="#img2"><img src="water-conservation.jpg" alt="Water Conservation"></a>
+            <a href="#img3"><img src="education.jpg" alt="Education"></a>
+            <a href="#img4"><img src="agriculture-support.jpg" alt="Agriculture Support"></a>
+            <a href="#img5"><img src="sanitation.jpg" alt="Sanitation"></a>
+            <a href="#img6"><img src="infrastructure.jpg" alt="Rural Infrastructure"></a>
+        </div>
+        
+        <!-- Lightbox for images -->
+        <div class="lightbox" id="img1">
+            <a href="#" class="close" aria-label="Close">&times;</a>
+            <img src="healthcare.jpg" alt="Healthcare">
+        </div>
+        <div class="lightbox" id="img2">
+            <a href="#" class="close" aria-label="Close">&times;</a>
+            <img src="water-conservation.jpg" alt="Water Conservation">
+        </div>
+        <div class="lightbox" id="img3">
+            <a href="#" class="close" aria-label="Close">&times;</a>
+            <img src="education.jpg" alt="Education">
+        </div>
+        <div class="lightbox" id="img4">
+            <a href="#" class="close" aria-label="Close">&times;</a>
+            <img src="agriculture-support.jpg" alt="Agriculture Support">
+        </div>
+        <div class="lightbox" id="img5">
+            <a href="#" class="close" aria-label="Close">&times;</a>
+            <img src="sanitation.jpg" alt="Sanitation">
+        </div>
+        <div class="lightbox" id="img6">
+            <a href="#" class="close" aria-label="Close">&times;</a>
+            <img src="infrastructure.jpg" alt="Rural Infrastructure">
+        </div>
+        
+        <h2>Contact Us</h2>
+        <p>If you would like to request any of these services or learn more about them, feel free to contact us.</p>
+
+        <!-- Request Service Form -->
+        <div class="form-container">
+            <h3>Request a Service</h3>
+            <form action="http://localhost:5000/submit-form" method="post">
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+
+                <label for="service">Service Requested:</label>
+                <select id="service" name="service" required>
+                    <option value="">Select a Service</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Water Conservation">Water Conservation</option>
+                    <option value="Education">Education</option>
+                    <option value="Agriculture Support">Agriculture Support</option>
+                    <option value="Sanitation">Sanitation</option>
+                    <option value="Rural Infrastructure">Rural Infrastructure</option>
+                </select>
+
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+
+
+
+<div class="apply-wrap">
+  <a href="../Forms/main-application.html" class="apply-btn">
+    <i class="fa-solid fa-landmark"></i>
+    Apply for Services
+  </a>
+</div>
+
+<div class="service-list">
+
+  <div class="service-option" onclick="selectService(this)">
+    <i class="fa-solid fa-baby"></i> Birth Certificate
+  </div>
+
+  <div class="service-option" onclick="selectService(this)">
+    <i class="fa-solid fa-cross"></i> Death Certificate
+  </div>
+
+  <div class="service-option" onclick="selectService(this)">
+    <i class="fa-solid fa-ring"></i> Marriage Registration Certificate
+  </div>
+
+  <div class="service-option" onclick="selectService(this)">
+    <i class="fa-solid fa-file"></i> No Dues Certificate
+  </div>
+
+  <div class="service-option" onclick="selectService(this)">
+    <i class="fa-solid fa-building"></i> Sample No. 8 Extract (Property Tax)
+  </div>
+
+  <div class="service-option" onclick="selectService(this)">
+    <i class="fa-solid fa-user"></i> Unfounded Admission
+  </div>
+
+  <div class="service-option" onclick="selectService(this)">
+    <i class="fa-solid fa-hand-holding-heart"></i> Below Poverty Line Certificate
+  </div>
+
+</div>
+
+
+
+<script>
+  const btn = document.getElementById("applyBtn");
+
+  btn.addEventListener("click", function (e) {
+    e.preventDefault(); // stop instant navigation
+
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Redirecting...';
+    btn.style.pointerEvents = "none";
+    btn.style.opacity = "0.9";
+
+    setTimeout(() => {
+      window.location.href = btn.getAttribute("href");
+    }, 2000);
+  });
+</script>
+
+
+    <div class="footer">
+        
+    </div>
+</body>
+</html>

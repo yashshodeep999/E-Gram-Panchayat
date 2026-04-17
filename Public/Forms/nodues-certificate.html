@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>थकबाकी नसल्याचे प्रमाणपत्र / No Dues Certificate</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="paper">
+
+  <!-- ✅ WATERMARK -->
+  <div class="watermark">GRAM PANCHAYAT</div>
+
+  <!-- ✅ GOV HEADER -->
+  <div class="gov-header">
+    <div class="topline">महाराष्ट्र शासन / Government of Maharashtra</div>
+    <div class="subline">ग्रामपंचायत कार्यालय / Grampanchayat Office</div>
+    <div class="rule"></div>
+  </div>
+
+  <!-- OFFICE DETAILS -->
+  <div class="small">
+    ग्रामपंचायत कार्यालय: <span class="line" style="min-width:60mm;"></span>
+    ता. <span class="line" style="min-width:30mm;"></span>
+    जि. <span class="line" style="min-width:30mm;"></span>
+  </div>
+
+  <div class="small" style="margin-top:2mm;">
+    Grampanchayat office: <span class="line" style="min-width:55mm;"></span>
+    tal: <span class="line" style="min-width:30mm;"></span>
+    Dist: <span class="line" style="min-width:30mm;"></span>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- TITLE -->
+  <div class="header-title">
+    थकबाकी नसल्याचे प्रमाणपत्र / <span class="small">No Dues Certificate</span>
+  </div>
+
+  <!-- DISPATCH / DATE -->
+  <div class="row" style="justify-content:space-between; margin-top:6px;">
+    <div class="small">जा.क्र.: <span class="line" style="min-width:45mm;"></span></div>
+    <div class="small">दिनांक: <span class="line" style="min-width:45mm;"></span></div>
+  </div>
+
+  <div class="row" style="justify-content:space-between; margin-top:4px;">
+    <div class="small">Dispatch no.: <span class="line" style="min-width:45mm;"></span></div>
+    <div class="small">Date: <span class="line" style="min-width:45mm;"></span></div>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- BODY -->
+  <div style="font-size:14px; line-height:1.9;">
+    सरपंच / ग्रामसेवक / ग्रामविकास अधिकारी, ग्रामपंचायत
+    <span class="line" style="min-width:55mm;"></span>
+    ता. <span class="line" style="min-width:30mm;"></span>
+    जि. <span class="line" style="min-width:30mm;"></span><br>
+
+    <span class="small">Sarpanch / Gramsevak / Village Development Officer, Grampanchayat</span>
+    <span class="line" style="min-width:55mm;"></span>
+    <span class="small">tal.</span> <span class="line" style="min-width:30mm;"></span>
+    <span class="small">Dist</span> <span class="line" style="min-width:30mm;"></span>
+    <br><br>
+
+    याजकडून दाखला देण्यात येतो की, श्री./श्रीमती <b id="nm"></b>
+    <span class="line" style="min-width:70mm;"></span><br>
+
+    <span class="small">Is issuing the certificate that Mr./Mrs.</span>
+    <span class="line" style="min-width:85mm;"></span><br><br>
+
+    आधारकार्ड क्र.: <b id="ad"></b>
+    <span class="line" style="min-width:55mm;"></span>
+    <span class="small">Aadhar Card Number:</span>
+    <span class="line" style="min-width:55mm;"></span><br><br>
+
+    हे/ही मौजे <span class="line" style="min-width:55mm;"></span>
+    ता. <span class="line" style="min-width:30mm;"></span>
+    जि. <span class="line" style="min-width:30mm;"></span>
+    महाराष्ट्र येथील कायमचे रहिवासी असुन<br>
+
+    <span class="small">Is a permanent resident of</span>
+    <span class="line" style="min-width:55mm;"></span>
+    <span class="small">tal.</span> <span class="line" style="min-width:30mm;"></span>
+    <span class="small">Dist</span> <span class="line" style="min-width:30mm;"></span>,
+    <span class="small">Maharashtra.</span>
+    <br><br>
+
+    त्यांच्याकडे ग्रामपंचायतीची कोणत्याही प्रकारची थकबाकी नाही.
+    <span class="small">And he/she has no balance due towards Grampanchayat.</span><br><br>
+
+    सदर दाखला त्यांच्या विनंती अर्जानुसार देण्यात येत आहे.
+    <span class="small">Certificate is issued on request of applicant.</span>
+  </div>
+
+  <div class="hr"></div>
+
+  <!-- ✅ GOV FOOTER (SIGN & PLACE) -->
+  <div class="gov-footer">
+    <div>
+      Place: <span class="line" style="min-width:45mm;"></span><br>
+      Date: <span class="line" style="min-width:45mm;"></span>
+    </div>
+
+    <div style="text-align:right;">
+      सही व शिक्का / Signature with stamp<br>
+      <span class="line" style="min-width:60mm;"></span>
+      <div class="small" style="margin-top:4px;">सरपंच / ग्रामसेवक / ग्रामविकास अधिकारी</div>
+    </div>
+  </div>
+
+  <!-- Buttons hidden in print -->
+  <div class="btnbar">
+    <button type="button" class="secondary" onclick="history.back()">Back</button>
+    <button type="button" class="secondary" onclick="saveNoDuesToMongo()">Save</button>
+    <button type="button" onclick="window.print()">Print</button>
+  </div>
+
+</div>
+
+<!-- ✅ Mongo helper -->
+<script src="api.js"></script>
+
+<script>
+(function fill(){
+  const raw = localStorage.getItem("GP_APPLICANT");
+  if(!raw) return;
+  const d = JSON.parse(raw);
+
+  // show name/aadhaar in bold
+  document.getElementById("nm").textContent = d.name || "";
+  document.getElementById("ad").textContent = d.aadhaar || "";
+})();
+
+function onlyDigits(str){ return (str || "").replace(/\\D/g, ""); }
+
+async function saveNoDuesToMongo(){
+  const raw = localStorage.getItem("GP_APPLICANT");
+  const d = raw ? JSON.parse(raw) : {};
+
+  const data = {
+    applicantName: d.name || "",
+    aadhaar: onlyDigits(d.aadhaar || ""),
+    mobile: onlyDigits(d.mobile || ""),
+    address: d.address || "",
+    village: d.village || "",
+    taluka: d.taluka || "",
+    district: d.district || "",
+    note: "No dues certificate generated",
+    createdAtISO: new Date().toISOString()
+  };
+
+  if(!data.applicantName){
+    alert("❌ Applicant name missing. Please fill main form again.");
+    location.href = "main-application.html";
+    return;
+  }
+  if(data.aadhaar && data.aadhaar.length !== 12){
+    alert("❌ Aadhaar must be 12 digits (or update applicant details).");
+    return;
+  }
+
+  const result = await submitToMongo("nodues", data);
+
+  if(result.success){
+    alert("✅ No Dues certificate saved to MongoDB!\nID: " + result.id);
+  } else {
+    alert("❌ Error: " + (result.message || result.error));
+  }
+}
+</script>
+<script src="api.js"></script>
+
+</body>
+</html>
