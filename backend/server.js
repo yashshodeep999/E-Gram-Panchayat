@@ -20,19 +20,12 @@ const SECRET = process.env.JWT_SECRET || "CHANGE_THIS_SECRET";
 /* =========================
    Middleware
 ========================= */
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
+app.use(cors());
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 /* =========================
-   Serve Frontend (Safe)
+   Serve Frontend
 ========================= */
 const publicPath = path.join(__dirname, "..", "Public");
 
@@ -40,6 +33,17 @@ if (fs.existsSync(publicPath)) {
   app.use(express.static(publicPath));
   console.log("✅ Serving Public folder");
 }
+
+/* ✅ IMPORTANT: HOMEPAGE ROUTE (FIXES YOUR ERROR) */
+app.get("/", (req, res) => {
+  const filePath = path.join(publicPath, "nimgoan", "Home.html");
+
+  if (fs.existsSync(filePath)) {
+    res.sendFile(filePath);
+  } else {
+    res.send("✅ Backend running, frontend not found");
+  }
+});
 
 /* =========================
    Uploads Folder
@@ -53,7 +57,7 @@ app.use("/uploads", express.static(uploadsDir));
    DB Connection
 ========================= */
 if (!MONGO_URI) {
-  console.error("❌ MONGO_URI missing in .env");
+  console.error("❌ MONGO_URI missing");
   process.exit(1);
 }
 
@@ -77,22 +81,17 @@ const { buildSiteIndex } = require("./chatbot/siteIndex");
 const { answerFromIndex, detectLang } = require("./chatbot/engineSmart");
 
 let SITE = { chunks: [], kb: {} };
-let isIndexed = false; // ✅ control flag
+let isIndexed = false;
 
 function rebuildIndex() {
   try {
-    // 🔥 LIMIT FOLDER (important)
     const smallPath = path.join(__dirname, "..", "Public", "nimgoan");
-
     SITE = buildSiteIndex(smallPath);
     console.log("✅ Chatbot index built:", SITE.chunks.length);
   } catch (e) {
     console.log("❌ Chatbot index error:", e.message);
   }
 }
-
-// ❌ REMOVE THIS (IMPORTANT)
-// rebuildIndex();
 
 /* =========================
    CHATBOT ROUTE
@@ -104,7 +103,6 @@ app.post("/api/chat", (req, res) => {
       return res.status(400).json({ success: false, reply: "Message required" });
     }
 
-    // ✅ Lazy loading (build only once)
     if (!isIndexed) {
       rebuildIndex();
       isIndexed = true;
@@ -164,12 +162,15 @@ const Member = mongoose.model(
 );
 
 /* =========================
-   AUTH MIDDLEWARE
+   AUTH
 ========================= */
 function auth(req, res, next) {
   const header = req.headers.authorization || "";
   const [type, token] = header.split(" ");
-  if (type !== "Bearer" || !token) return res.status(401).json({ msg: "Token missing" });
+
+  if (type !== "Bearer" || !token) {
+    return res.status(401).json({ msg: "Token missing" });
+  }
 
   try {
     req.user = jwt.verify(token, SECRET);
@@ -180,12 +181,14 @@ function auth(req, res, next) {
 }
 
 function adminOnly(req, res, next) {
-  if (req.user?.role !== "ADMIN") return res.status(403).json({ msg: "Admin only" });
+  if (req.user?.role !== "ADMIN") {
+    return res.status(403).json({ msg: "Admin only" });
+  }
   next();
 }
 
 /* =========================
-   MULTER SETUP
+   MULTER
 ========================= */
 const storage = multer.diskStorage({
   destination: uploadsDir,
@@ -198,11 +201,14 @@ const upload = multer({
 });
 
 /* =========================
-   AUTH ROUTES
+   ROUTES
 ========================= */
 app.post("/api/register-admin", async (req, res) => {
   const { username, password } = req.body || {};
-  if (!username || !password) return res.status(400).json({ msg: "Required fields missing" });
+
+  if (!username || !password) {
+    return res.status(400).json({ msg: "Required fields missing" });
+  }
 
   const exists = await User.findOne({ username });
   if (exists) return res.status(400).json({ msg: "Admin exists" });
@@ -215,64 +221,34 @@ app.post("/api/register-admin", async (req, res) => {
 
 app.post("/api/login", async (req, res) => {
   const { username, password } = req.body || {};
-  const user = await User.findOne({ username });
 
+  const user = await User.findOne({ username });
   if (!user) return res.status(400).json({ msg: "Invalid username" });
 
   const ok = await bcrypt.compare(password, user.password);
   if (!ok) return res.status(400).json({ msg: "Invalid password" });
 
-  const token = jwt.sign({ id: user._id, role: user.role }, SECRET, { expiresIn: "2h" });
+  const token = jwt.sign(
+    { id: user._id, role: user.role },
+    SECRET,
+    { expiresIn: "2h" }
+  );
 
   res.json({ token });
-});
-
-/* =========================
-   FORM ROUTES
-========================= */
-app.post("/submit-form", async (req, res) => {
-  await ServiceRequest.create(req.body);
-  res.send("Form submitted");
-});
-
-app.post("/contact", async (req, res) => {
-  await ContactMessage.create(req.body);
-  res.send("Message sent");
-});
-
-/* =========================
-   MEMBERS CRUD
-========================= */
-app.get("/members", async (req, res) => {
-  res.json(await Member.find().sort({ createdAt: -1 }));
-});
-
-app.post("/members", auth, adminOnly, upload.single("image"), async (req, res) => {
-  const { name, position, bio } = req.body;
-  const member = await Member.create({
-    name,
-    position,
-    bio,
-    image: req.file?.filename,
-  });
-  res.json(member);
-});
-
-app.delete("/members/:id", auth, adminOnly, async (req, res) => {
-  await Member.findByIdAndDelete(req.params.id);
-  res.json({ msg: "Deleted" });
 });
 
 /* =========================
    ERROR HANDLER
 ========================= */
 app.use((err, req, res, next) => {
-  if (err.code === "LIMIT_FILE_SIZE") return res.status(400).json({ msg: "File too large" });
+  if (err.code === "LIMIT_FILE_SIZE") {
+    return res.status(400).json({ msg: "File too large" });
+  }
   res.status(500).json({ msg: "Server error" });
 });
 
 /* =========================
-   START SERVER
+   START
 ========================= */
 app.listen(PORT, () => {
   console.log(`✅ Server running on PORT ${PORT}`);
