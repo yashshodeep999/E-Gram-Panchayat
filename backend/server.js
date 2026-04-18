@@ -21,25 +21,20 @@ const SECRET = process.env.JWT_SECRET || "CHANGE_THIS_SECRET";
    MIDDLEWARE
 ========================= */
 app.use(cors());
-app.use(express.json({ limit: "2mb" }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* =========================
-   FRONTEND SERVE
+   FRONTEND
 ========================= */
 const publicPath = path.join(__dirname, "..", "Public", "nimgoan");
 
 if (fs.existsSync(publicPath)) {
   app.use(express.static(publicPath));
   console.log("✅ Serving Frontend from:", publicPath);
+} else {
+  console.log("⚠️ Frontend folder not found:", publicPath);
 }
-
-/* =========================
-   HOMEPAGE
-========================= */
-app.get("/", (req, res) => {
-  res.sendFile(path.join(publicPath, "Home.html"));
-});
 
 /* =========================
    UPLOADS
@@ -52,6 +47,11 @@ app.use("/uploads", express.static(uploadsDir));
 /* =========================
    DB CONNECTION
 ========================= */
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI missing");
+  process.exit(1);
+}
+
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
@@ -68,35 +68,36 @@ app.get("/ping", (req, res) => {
 });
 
 /* =========================
-   SCHEMAS
+   SCHEMA
 ========================= */
-const User = mongoose.model("User", new mongoose.Schema({
-  username: String,
-  password: String,
-  role: { type: String, default: "ADMIN" }
-}));
-
-const Member = mongoose.model("Member", new mongoose.Schema({
-  name: String,
-  position: String,
-  bio: String,
-  image: String
-}));
+const Member = mongoose.model(
+  "Member",
+  new mongoose.Schema(
+    {
+      name: String,
+      position: String,
+      bio: String,
+      image: String,
+    },
+    { timestamps: true }
+  )
+);
 
 /* =========================
-   MEMBERS API (IMPORTANT)
+   MEMBERS API
 ========================= */
 app.get("/members", async (req, res) => {
   try {
     const data = await Member.find().sort({ createdAt: -1 });
     res.json(data);
-  } catch {
-    res.status(500).json({ msg: "Error loading members" });
+  } catch (err) {
+    console.error("❌ Members fetch error:", err);
+    res.status(500).json({ msg: "Failed to fetch members" });
   }
 });
 
 /* =========================
-   AUTH
+   AUTH (optional)
 ========================= */
 function auth(req, res, next) {
   const header = req.headers.authorization || "";
@@ -115,21 +116,42 @@ function auth(req, res, next) {
 }
 
 /* =========================
-   FINAL FALLBACK (VERY IMPORTANT)
+   ERROR HANDLER
 ========================= */
-app.use((req, res) => {
-  const filePath = path.join(publicPath, req.path);
+app.use((err, req, res, next) => {
+  console.error("❌ Server error:", err);
+  res.status(500).json({ msg: "Server error" });
+});
 
-  if (fs.existsSync(filePath)) {
-    res.sendFile(filePath);
+/* =========================
+   FRONTEND ROUTES (LAST)
+========================= */
+
+// Homepage
+app.get("/", (req, res) => {
+  const homeFile = path.join(publicPath, "Home.html");
+
+  if (fs.existsSync(homeFile)) {
+    res.sendFile(homeFile);
   } else {
-    res.sendFile(path.join(publicPath, "Home.html"));
+    res.send("✅ Backend running, frontend missing");
+  }
+});
+
+// Catch-all (SPA support)
+app.use((req, res) => {
+  const homeFile = path.join(publicPath, "Home.html");
+
+  if (fs.existsSync(homeFile)) {
+    res.sendFile(homeFile);
+  } else {
+    res.status(404).send("Page not found");
   }
 });
 
 /* =========================
-   START
+   START SERVER
 ========================= */
 app.listen(PORT, () => {
-  console.log(`✅ Server running on PORT ${PORT}`);
+  console.log(`🚀 Server running on PORT ${PORT}`);
 });
