@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 });
 
 /* ✅ IMPORTANT: Fix page navigation (VERY IMPORTANT) */
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
   const filePath = path.join(publicPath, req.path);
 
   if (fs.existsSync(filePath)) {
