@@ -13,40 +13,48 @@ const app = express();
 /* =========================
    CONFIG
 ========================= */
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000; // ✅ Render uses 10000
 const MONGO_URI = process.env.MONGO_URI;
 const SECRET = process.env.JWT_SECRET || "CHANGE_THIS_SECRET";
 
 /* =========================
-   Middleware
+   MIDDLEWARE
 ========================= */
 app.use(cors());
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 /* =========================
-   Serve Frontend
+   FRONTEND SERVE (FIXED)
 ========================= */
-const publicPath = path.join(__dirname, "..", "Public");
+const publicPath = path.join(__dirname, "..", "Public", "nimgoan");
 
+// Serve static files (images, css, js)
 if (fs.existsSync(publicPath)) {
   app.use(express.static(publicPath));
-  console.log("✅ Serving Public folder");
+  console.log("✅ Serving Frontend from:", publicPath);
+} else {
+  console.log("❌ Frontend folder not found:", publicPath);
 }
 
-/* ✅ IMPORTANT: HOMEPAGE ROUTE (FIXES YOUR ERROR) */
+/* ✅ Homepage */
 app.get("/", (req, res) => {
-  const filePath = path.join(publicPath, "nimgoan", "Home.html");
+  res.sendFile(path.join(publicPath, "Home.html"));
+});
+
+/* ✅ IMPORTANT: Fix page navigation (VERY IMPORTANT) */
+app.get("*", (req, res) => {
+  const filePath = path.join(publicPath, req.path);
 
   if (fs.existsSync(filePath)) {
     res.sendFile(filePath);
   } else {
-    res.send("✅ Backend running, frontend not found");
+    res.sendFile(path.join(publicPath, "Home.html"));
   }
 });
 
 /* =========================
-   Uploads Folder
+   UPLOADS
 ========================= */
 const uploadsDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
@@ -54,7 +62,7 @@ if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
 app.use("/uploads", express.static(uploadsDir));
 
 /* =========================
-   DB Connection
+   DB CONNECTION
 ========================= */
 if (!MONGO_URI) {
   console.error("❌ MONGO_URI missing");
@@ -72,10 +80,12 @@ mongoose
 /* =========================
    TEST ROUTE
 ========================= */
-app.get("/ping", (req, res) => res.send("pong ✅ backend running"));
+app.get("/ping", (req, res) => {
+  res.send("pong ✅ backend running");
+});
 
 /* =========================
-   CHATBOT SETUP
+   CHATBOT
 ========================= */
 const { buildSiteIndex } = require("./chatbot/siteIndex");
 const { answerFromIndex, detectLang } = require("./chatbot/engineSmart");
@@ -85,7 +95,7 @@ let isIndexed = false;
 
 function rebuildIndex() {
   try {
-    const smallPath = path.join(__dirname, "..", "Public", "nimgoan");
+    const smallPath = publicPath;
     SITE = buildSiteIndex(smallPath);
     console.log("✅ Chatbot index built:", SITE.chunks.length);
   } catch (e) {
@@ -93,14 +103,15 @@ function rebuildIndex() {
   }
 }
 
-/* =========================
-   CHATBOT ROUTE
-========================= */
 app.post("/api/chat", (req, res) => {
   try {
     const { message, lang } = req.body || {};
+
     if (!message) {
-      return res.status(400).json({ success: false, reply: "Message required" });
+      return res.status(400).json({
+        success: false,
+        reply: "Message required",
+      });
     }
 
     if (!isIndexed) {
@@ -113,7 +124,10 @@ app.post("/api/chat", (req, res) => {
 
     res.json(ans);
   } catch (e) {
-    res.status(500).json({ success: false, reply: "Chatbot error" });
+    res.status(500).json({
+      success: false,
+      reply: "Chatbot error",
+    });
   }
 });
 
@@ -135,7 +149,13 @@ const User = mongoose.model(
 const ServiceRequest = mongoose.model(
   "ServiceRequest",
   new mongoose.Schema(
-    { name: String, email: String, phone: String, address: String, service: String },
+    {
+      name: String,
+      email: String,
+      phone: String,
+      address: String,
+      service: String,
+    },
     { timestamps: true }
   )
 );
@@ -143,7 +163,11 @@ const ServiceRequest = mongoose.model(
 const ContactMessage = mongoose.model(
   "ContactMessage",
   new mongoose.Schema(
-    { name: String, email: String, message: String },
+    {
+      name: String,
+      email: String,
+      message: String,
+    },
     { timestamps: true }
   )
 );
@@ -192,7 +216,8 @@ function adminOnly(req, res, next) {
 ========================= */
 const storage = multer.diskStorage({
   destination: uploadsDir,
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
+  filename: (req, file, cb) =>
+    cb(null, Date.now() + "-" + file.originalname),
 });
 
 const upload = multer({
@@ -244,6 +269,8 @@ app.use((err, req, res, next) => {
   if (err.code === "LIMIT_FILE_SIZE") {
     return res.status(400).json({ msg: "File too large" });
   }
+
+  console.error(err);
   res.status(500).json({ msg: "Server error" });
 });
 
